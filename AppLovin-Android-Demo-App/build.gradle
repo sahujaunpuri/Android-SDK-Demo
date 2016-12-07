@@ -44,7 +44,7 @@ dependencies {
     // Otherwise (AppLovin Demo app is running as a standalone project)
     else {
         def libsFolder = new File(projectDir, "libs");
-        if ( !libsFolder.exists() || libsFolder.list() == null || libsFolder.list().length < 1 )  {
+        if ( !libsFolder.exists() || libsFolder.list() == null || libsFolder.list().length < 2 )  {
             throw new IllegalStateException("AppLovin SDK jar file was not found in the libs/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the libs/ folder of your project")
         }
     }
