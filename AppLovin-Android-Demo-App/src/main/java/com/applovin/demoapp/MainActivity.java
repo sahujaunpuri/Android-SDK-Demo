@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity
         {
             final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder( this );
 
-            dialogBuilder.setTitle( "WARNING" );
+            dialogBuilder.setTitle( "IF you are using Android SDK 6.4.0 or above" );
             dialogBuilder.setMessage( "In your manifest file, please set the \"android:configChanges\" attribute for com.applovin.adview.AppLovinInterstitialActivity to be \"orientation|screenSize\"" );
             dialogBuilder.setCancelable( false );
             dialogBuilder.setNeutralButton( "OK", null );
