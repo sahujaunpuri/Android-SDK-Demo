@@ -5,7 +5,11 @@ This is our open source demo application for Android. You may re-use any code in
 
 # Instructions #
 
-In your `AndroidManifest.xml` file, add your SDK key as metadata, inside the `<application>` tag:
+  1. Download the latest SDK from [https://applovin.com](https://applovin.com/integration).
+
+  2. Copy the AppLovin SDK JAR into `Android-SDK-Demo/AppLovin-Android-Demo-App/libs` folder.
+
+  3. Add your SDK key into your `AndroidManifest.xml` file, inside the `<application>` tag:
 
 ```
 <meta-data
