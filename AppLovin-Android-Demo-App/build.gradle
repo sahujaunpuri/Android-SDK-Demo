@@ -45,7 +45,7 @@ dependencies {
     else {
         def libsFolder = new File(projectDir, "libs");
         if ( !libsFolder.exists() || libsFolder.list() == null || libsFolder.list().length < 1 )  {
-            throw new GradleException("AppLovin SDK jar file was not found in the libs/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the libs/ folder of your project")
+            throw new IllegalStateException("AppLovin SDK jar file was not found in the libs/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the libs/ folder of your project")
         }
     }
 }
