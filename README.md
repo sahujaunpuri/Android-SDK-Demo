@@ -1,4 +1,4 @@
-Android-Demo-App
+AppLovin Android Demo
 ============
 
 This is our open source demo application for Android. You may re-use any code in your own project(s). If you have any questions, feel free to drop us a line at support@applovin.com.
