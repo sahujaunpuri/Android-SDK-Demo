@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.applovin.apps.demoapp"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -21,30 +20,22 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    testCompile 'junit:junit:4.12'
 
-    compile 'com.android.support:support-v4:23.1.1'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile 'com.google.android.gms:play-services:8.3.0'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
-    compile 'com.google.android.gms:play-services-identity:8.3.0'
-    compile 'com.google.android.gms:play-services-gcm:8.3.0'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:support-v13:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.google.android.gms:play-services:10.2.0'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    compile 'com.google.android.gms:play-services-identity:10.2.0'
 
     // If AppLovin Demo App is running as a module in the AppLovin development environment
-    if ( new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists() ) {
-        compile project(':AppLovin-Android-SDK')
-        compile project(':AppLovin-Android-SDK-Mediation-Adapters')
+    if (new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists()) {
+         compile project(':AppLovin-Android-SDK-Mediation-Adapters') // This compiles SDK project
     }
-
     // Otherwise (AppLovin Demo app is running as a standalone project)
     else {
         def libsFolder = new File(projectDir, "libs");
-        if ( !libsFolder.exists() || libsFolder.list() == null || libsFolder.list().length < 2 )  {
+        if (!libsFolder.exists() || libsFolder.list() == null || libsFolder.listFiles().length == 0) {
             throw new IllegalStateException("AppLovin SDK jar file was not found in the libs/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the libs/ folder of your project")
         }
     }

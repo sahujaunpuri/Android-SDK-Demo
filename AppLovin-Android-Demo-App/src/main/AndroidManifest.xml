@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.applovin.demoapp" >
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="25" />
 
     <!-- These permissions are mandatory to run AppLovin SDK -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,7 +10,6 @@
 
     <!-- These permissions are strongly recommended and will result in higher performance -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -23,12 +22,14 @@
             android:name="applovin.sdk.key"
             android:value="YOUR_SDK_KEY" />
 
-        <!-- AppLovinInterstitialActivity - It is VERY IMPORTANT you add the orientation and screenSize config flags -->
+        <!-- It is VERY IMPORTANT you add the orientation and screenSize config flags if using Version 6.4.0 and above -->
         <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
                   android:configChanges="orientation|screenSize"/>
 
         <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
 
+
+        <!-- DEMO APP ACTIVITIES -->
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name" >
@@ -37,53 +38,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".interstitials.InterstitialSingleInstanceActivity"
             android:label="@string/title_activity_interstitial_single_instance" >
         </activity>
-
         <activity
             android:name=".InterstitialListViewActivity"
             android:label="@string/title_activity_interstitial_list_view" >
         </activity>
-
         <activity
             android:name=".interstitials.InterstitialSharedInstanceActivity"
             android:label="@string/title_activity_interstitial_shared_instance" >
         </activity>
-
         <activity
             android:name=".interstitials.InterstitialManualLoadingActivity"
-            android:label="@string/title_activity_interstitial_manual_loading" >
+            android:label="@string/title_activity_interstitial_manual_loading">
         </activity>
-
         <activity
             android:name=".rewarded.RewardedVideosActivity"
             android:label="@string/title_activity_rewarded_videos" >
         </activity>
-
         <activity
             android:name=".NativeAdListViewActivity"
             android:label="@string/title_activity_native_ad_list_view" >
         </activity>
-
         <activity
             android:name=".nativeads.CarouselUINativeAdActivity"
             android:label="@string/title_activity_single_native_ad"
             android:screenOrientation="portrait">
         </activity>
-
         <activity
             android:name=".nativeads.RecyclerViewNativeAdsActivity"
             android:label="@string/title_activity_multiple_native_ads" >
         </activity>
-
     </application>
-
 </manifest>
