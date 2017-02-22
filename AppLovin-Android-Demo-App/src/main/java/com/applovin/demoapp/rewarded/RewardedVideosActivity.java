@@ -31,7 +31,6 @@ public class RewardedVideosActivity extends BaseActivity {
 
         adStatusTextView = (TextView) findViewById(R.id.statusLabel);
 
-        final AppLovinSdk sdk = AppLovinSdk.getInstance(getApplicationContext());
         final Button loadButton = (Button) findViewById(R.id.loadButton);
         final Button showButton = (Button) findViewById(R.id.showButton);
 
@@ -45,6 +44,10 @@ public class RewardedVideosActivity extends BaseActivity {
                 showButton.setEnabled(false);
 
                 incentivizedInterstitial = AppLovinIncentivizedInterstitial.create(getApplicationContext());
+
+                // Set an optional user identifier used for S2S callbacks
+                incentivizedInterstitial.setUserIdentifier( "DEMO_USER_IDENTIFIER" );
+
                 incentivizedInterstitial.preload(new AppLovinAdLoadListener() {
                     @Override
                     public void adReceived(AppLovinAd appLovinAd) {
@@ -84,7 +87,7 @@ public class RewardedVideosActivity extends BaseActivity {
                             String amountGivenString = (String) map.get("amount");
 
                             log("Rewarded " + amountGivenString + " " + currencyName);
-                            log("");
+
                             // By default we'll show a alert informing your user of the currency & amount earned.
                             // If you don't want this, you can turn it off in the Manage Apps UI.
                         }
@@ -94,6 +97,8 @@ public class RewardedVideosActivity extends BaseActivity {
                             // Your user has already earned the max amount you allowed for the day at this point, so
                             // don't give them any more money. By default we'll show them a alert explaining this,
                             // though you can change that from the AppLovin dashboard.
+
+                            log( "Reward validation request exceeded quota with response: " + map );
                         }
 
                         @Override
@@ -101,6 +106,8 @@ public class RewardedVideosActivity extends BaseActivity {
                             // Your user couldn't be granted a reward for this view. This could happen if you've blacklisted
                             // them, for example. Don't grant them any currency. By default we'll show them an alert explaining this,
                             // though you can change that from the AppLovin dashboard.
+
+                            log( "Reward validation request was rejected with response: " + map );
                         }
 
                         @Override
@@ -118,12 +125,16 @@ public class RewardedVideosActivity extends BaseActivity {
                                 // Indicates that the developer called for a rewarded video before one was available.
                                 // Note: This code is only possible when working with rewarded videos.
                             }
+
+                            log( "Reward validation request failed with error code: " + responseCode );
                         }
 
                         @Override
                         public void userDeclinedToViewAd(AppLovinAd appLovinAd) {
                             // This method will be invoked if the user selected "no" when asked if they want to view an ad.
                             // If you've disabled the pre-video prompt in the "Manage Apps" UI on our website, then this method won't be called.
+
+                            log( "User declined to view ad" );
                         }
                     };
 
