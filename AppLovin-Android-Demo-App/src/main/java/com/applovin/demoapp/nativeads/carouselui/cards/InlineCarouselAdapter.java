@@ -18,13 +18,14 @@ import com.applovin.sdk.AppLovinSdk;
 /**
  * This adapter manages instances of InlineCarouselCardView which are supplied to the view pager contained in AppLovinCarouselView.
  */
-public class InlineCarouselAdapter extends AppLovinSdkViewPagerAdapter
+public class InlineCarouselAdapter
+        extends AppLovinSdkViewPagerAdapter
 {
-    private static final String                            TAG = "InlineCarouselAdapter";
+    private static final String TAG = "InlineCarouselAdapter";
 
-    private AppLovinSdk                                    sdk;
-    private Context                                        context;
-    private AppLovinCarouselView parentView;
+    private AppLovinSdk                                        sdk;
+    private Context                                            context;
+    private AppLovinCarouselView                               parentView;
     private SparseArray<WeakReference<InlineCarouselCardView>> existingCards;
 
     public InlineCarouselAdapter(Context context, AppLovinSdk sdk, AppLovinCarouselView parentView)
@@ -72,7 +73,7 @@ public class InlineCarouselAdapter extends AppLovinSdkViewPagerAdapter
     {
         final List<AppLovinNativeAd> slots = parentView.getNativeAds();
 
-        final int count = (slots != null) ? slots.size() : 0;
+        final int count = ( slots != null ) ? slots.size() : 0;
         if ( count <= 1 )
         {
             sdk.getLogger().e( TAG, "Asked to render a view pager but only one slot is available!" );
@@ -98,7 +99,7 @@ public class InlineCarouselAdapter extends AppLovinSdkViewPagerAdapter
     public void destroyCards()
     {
         sdk.getLogger().d( TAG, "Destroying all owned cards" );
-        for (int i = 0; i < existingCards.size(); i++)
+        for ( int i = 0; i < existingCards.size(); i++ )
         {
             final WeakReference<InlineCarouselCardView> cardRef = existingCards.get( i );
             if ( cardRef != null )

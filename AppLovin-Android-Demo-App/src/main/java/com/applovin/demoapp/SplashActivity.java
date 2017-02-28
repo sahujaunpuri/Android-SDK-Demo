@@ -8,29 +8,39 @@ import android.widget.TextView;
 
 import com.applovin.apps.demoapp.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity
+        extends AppCompatActivity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_splash );
 
         getSupportActionBar().hide();
 
-        TextView logoTextView = (TextView)findViewById( R.id.logoTextView);
-        logoTextView.setText(Html.fromHtml("<b>App</b>Lovin"));
+        TextView logoTextView = (TextView) findViewById( R.id.logoTextView );
+        logoTextView.setText( Html.fromHtml( "<b>App</b>Lovin" ) );
 
-        Thread timerThread = new Thread() {
+        Thread timerThread = new Thread()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 super.run();
 
-                try {
-                    sleep(3000);
-                } catch (InterruptedException e) {
+                try
+                {
+                    sleep( 3000 );
+                }
+                catch ( InterruptedException e )
+                {
                     e.printStackTrace();
-                } finally {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
+                }
+                finally
+                {
+                    Intent intent = new Intent( SplashActivity.this, MainActivity.class );
+                    startActivity( intent );
                 }
             }
         };
@@ -38,7 +48,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
         finish();
     }

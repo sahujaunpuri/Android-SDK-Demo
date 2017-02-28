@@ -7,7 +7,8 @@ import android.view.TextureView;
 /**
  * Provides a TextureView that maintains the aspect ratio of a video contained within.
  */
-public class AspectRatioTextureView extends TextureView
+public class AspectRatioTextureView
+        extends TextureView
 {
     private int                         mVideoWidth;
     private int                         mVideoHeight;
@@ -91,7 +92,7 @@ public class AspectRatioTextureView extends TextureView
             requestLayout();
             invalidate();
         }
-        catch (Exception ignore)
+        catch ( Exception ignore )
         {
         }
     }

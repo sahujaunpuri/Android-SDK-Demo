@@ -5,8 +5,8 @@ package com.applovin.demoapp.nativeads.carouselui.cards;
  * This is not part of the support library's stock pager (SdkViewPager),
  * You should set an OnPageChangeListener on the view pager and invoke these callbacks yourself.
  */
-public interface InlineCarouselCardCallbacks {
-
+public interface InlineCarouselCardCallbacks
+{
     /**
      * Called when a page becomes the foreground view.
      */

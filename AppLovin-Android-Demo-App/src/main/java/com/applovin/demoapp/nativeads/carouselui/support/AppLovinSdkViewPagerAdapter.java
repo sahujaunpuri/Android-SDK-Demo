@@ -3,12 +3,15 @@ package com.applovin.demoapp.nativeads.carouselui.support;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class AppLovinSdkViewPagerAdapter extends SdkPagerAdapter {
+public abstract class AppLovinSdkViewPagerAdapter
+        extends SdkPagerAdapter
+{
     /**
      * Get a View that displays the data at the specified position in the data set.
      *
      * @param position The position of the item within the adapter's data set of the item whose view we want.
      * @param pager    The ViewPager that this view will eventually be attached to.
+     *
      * @return A View corresponding to the data at the specified position.
      */
     public abstract View getView(int position, SdkCenteredViewPager pager);
@@ -19,10 +22,12 @@ public abstract class AppLovinSdkViewPagerAdapter extends SdkPagerAdapter {
      *
      * @param view   Page View to check for association with object
      * @param object Object to check for association with view
+     *
      * @return true if view is associated with the key object object.
      */
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(View view, Object object)
+    {
         return view == object;
     }
 
@@ -31,16 +36,18 @@ public abstract class AppLovinSdkViewPagerAdapter extends SdkPagerAdapter {
      *
      * @param container The containing View in which the page will be shown.
      * @param position  The page position to be instantiated.
+     *
      * @return Returns an Object representing the new page. This does not need
      * to be a View, but can be some other container of the page.
      */
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, int position)
+    {
         SdkCenteredViewPager pager = (SdkCenteredViewPager) container;
-        View view = getView(position, pager);
+        View view = getView( position, pager );
 
-        pager.removeView(view);
-        pager.addView(view);
+        pager.removeView( view );
+        pager.addView( view );
 
         return view;
     }
@@ -53,7 +60,8 @@ public abstract class AppLovinSdkViewPagerAdapter extends SdkPagerAdapter {
      * @param view      The same object that was returned by instantiateItem(View, int).
      */
     @Override
-    public void destroyItem(ViewGroup container, int position, Object view) {
-        ((SdkCenteredViewPager) container).removeView((View) view);
+    public void destroyItem(ViewGroup container, int position, Object view)
+    {
+        ( (SdkCenteredViewPager) container ).removeView( (View) view );
     }
 }

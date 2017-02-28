@@ -11,13 +11,14 @@ import com.applovin.apps.demoapp.R;
 /**
  * Created by mszaro on 4/21/15.
  */
-public class InlineCarouselCardReplayOverlay extends LinearLayout
+public class InlineCarouselCardReplayOverlay
+        extends LinearLayout
 {
     private OnClickListener replayClickListener;
     private OnClickListener learnMoreClickListener;
 
-    private LinearLayout    replayLayout;
-    private LinearLayout    learnMoreLayout;
+    private LinearLayout replayLayout;
+    private LinearLayout learnMoreLayout;
 
     public InlineCarouselCardReplayOverlay(Context context)
     {

@@ -5,29 +5,36 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity
+        extends AppCompatActivity
+{
 
     protected TextView adStatusTextView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate( savedInstanceState );
 
         // TODO: use theme color
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xDD0A83AA));
+        getSupportActionBar().setBackgroundDrawable( new ColorDrawable( 0xDD0A83AA ) );
         getSupportActionBar().show();
         //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
     }
 
-    protected void log(final String message) {
-        if (adStatusTextView != null) {
-            runOnUiThread(new Runnable() {
+    protected void log(final String message)
+    {
+        if ( adStatusTextView != null )
+        {
+            runOnUiThread( new Runnable()
+            {
                 @Override
-                public void run() {
-                    adStatusTextView.setText(message);
+                public void run()
+                {
+                    adStatusTextView.setText( message );
                 }
-            });
+            } );
         }
-        System.out.println(message);
+        System.out.println( message );
     }
 }

@@ -75,11 +75,12 @@ import android.view.ViewGroup;
  * ViewPager will keep the current page active provided the adapter implements
  * the method {@link #getItemPosition(Object)}.</p>
  */
-public abstract class SdkPagerAdapter {
+public abstract class SdkPagerAdapter
+{
     private DataSetObservable mObservable = new DataSetObservable();
 
     public static final int POSITION_UNCHANGED = -1;
-    public static final int POSITION_NONE = -2;
+    public static final int POSITION_NONE      = -2;
 
     /**
      * Return the number of views available.
@@ -92,8 +93,9 @@ public abstract class SdkPagerAdapter {
      * @param container The containing View which is displaying this adapter's
      *                  page views.
      */
-    public void startUpdate(ViewGroup container) {
-        startUpdate((View) container);
+    public void startUpdate(ViewGroup container)
+    {
+        startUpdate( (View) container );
     }
 
     /**
@@ -104,11 +106,13 @@ public abstract class SdkPagerAdapter {
      *
      * @param container The containing View in which the page will be shown.
      * @param position  The page position to be instantiated.
+     *
      * @return Returns an Object representing the new page.  This does not
      * need to be a View, but can be some other container of the page.
      */
-    public Object instantiateItem(ViewGroup container, int position) {
-        return instantiateItem((View) container, position);
+    public Object instantiateItem(ViewGroup container, int position)
+    {
+        return instantiateItem( (View) container, position );
     }
 
     /**
@@ -121,8 +125,9 @@ public abstract class SdkPagerAdapter {
      * @param object    The same object that was returned by
      *                  {@link #instantiateItem(View, int)}.
      */
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        destroyItem((View) container, position, object);
+    public void destroyItem(ViewGroup container, int position, Object object)
+    {
+        destroyItem( (View) container, position, object );
     }
 
     /**
@@ -134,8 +139,9 @@ public abstract class SdkPagerAdapter {
      * @param object    The same object that was returned by
      *                  {@link #instantiateItem(View, int)}.
      */
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
-        setPrimaryItem((View) container, position, object);
+    public void setPrimaryItem(ViewGroup container, int position, Object object)
+    {
+        setPrimaryItem( (View) container, position, object );
     }
 
     /**
@@ -146,8 +152,9 @@ public abstract class SdkPagerAdapter {
      * @param container The containing View which is displaying this adapter's
      *                  page views.
      */
-    public void finishUpdate(ViewGroup container) {
-        finishUpdate((View) container);
+    public void finishUpdate(ViewGroup container)
+    {
+        finishUpdate( (View) container );
     }
 
     /**
@@ -155,9 +162,11 @@ public abstract class SdkPagerAdapter {
      *
      * @param container The containing View which is displaying this adapter's
      *                  page views.
+     *
      * @deprecated Use {@link #startUpdate(ViewGroup)}
      */
-    public void startUpdate(View container) {
+    public void startUpdate(View container)
+    {
     }
 
     /**
@@ -168,13 +177,15 @@ public abstract class SdkPagerAdapter {
      *
      * @param container The containing View in which the page will be shown.
      * @param position  The page position to be instantiated.
+     *
      * @return Returns an Object representing the new page.  This does not
      * need to be a View, but can be some other container of the page.
      * @deprecated Use {@link #instantiateItem(ViewGroup, int)}
      */
-    public Object instantiateItem(View container, int position) {
+    public Object instantiateItem(View container, int position)
+    {
         throw new UnsupportedOperationException(
-                "Required method instantiateItem was not overridden");
+                "Required method instantiateItem was not overridden" );
     }
 
     /**
@@ -186,10 +197,12 @@ public abstract class SdkPagerAdapter {
      * @param position  The page position to be removed.
      * @param object    The same object that was returned by
      *                  {@link #instantiateItem(View, int)}.
+     *
      * @deprecated Use {@link #destroyItem(ViewGroup, int, Object)}
      */
-    public void destroyItem(View container, int position, Object object) {
-        throw new UnsupportedOperationException("Required method destroyItem was not overridden");
+    public void destroyItem(View container, int position, Object object)
+    {
+        throw new UnsupportedOperationException( "Required method destroyItem was not overridden" );
     }
 
     /**
@@ -200,9 +213,11 @@ public abstract class SdkPagerAdapter {
      * @param position  The page position that is now the primary.
      * @param object    The same object that was returned by
      *                  {@link #instantiateItem(View, int)}.
+     *
      * @deprecated Use {@link #setPrimaryItem(ViewGroup, int, Object)}
      */
-    public void setPrimaryItem(View container, int position, Object object) {
+    public void setPrimaryItem(View container, int position, Object object)
+    {
     }
 
     /**
@@ -212,9 +227,11 @@ public abstract class SdkPagerAdapter {
      *
      * @param container The containing View which is displaying this adapter's
      *                  page views.
+     *
      * @deprecated Use {@link #finishUpdate(ViewGroup)}
      */
-    public void finishUpdate(View container) {
+    public void finishUpdate(View container)
+    {
     }
 
     /**
@@ -224,6 +241,7 @@ public abstract class SdkPagerAdapter {
      *
      * @param view   Page View to check for association with <code>object</code>
      * @param object Object to check for association with <code>view</code>
+     *
      * @return true if <code>view</code> is associated with the key object <code>object</code>
      */
     public abstract boolean isViewFromObject(View view, Object object);
@@ -234,7 +252,8 @@ public abstract class SdkPagerAdapter {
      *
      * @return Saved state for this adapter
      */
-    public Parcelable saveState() {
+    public Parcelable saveState()
+    {
         return null;
     }
 
@@ -245,7 +264,8 @@ public abstract class SdkPagerAdapter {
      * @param state  State previously saved by a call to {@link #saveState()}
      * @param loader A ClassLoader that should be used to instantiate any restored objects
      */
-    public void restoreState(Parcelable state, ClassLoader loader) {
+    public void restoreState(Parcelable state, ClassLoader loader)
+    {
     }
 
     /**
@@ -259,11 +279,13 @@ public abstract class SdkPagerAdapter {
      *
      * @param object Object representing an item, previously returned by a call to
      *               {@link #instantiateItem(View, int)}.
+     *
      * @return object's new position index from [0, {@link #getCount()}),
      * {@link #POSITION_UNCHANGED} if the object's position has not changed,
      * or {@link #POSITION_NONE} if the item is no longer present.
      */
-    public int getItemPosition(Object object) {
+    public int getItemPosition(Object object)
+    {
         return POSITION_UNCHANGED;
     }
 
@@ -271,7 +293,8 @@ public abstract class SdkPagerAdapter {
      * This method should be called by the application if the data backing this adapter has changed
      * and associated views should update.
      */
-    public void notifyDataSetChanged() {
+    public void notifyDataSetChanged()
+    {
         mObservable.notifyChanged();
     }
 
@@ -280,8 +303,9 @@ public abstract class SdkPagerAdapter {
      *
      * @param observer The {@link android.database.DataSetObserver} which will receive callbacks.
      */
-    public void registerDataSetObserver(DataSetObserver observer) {
-        mObservable.registerObserver(observer);
+    public void registerDataSetObserver(DataSetObserver observer)
+    {
+        mObservable.registerObserver( observer );
     }
 
     /**
@@ -289,8 +313,9 @@ public abstract class SdkPagerAdapter {
      *
      * @param observer The {@link android.database.DataSetObserver} which will be unregistered.
      */
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-        mObservable.unregisterObserver(observer);
+    public void unregisterDataSetObserver(DataSetObserver observer)
+    {
+        mObservable.unregisterObserver( observer );
     }
 
     /**
@@ -300,9 +325,11 @@ public abstract class SdkPagerAdapter {
      * null.
      *
      * @param position The position of the title requested
+     *
      * @return A title for the requested page
      */
-    public CharSequence getPageTitle(int position) {
+    public CharSequence getPageTitle(int position)
+    {
         return null;
     }
 
@@ -311,9 +338,11 @@ public abstract class SdkPagerAdapter {
      * ViewPager's measured width from (0.f-1.f]
      *
      * @param position The position of the page requested
+     *
      * @return Proportional width for the given page position
      */
-    public float getPageWidth(int position) {
+    public float getPageWidth(int position)
+    {
         return 1.f;
     }
 }
