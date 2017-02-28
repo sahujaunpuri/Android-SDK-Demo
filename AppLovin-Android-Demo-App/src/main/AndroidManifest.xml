@@ -31,7 +31,7 @@
 
         <!-- DEMO APP ACTIVITIES -->
         <activity
-            android:name=".SplashActivity"
+            android:name="com.applovin.demoapp.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,40 +39,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.applovin.demoapp.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".interstitials.InterstitialSingleInstanceActivity"
+            android:name="com.applovin.demoapp.interstitials.InterstitialSingleInstanceActivity"
             android:label="@string/title_activity_interstitial_single_instance" >
         </activity>
         <activity
-            android:name=".InterstitialListViewActivity"
+            android:name="com.applovin.demoapp.InterstitialListViewActivity"
             android:label="@string/title_activity_interstitial_list_view" >
         </activity>
         <activity
-            android:name=".interstitials.InterstitialSharedInstanceActivity"
+            android:name="com.applovin.demoapp.interstitials.InterstitialSharedInstanceActivity"
             android:label="@string/title_activity_interstitial_shared_instance" >
         </activity>
         <activity
-            android:name=".interstitials.InterstitialManualLoadingActivity"
+            android:name="com.applovin.demoapp.interstitials.InterstitialManualLoadingActivity"
             android:label="@string/title_activity_interstitial_manual_loading">
         </activity>
         <activity
-            android:name=".rewarded.RewardedVideosActivity"
+            android:name="com.applovin.demoapp.rewarded.RewardedVideosActivity"
             android:label="@string/title_activity_rewarded_videos" >
         </activity>
         <activity
-            android:name=".NativeAdListViewActivity"
+            android:name="com.applovin.demoapp.NativeAdListViewActivity"
             android:label="@string/title_activity_native_ad_list_view" >
         </activity>
         <activity
-            android:name=".nativeads.CarouselUINativeAdActivity"
+            android:name="com.applovin.demoapp.nativeads.CarouselUINativeAdActivity"
             android:label="@string/title_activity_single_native_ad"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".nativeads.RecyclerViewNativeAdsActivity"
+            android:name="com.applovin.demoapp.nativeads.RecyclerViewNativeAdsActivity"
             android:label="@string/title_activity_multiple_native_ads" >
         </activity>
     </application>

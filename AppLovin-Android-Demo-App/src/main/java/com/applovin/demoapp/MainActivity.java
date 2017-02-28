@@ -81,7 +81,6 @@ public class MainActivity
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
-
                 View row = convertView;
                 if ( row == null )
                 {

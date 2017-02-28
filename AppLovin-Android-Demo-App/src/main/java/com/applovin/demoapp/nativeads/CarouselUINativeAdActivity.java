@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.applovin.demoapp.BaseActivity;
-import com.applovin.demoapp.R;
+import com.applovin.apps.demoapp.R;
 import com.applovin.demoapp.nativeads.carouselui.AppLovinCarouselViewSettings;
 import com.applovin.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView;
 import com.applovin.demoapp.nativeads.carouselui.cards.InlineCarouselCardState;

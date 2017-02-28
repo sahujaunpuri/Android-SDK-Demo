@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.applovin.adview.AppLovinIncentivizedInterstitial;
 import com.applovin.demoapp.BaseActivity;
-import com.applovin.demoapp.R;
+import com.applovin.apps.demoapp.R;
 import com.applovin.sdk.AppLovinAd;
 import com.applovin.sdk.AppLovinAdClickListener;
 import com.applovin.sdk.AppLovinAdDisplayListener;

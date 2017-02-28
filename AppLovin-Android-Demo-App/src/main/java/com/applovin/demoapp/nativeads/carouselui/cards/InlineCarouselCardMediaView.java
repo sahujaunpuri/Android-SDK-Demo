@@ -18,7 +18,7 @@ import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.applovin.demoapp.R;
+import com.applovin.apps.demoapp.R;
 import com.applovin.demoapp.nativeads.carouselui.AppLovinCarouselViewSettings;
 import com.applovin.demoapp.nativeads.carouselui.support.AspectRatioTextureView;
 import com.applovin.demoapp.nativeads.carouselui.util.LayoutUtils;

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.widget.TextView;
 
+import com.applovin.apps.demoapp.R;
+
 public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        TextView logoTextView = (TextView)findViewById(R.id.logoTextView);
+        TextView logoTextView = (TextView)findViewById( R.id.logoTextView);
         logoTextView.setText(Html.fromHtml("<b>App</b>Lovin"));
 
         Thread timerThread = new Thread() {

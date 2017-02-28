@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.applovin.apps.demoapp.R;
 import com.applovin.demoapp.interstitials.InterstitialManualLoadingActivity;
 import com.applovin.demoapp.interstitials.InterstitialSharedInstanceActivity;
 import com.applovin.demoapp.interstitials.InterstitialSingleInstanceActivity;
@@ -32,7 +33,7 @@ public class InterstitialListViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interstitial_list_view);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById( R.id.listView);
         ArrayAdapter<ListItem> listAdapter = new ArrayAdapter<ListItem>(this, android.R.layout.simple_list_item_2, items) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {

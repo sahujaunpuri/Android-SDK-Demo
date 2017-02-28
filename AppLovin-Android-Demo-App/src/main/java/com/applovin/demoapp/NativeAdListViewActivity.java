@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.applovin.apps.demoapp.R;
 import com.applovin.demoapp.nativeads.CarouselUINativeAdActivity;
 import com.applovin.demoapp.nativeads.RecyclerViewNativeAdsActivity;
 
@@ -34,7 +35,7 @@ public class NativeAdListViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_native_ad_list_view);
 
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById( R.id.listView);
         setupListViewFooter();
         ArrayAdapter<ListItem> listAdapter = new ArrayAdapter<ListItem>(this, android.R.layout.simple_list_item_2, items) {
             @Override

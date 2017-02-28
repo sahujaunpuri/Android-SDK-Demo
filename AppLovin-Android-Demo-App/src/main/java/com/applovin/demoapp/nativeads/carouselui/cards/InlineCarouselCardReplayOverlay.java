@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
-import com.applovin.demoapp.R;
+import com.applovin.apps.demoapp.R;
 
 
 /**
