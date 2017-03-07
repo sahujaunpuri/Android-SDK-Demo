@@ -21,7 +21,7 @@ public class InterstitialSharedInstanceActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_interstitial_shared_instance );
 
-        adStatusTextView = (TextView) findViewById( R.id.statusLabel );
+        adStatusTextView = (TextView) findViewById( R.id.status_label );
 
         final WeakReference<InterstitialSharedInstanceActivity> weakRef = new WeakReference<InterstitialSharedInstanceActivity>( this );
 

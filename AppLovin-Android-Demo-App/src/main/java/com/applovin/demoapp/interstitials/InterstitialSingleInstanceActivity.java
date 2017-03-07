@@ -30,7 +30,7 @@ public class InterstitialSingleInstanceActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_interstitial_single_instance );
 
-        adStatusTextView = (TextView) findViewById( R.id.statusLabel );
+        adStatusTextView = (TextView) findViewById( R.id.status_label );
 
         final WeakReference<InterstitialSingleInstanceActivity> weakRef = new WeakReference<InterstitialSingleInstanceActivity>( this );
         final AppLovinSdk sdk = AppLovinSdk.getInstance( getApplicationContext() );

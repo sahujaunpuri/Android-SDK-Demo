@@ -1,6 +1,5 @@
 package com.applovin.demoapp.nativeads;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import com.applovin.sdk.AppLovinPostbackListener;
 import com.applovin.sdk.AppLovinSdk;
 import com.applovin.sdk.AppLovinSdkUtils;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class CarouselUINativeAdActivity
@@ -55,7 +53,7 @@ public class CarouselUINativeAdActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_single_native_ad );
 
-        adStatusTextView = (TextView) findViewById( R.id.statusLabel );
+        adStatusTextView = (TextView) findViewById( R.id.status_label );
         impressionStatusTextView = (TextView) findViewById( R.id.impressionStatusTextView );
         loadButton = (Button) findViewById( R.id.loadButton );
         appRating = (ImageView) findViewById( R.id.appRating );

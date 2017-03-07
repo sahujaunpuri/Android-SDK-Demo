@@ -18,4 +18,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_single_native_ad">Single Ad</string>
     <string name="title_activity_multiple_native_ads">Multiple Ads</string>
+
+    <string name="title_activity_banner">Banners</string>
+    <string name="title_activity_banner_programmatic">Programmatic Banners</string>
+    <string name="title_activity_banner_layout_editor">Layout Editor Banners</string>
 </resources>

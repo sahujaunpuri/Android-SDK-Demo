@@ -26,7 +26,7 @@ public class NativeAdListViewActivity
     private static final int POSITION_MULTIPLE = 1;
 
     private ListItem[] items = {
-            new ListItem( "Single ad", "Programatically load an ad using our open-source carousel view" ),
+            new ListItem( "Single ad", "Programmatically load an ad using our open-source carousel view" ),
             new ListItem( "Multiple ads", "Simple native ads in a RecyclerView" )
     };
 

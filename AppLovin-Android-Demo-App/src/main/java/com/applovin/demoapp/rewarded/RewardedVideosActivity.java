@@ -15,7 +15,6 @@ import com.applovin.sdk.AppLovinAdLoadListener;
 import com.applovin.sdk.AppLovinAdRewardListener;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinErrorCodes;
-import com.applovin.sdk.AppLovinSdk;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class RewardedVideosActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_rewarded_videos );
 
-        adStatusTextView = (TextView) findViewById( R.id.statusLabel );
+        adStatusTextView = (TextView) findViewById( R.id.status_label );
 
         final Button loadButton = (Button) findViewById( R.id.loadButton );
         final Button showButton = (Button) findViewById( R.id.showButton );

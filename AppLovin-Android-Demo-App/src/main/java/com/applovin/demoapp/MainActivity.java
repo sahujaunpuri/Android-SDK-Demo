@@ -38,14 +38,17 @@ public class MainActivity
     private static final int POSITION_INTERSTITIALS = 0;
     private static final int POSITION_INCENTIVIZED  = 1;
     private static final int POSITION_NATIVE        = 2;
-    private static final int POSITION_RESOURCES     = 3;
-    private static final int POSITION_CONTACT       = 4;
+    private static final int POSITION_BANNER        = 3;
+    private static final int POSITION_RESOURCES     = 5;
+    private static final int POSITION_CONTACT       = 6;
 
     private ListView listView;
     private ListItem[] items = {
             new ListItem( "Interstitials", "Full screen ads. Graphic or video" ),
             new ListItem( "Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos" ),
             new ListItem( "Native Ads", "In-content ads that blend in seamlessly" ),
+            new ListItem( "Banners", "320x50 Classic banner ads" ),
+            new ListItem( "MRecs", "Please reference banners demo" ),
             new ListItem( "Resources", "https://support.applovin.com/support/home" ),
             new ListItem( "Contact", "support@applovin.com" )
     };
@@ -120,6 +123,11 @@ public class MainActivity
                 else if ( position == POSITION_NATIVE )
                 {
                     Intent intent = new Intent( MainActivity.this, NativeAdListViewActivity.class );
+                    startActivity( intent );
+                }
+                else if ( position == POSITION_BANNER )
+                {
+                    Intent intent = new Intent( MainActivity.this, BannerListViewActivity.class );
                     startActivity( intent );
                 }
                 else if ( position == POSITION_RESOURCES )

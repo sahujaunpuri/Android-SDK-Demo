@@ -12,21 +12,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.applovin.apps.demoapp.R;
-import com.applovin.demoapp.interstitials.InterstitialManualLoadingActivity;
-import com.applovin.demoapp.interstitials.InterstitialSharedInstanceActivity;
-import com.applovin.demoapp.interstitials.InterstitialSingleInstanceActivity;
+import com.applovin.demoapp.banners.LayoutEditorBannerActivity;
+import com.applovin.demoapp.banners.ProgrammaticBannerActivity;
 
-public class InterstitialListViewActivity
+public class BannerListViewActivity
         extends BaseActivity
 {
-    private static final int POSITION_INSTANCE = 0;
-    private static final int POSITION_SHARED   = 1;
-    private static final int POSITION_MANUAL   = 2;
+    private static final int POSITION_PROGRAMMATIC  = 0;
+    private static final int POSITION_LAYOUT_EDITOR = 1;
 
     private ListItem[] items = {
-            new ListItem( "Single instance", "Programmatically creating an instance of it" ),
-            new ListItem( "Shared instance", "Use the shared instance" ),
-            new ListItem( "Manually loading ad", "Use this for greater control over the ad load process" )
+            new ListItem( "Programmatic", "Programmatically creating an instance of it" ),
+            new ListItem( "Layout Editor", "Create a banner from the layout editor" ),
     };
 
     @Override
@@ -67,19 +64,14 @@ public class InterstitialListViewActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
 
-                if ( position == POSITION_INSTANCE )
+                if ( position == POSITION_PROGRAMMATIC )
                 {
-                    Intent intent = new Intent( InterstitialListViewActivity.this, InterstitialSingleInstanceActivity.class );
+                    Intent intent = new Intent( BannerListViewActivity.this, ProgrammaticBannerActivity.class );
                     startActivity( intent );
                 }
-                else if ( position == POSITION_SHARED )
+                else if ( position == POSITION_LAYOUT_EDITOR )
                 {
-                    Intent intent = new Intent( InterstitialListViewActivity.this, InterstitialSharedInstanceActivity.class );
-                    startActivity( intent );
-                }
-                else if ( position == POSITION_MANUAL )
-                {
-                    Intent intent = new Intent( InterstitialListViewActivity.this, InterstitialManualLoadingActivity.class );
+                    Intent intent = new Intent( BannerListViewActivity.this, LayoutEditorBannerActivity.class );
                     startActivity( intent );
                 }
             }

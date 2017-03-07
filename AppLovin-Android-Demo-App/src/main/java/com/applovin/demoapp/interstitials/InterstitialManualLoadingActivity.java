@@ -30,7 +30,7 @@ public class InterstitialManualLoadingActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_interstitial_manual_loading );
 
-        adStatusTextView = (TextView) findViewById( R.id.statusLabel );
+        adStatusTextView = (TextView) findViewById( R.id.status_label );
 
         final AppLovinSdk sdk = AppLovinSdk.getInstance( getApplicationContext() );
         interstitialAdDialog = AppLovinInterstitialAd.create( sdk, this );

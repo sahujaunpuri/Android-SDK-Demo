@@ -8,7 +8,7 @@
     tools:context="com.applovin.demoapp.nativeads.CarouselUINativeAdActivity">
 
     <TextView
-        android:id="@+id/statusLabel"
+        android:id="@+id/status_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ready to load ads."
@@ -27,11 +27,11 @@
         android:text="No impression to track"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/statusLabel"
+        android:layout_below="@+id/status_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/statusLabel"
-        android:layout_alignEnd="@+id/statusLabel" />
+        android:layout_alignRight="@+id/status_label"
+        android:layout_alignEnd="@+id/status_label" />
 
     <LinearLayout
         android:orientation="horizontal"
