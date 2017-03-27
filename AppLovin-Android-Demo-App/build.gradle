@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.applovin.apps.demoapp"
         minSdkVersion 15
@@ -20,14 +20,12 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:support-v13:25.1.1'
     compile 'com.android.support:recyclerview-v7:25.1.1'
     compile 'com.google.android.gms:play-services:10.2.0'
     compile 'com.google.android.gms:play-services-ads:10.2.0'
     compile 'com.google.android.gms:play-services-identity:10.2.0'
-
     // If AppLovin Demo App is running as a module in the AppLovin development environment
     if (new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists()) {
          compile project(':AppLovin-Android-SDK-Mediation-Adapters') // This compiles SDK project
