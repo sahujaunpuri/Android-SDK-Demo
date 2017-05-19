@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.applovin.demoapp.BaseActivity;
 import com.applovin.apps.demoapp.R;
+import com.applovin.demoapp.BaseActivity;
 import com.applovin.demoapp.nativeads.carouselui.AppLovinCarouselViewSettings;
 import com.applovin.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView;
 import com.applovin.demoapp.nativeads.carouselui.cards.InlineCarouselCardState;
@@ -149,8 +149,7 @@ public class CarouselUINativeAdActivity
                         appTitleTextView.setText( nativeAd.getTitle() );
                         appDescriptionTextView.setText( nativeAd.getDescriptionText() );
 
-                        AppLovinSdkUtils.safePopulateImageView( appIcon, Uri.parse( nativeAd.getIconUrl() ),
-                                                                AppLovinSdkUtils.dpToPx( getApplicationContext(), AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE ) );
+                        AppLovinSdkUtils.safePopulateImageView( appIcon, Uri.parse( nativeAd.getIconUrl() ), AppLovinSdkUtils.dpToPx( getApplicationContext(), AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE ) );
 
                         final Drawable starRatingDrawable = getStarRatingDrawable( nativeAd.getStarRating() );
                         appRating.setImageDrawable( starRatingDrawable );
@@ -165,7 +164,7 @@ public class CarouselUINativeAdActivity
                         mediaView.autoplayVideo();
 
                         //
-                        // You are responsible for firing all necessary postback URLs
+                        // You are responsible for firing impressions
                         //
                         trackImpression( nativeAd );
                     }
@@ -233,9 +232,7 @@ public class CarouselUINativeAdActivity
     {
         impressionStatusTextView.setText( "Tracking Impression..." );
 
-        final AppLovinSdk sdk = AppLovinSdk.getInstance( getApplicationContext() );
-        final String impressionUrl = nativeAd.getImpressionTrackingUrl();
-        sdk.getPostbackService().dispatchPostbackAsync( impressionUrl, new AppLovinPostbackListener()
+        nativeAd.trackImpression( new AppLovinPostbackListener()
         {
             @Override
             public void onPostbackSuccess(String url)
@@ -272,6 +269,7 @@ public class CarouselUINativeAdActivity
         final String sanitizedRating = Float.toString( starRating ).replace( ".", "_" );
         final String resourceName = "applovin_star_sprite_" + sanitizedRating;
         final int drawableId = getApplicationContext().getResources().getIdentifier( resourceName, "drawable", getApplicationContext().getPackageName() );
+
         return getApplicationContext().getResources().getDrawable( drawableId );
     }
 }

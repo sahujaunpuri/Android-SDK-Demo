@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applovin.demoapp.BaseActivity;
 import com.applovin.apps.demoapp.R;
+import com.applovin.demoapp.BaseActivity;
 import com.applovin.nativeAds.AppLovinNativeAd;
 import com.applovin.nativeAds.AppLovinNativeAdLoadListener;
 import com.applovin.nativeAds.AppLovinNativeAdPrecacheListener;
@@ -29,13 +29,13 @@ import java.util.List;
 public class RecyclerViewNativeAdsActivity
         extends BaseActivity
 {
-
     private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
+
         setContentView( R.layout.activity_multiple_native_ads );
         recyclerView = (RecyclerView) findViewById( R.id.nativeAdsRecyclerView );
 
@@ -64,7 +64,6 @@ public class RecyclerViewNativeAdsActivity
             @Override
             public void onNativeAdsFailedToLoad(final int errorCode)
             {
-
                 runOnUiThread( new Runnable()
                 {
                     @Override
@@ -210,6 +209,9 @@ public class RecyclerViewNativeAdsActivity
 
             final int maxSizeDp = 50; // match the size defined in the XML layout
             AppLovinSdkUtils.safePopulateImageView( holder.getAppIconImageView(), Uri.parse( nativeAd.getImageUrl() ), maxSizeDp );
+
+            // Track impression
+            nativeAd.trackImpression();
         }
 
         @Override
