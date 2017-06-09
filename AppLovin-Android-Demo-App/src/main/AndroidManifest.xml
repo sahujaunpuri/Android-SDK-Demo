@@ -7,7 +7,7 @@
 
     <!-- These permissions are mandatory to run AppLovin SDK -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
 
     <!-- These permissions are strongly recommended and will result in higher performance -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -22,6 +22,10 @@
         <meta-data
             android:name="applovin.sdk.key"
             android:value="YOUR_SDK_KEY" />
+
+        <meta-data
+            android:name="applovin.sdk.verbose_logging"
+            android:value="true" />
 
         <!-- It is VERY IMPORTANT you add the orientation and screenSize config flags if using Version 6.4.0 and above -->
         <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
@@ -79,6 +83,9 @@
         <activity
             android:name="com.applovin.demoapp.BannerListViewActivity"
             android:label="@string/title_activity_banner">
+        </activity>
+        <activity android:name="com.applovin.demoapp.eventtracking.EventTrackingActivity"
+            android:label="Event Tracking">
         </activity>
         <activity
             android:name="com.applovin.demoapp.banners.ProgrammaticBannerActivity"

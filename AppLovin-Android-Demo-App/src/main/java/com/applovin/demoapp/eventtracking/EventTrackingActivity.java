@@ -92,133 +92,131 @@ public class EventTrackingActivity
                 String eventTitle = events[position].getTitle();
                 setTitle( eventTitle );
                 Map<String, String> parameters;
-                switch ( position )
+
+                if ( position == 0 )
                 {
-                    case 0:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-                        parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "PRICE OF ITEM" );
-                        parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
+                    parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "PRICE OF ITEM" );
+                    parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
 
-                        eventService.trackEvent( AppLovinEventTypes.USER_BEGAN_CHECKOUT, parameters );
+                    eventService.trackEvent( AppLovinEventTypes.USER_BEGAN_CHECKOUT, parameters );
+                }
+                else if ( position == 1 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
 
-                        break;
-                    case 1:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
+                    eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_CART, parameters );
+                }
+                else if ( position == 2 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.COMPLETED_ACHIEVEMENT_IDENTIFIER, "ACHIEVEMENT NAME OR ID" );
 
-                        eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_CART, parameters );
+                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_ACHIEVEMENT, parameters );
+                }
+                else if ( position == 3 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.CHECKOUT_TRANSACTION_IDENTIFIER, "UNIQUE TRANSACTION ID" );
+                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
+                    parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
+                    parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
 
-                        break;
-                    case 2:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.COMPLETED_ACHIEVEMENT_IDENTIFIER, "ACHIEVEMENT NAME OR ID" );
+                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_CHECKOUT, parameters );
+                }
+                else if ( position == 4 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.COMPLETED_LEVEL_IDENTIFIER, "LEVEL NAME OR NUMBER" );
 
-                        eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_ACHIEVEMENT, parameters );
+                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_LEVEL, parameters );
+                }
+                else if ( position == 5 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
+                    long unixTimeInMilliseconds = System.currentTimeMillis() / 1000L;
+                    parameters.put( AppLovinEventParameters.RESERVATION_START_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
+                    parameters.put( AppLovinEventParameters.RESERVATION_END_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
 
-                        break;
-                    case 3:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.CHECKOUT_TRANSACTION_IDENTIFIER, "UNIQUE TRANSACTION ID" );
-                        parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-                        parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
-                        parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
+                    eventService.trackEvent( AppLovinEventTypes.USER_CREATED_RESERVATION, parameters );
+                }
+                else if ( position == 6 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
+                    parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
 
-                        eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_CHECKOUT, parameters );
+                    //eventService.trackInAppPurchase(responseIntentFromOnActivityResult, parameters);
+                    // responseIntentFromOnActivityResult is the Intent returned to you by Google Play upon a purchase within the onActivityResult method, as described in the Android Developer Portal.
+                }
+                else if ( position == 7 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
 
-                        break;
-                    case 4:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.COMPLETED_LEVEL_IDENTIFIER, "LEVEL NAME OR NUMBER" );
+                    eventService.trackEvent( AppLovinEventTypes.USER_LOGGED_IN, parameters );
+                }
+                else if ( position == 8 )
+                {
+                    eventService.trackEvent( AppLovinEventTypes.USER_PROVIDED_PAYMENT_INFORMATION );
+                }
+                else if ( position == 9 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
 
-                        eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_LEVEL, parameters );
+                    eventService.trackEvent( AppLovinEventTypes.USER_CREATED_ACCOUNT, parameters );
+                }
+                else if ( position == 10 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.SEARCH_QUERY, "USER'S SEARCH STRING" );
 
-                        break;
-                    case 5:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-                        long unixTimeInMilliseconds = System.currentTimeMillis() / 1000L;
-                        parameters.put( AppLovinEventParameters.RESERVATION_START_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
-                        parameters.put( AppLovinEventParameters.RESERVATION_END_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
+                    eventService.trackEvent( AppLovinEventTypes.USER_EXECUTED_SEARCH, parameters );
+                }
+                else if ( position == 11 )
+                {
+                    eventService.trackEvent( AppLovinEventTypes.USER_SENT_INVITATION );
+                }
+                else if ( position == 12 )
+                {
+                    eventService.trackEvent( AppLovinEventTypes.USER_SHARED_LINK );
+                }
+                else if ( position == 13 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_AMOUNT, "NUMBER OF COINS SPENT" );
+                    parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_NAME, "CURRENCY NAME" );
 
-                        eventService.trackEvent( AppLovinEventTypes.USER_CREATED_RESERVATION, parameters );
+                    eventService.trackEvent( AppLovinEventTypes.USER_SPENT_VIRTUAL_CURRENCY, parameters );
+                }
+                else if ( position == 14 )
+                {
+                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_TUTORIAL );
+                }
+                else if ( position == 15 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.CONTENT_IDENTIFIER, "SOME ID DESCRIBING CONTENT" );
 
-                        break;
-                    case 6:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
-                        parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
+                    eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_CONTENT, parameters );
+                }
+                else if ( position == 16 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
 
-                        //eventService.trackInAppPurchase(responseIntentFromOnActivityResult, parameters);
-                        // responseIntentFromOnActivityResult is the Intent returned to you by Google Play upon a purchase within the onActivityResult method, as described in the Android Developer Portal.
+                    eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_PRODUCT, parameters );
+                }
+                else if ( position == 17 )
+                {
+                    parameters = new HashMap<String, String>();
+                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
 
-                        break;
-                    case 7:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
-
-                        eventService.trackEvent( AppLovinEventTypes.USER_LOGGED_IN, parameters );
-
-                        break;
-                    case 8:
-                        eventService.trackEvent( AppLovinEventTypes.USER_PROVIDED_PAYMENT_INFORMATION );
-
-                        break;
-                    case 9:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
-
-                        eventService.trackEvent( AppLovinEventTypes.USER_CREATED_ACCOUNT, parameters );
-
-                        break;
-                    case 10:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.SEARCH_QUERY, "USER'S SEARCH STRING" );
-
-                        eventService.trackEvent( AppLovinEventTypes.USER_EXECUTED_SEARCH, parameters );
-
-                        break;
-                    case 11:
-                        eventService.trackEvent( AppLovinEventTypes.USER_SENT_INVITATION );
-
-                        break;
-                    case 12:
-                        eventService.trackEvent( AppLovinEventTypes.USER_SHARED_LINK );
-
-                        break;
-                    case 13:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_AMOUNT, "NUMBER OF COINS SPENT" );
-                        parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_NAME, "CURRENCY NAME" );
-
-                        eventService.trackEvent( AppLovinEventTypes.USER_SPENT_VIRTUAL_CURRENCY, parameters );
-
-                        break;
-                    case 14:
-                        eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_TUTORIAL );
-
-                        break;
-                    case 15:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.CONTENT_IDENTIFIER, "SOME ID DESCRIBING CONTENT" );
-
-                        eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_CONTENT, parameters );
-
-                        break;
-                    case 16:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-
-                        eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_PRODUCT, parameters );
-
-                        break;
-                    case 17:
-                        parameters = new HashMap<String, String>();
-                        parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-
-                        eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_WISHLIST, parameters );
-
-                        break;
+                    eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_WISHLIST, parameters );
                 }
             }
         };
