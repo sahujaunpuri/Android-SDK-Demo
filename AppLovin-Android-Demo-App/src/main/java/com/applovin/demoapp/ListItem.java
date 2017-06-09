@@ -8,7 +8,7 @@ public class ListItem
     private final String title;
     private final String subtitle;
 
-    ListItem(final String title, final String subtitle)
+    public ListItem(final String title, final String subtitle)
     {
         this.title = title;
         this.subtitle = subtitle;
