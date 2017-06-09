@@ -29,7 +29,7 @@ public class EventTrackingActivity
         extends InterstitialListViewActivity
 {
 
-    private ListItem[] events = {
+    private static final ListItem[] events = {
             new ListItem( "Began Checkout Event", "Track when user begins checkout procedure" ),
             new ListItem( "Cart Event", "Track when user adds an item to cart" ),
             new ListItem( "Completed Achievement Event", "Track when user completed an achievement" ),
@@ -49,8 +49,6 @@ public class EventTrackingActivity
             new ListItem( "Viewed Product Event", "Track when user views product" ),
             new ListItem( "Wishlist Event", "Track when user adds an item to their wishlist" )
     };
-    private AppLovinEventService eventService;
-
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -59,7 +57,7 @@ public class EventTrackingActivity
         setContentView( R.layout.activity_event_tracking );
         setTitle( "Event Tracking" );
 
-        eventService = AppLovinSdk.getInstance( this ).getEventService();
+        final AppLovinEventService eventService = AppLovinSdk.getInstance( this ).getEventService();
 
         ListView listView = (ListView) findViewById( R.id.listView );
         ArrayAdapter<ListItem> listAdapter = new ArrayAdapter<ListItem>( this, android.R.layout.simple_list_item_2, events )
@@ -117,6 +115,7 @@ public class EventTrackingActivity
                         parameters.put( AppLovinEventParameters.COMPLETED_ACHIEVEMENT_IDENTIFIER, "ACHIEVEMENT NAME OR ID" );
 
                         eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_ACHIEVEMENT, parameters );
+
                         break;
                     case 3:
                         parameters = new HashMap<String, String>();
@@ -218,10 +217,6 @@ public class EventTrackingActivity
                         parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
 
                         eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_WISHLIST, parameters );
-
-                        break;
-                    default:
-                        setTitle( "Default event tracking initiated" );
 
                         break;
                 }
