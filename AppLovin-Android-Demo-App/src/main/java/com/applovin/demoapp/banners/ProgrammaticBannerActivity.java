@@ -2,7 +2,9 @@ package com.applovin.demoapp.banners;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,11 +32,20 @@ public final class ProgrammaticBannerActivity
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
+        Button loadButton = (Button) findViewById(R.id.load_button);
+
         final AppLovinAdView adView = new AppLovinAdView( AppLovinAdSize.BANNER, this );
 
         //
         // Optional: Set listeners
         //
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adView.loadNextAd();
+            }
+        });
+
         adView.setAdLoadListener( new AppLovinAdLoadListener()
         {
             @Override
