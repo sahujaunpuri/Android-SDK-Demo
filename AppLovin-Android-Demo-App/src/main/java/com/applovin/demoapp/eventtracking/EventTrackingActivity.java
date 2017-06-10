@@ -91,11 +91,10 @@ public class EventTrackingActivity
             {
                 String eventTitle = events[position].getTitle();
                 setTitle( eventTitle );
-                Map<String, String> parameters;
 
                 if ( position == 0 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
                     parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "PRICE OF ITEM" );
                     parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
@@ -104,21 +103,21 @@ public class EventTrackingActivity
                 }
                 else if ( position == 1 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_CART, parameters );
                 }
                 else if ( position == 2 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.COMPLETED_ACHIEVEMENT_IDENTIFIER, "ACHIEVEMENT NAME OR ID" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_ACHIEVEMENT, parameters );
                 }
                 else if ( position == 3 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.CHECKOUT_TRANSACTION_IDENTIFIER, "UNIQUE TRANSACTION ID" );
                     parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
                     parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
@@ -128,14 +127,14 @@ public class EventTrackingActivity
                 }
                 else if ( position == 4 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.COMPLETED_LEVEL_IDENTIFIER, "LEVEL NAME OR NUMBER" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_LEVEL, parameters );
                 }
                 else if ( position == 5 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
                     long unixTimeInMilliseconds = System.currentTimeMillis() / 1000L;
                     parameters.put( AppLovinEventParameters.RESERVATION_START_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
@@ -145,7 +144,7 @@ public class EventTrackingActivity
                 }
                 else if ( position == 6 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
                     parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
 
@@ -154,7 +153,7 @@ public class EventTrackingActivity
                 }
                 else if ( position == 7 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_LOGGED_IN, parameters );
@@ -165,14 +164,14 @@ public class EventTrackingActivity
                 }
                 else if ( position == 9 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_CREATED_ACCOUNT, parameters );
                 }
                 else if ( position == 10 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.SEARCH_QUERY, "USER'S SEARCH STRING" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_EXECUTED_SEARCH, parameters );
@@ -187,7 +186,7 @@ public class EventTrackingActivity
                 }
                 else if ( position == 13 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_AMOUNT, "NUMBER OF COINS SPENT" );
                     parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_NAME, "CURRENCY NAME" );
 
@@ -199,21 +198,21 @@ public class EventTrackingActivity
                 }
                 else if ( position == 15 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.CONTENT_IDENTIFIER, "SOME ID DESCRIBING CONTENT" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_CONTENT, parameters );
                 }
                 else if ( position == 16 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_PRODUCT, parameters );
                 }
                 else if ( position == 17 )
                 {
-                    parameters = new HashMap<String, String>();
+                    Map<String, String> parameters  = new HashMap<String, String>();
                     parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
 
                     eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_WISHLIST, parameters );
