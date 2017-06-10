@@ -23,10 +23,6 @@
             android:name="applovin.sdk.key"
             android:value="YOUR_SDK_KEY" />
 
-        <meta-data
-            android:name="applovin.sdk.verbose_logging"
-            android:value="true" />
-
         <!-- It is VERY IMPORTANT you add the orientation and screenSize config flags if using Version 6.4.0 and above -->
         <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
                   android:configChanges="orientation|screenSize"/>
