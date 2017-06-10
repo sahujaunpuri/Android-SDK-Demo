@@ -25,37 +25,40 @@ public final class ProgrammaticBannerActivity
         extends BaseActivity
 {
     @Override
-    protected void onCreate(final Bundle savedInstanceState)
+    protected void onCreate( final Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_banner_programmatic );
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
-        Button loadButton = (Button) findViewById(R.id.load_button);
-
+        // Retrieve banner from layout editor
         final AppLovinAdView adView = new AppLovinAdView( AppLovinAdSize.BANNER, this );
+
+        Button loadButton = (Button) findViewById( R.id.load_button );
+
+        loadButton.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick( View v )
+            {
+                adView.loadNextAd();
+            }
+        } );
 
         //
         // Optional: Set listeners
         //
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adView.loadNextAd();
-            }
-        });
-
         adView.setAdLoadListener( new AppLovinAdLoadListener()
         {
             @Override
-            public void adReceived(final AppLovinAd ad)
+            public void adReceived( final AppLovinAd ad )
             {
                 log( "Banner loaded" );
             }
 
             @Override
-            public void failedToReceiveAd(final int errorCode)
+            public void failedToReceiveAd( final int errorCode )
             {
                 // Look at AppLovinErrorCodes.java for list of error codes
                 log( "Banner failed to load with error code " + errorCode );
@@ -65,13 +68,13 @@ public final class ProgrammaticBannerActivity
         adView.setAdDisplayListener( new AppLovinAdDisplayListener()
         {
             @Override
-            public void adDisplayed(final AppLovinAd ad)
+            public void adDisplayed( final AppLovinAd ad )
             {
                 log( "Banner Displayed" );
             }
 
             @Override
-            public void adHidden(final AppLovinAd ad)
+            public void adHidden( final AppLovinAd ad )
             {
                 log( "Banner Hidden" );
             }
@@ -80,7 +83,7 @@ public final class ProgrammaticBannerActivity
         adView.setAdClickListener( new AppLovinAdClickListener()
         {
             @Override
-            public void adClicked(final AppLovinAd ad)
+            public void adClicked( final AppLovinAd ad )
             {
                 log( "Banner Clicked" );
             }
