@@ -1,11 +1,5 @@
 package com.applovin.demoapp.banners;
 
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.applovin.adview.AppLovinAdView;
 import com.applovin.apps.demoapp.R;
 import com.applovin.demoapp.BaseActivity;
@@ -14,6 +8,12 @@ import com.applovin.sdk.AppLovinAdClickListener;
 import com.applovin.sdk.AppLovinAdDisplayListener;
 import com.applovin.sdk.AppLovinAdLoadListener;
 import com.applovin.sdk.AppLovinAdSize;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * Created by thomasso on 3/6/17.
@@ -35,8 +35,7 @@ public final class ProgrammaticBannerActivity
         //
         // Optional: Set listeners
         //
-        adView.setAdLoadListener( new AppLovinAdLoadListener()
-        {
+        adView.setAdLoadListener( new AppLovinAdLoadListener() {
             @Override
             public void adReceived(final AppLovinAd ad)
             {
@@ -51,8 +50,7 @@ public final class ProgrammaticBannerActivity
             }
         } );
 
-        adView.setAdDisplayListener( new AppLovinAdDisplayListener()
-        {
+        adView.setAdDisplayListener( new AppLovinAdDisplayListener() {
             @Override
             public void adDisplayed(final AppLovinAd ad)
             {
@@ -66,8 +64,7 @@ public final class ProgrammaticBannerActivity
             }
         } );
 
-        adView.setAdClickListener( new AppLovinAdClickListener()
-        {
+        adView.setAdClickListener( new AppLovinAdClickListener() {
             @Override
             public void adClicked(final AppLovinAd ad)
             {
