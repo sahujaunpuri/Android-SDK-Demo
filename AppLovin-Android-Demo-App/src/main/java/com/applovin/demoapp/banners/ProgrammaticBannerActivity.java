@@ -32,7 +32,6 @@ public final class ProgrammaticBannerActivity
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
-        // Retrieve banner from layout editor
         final AppLovinAdView adView = new AppLovinAdView( AppLovinAdSize.BANNER, this );
 
         Button loadButton = (Button) findViewById( R.id.load_button );
