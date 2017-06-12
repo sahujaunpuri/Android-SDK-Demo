@@ -29,26 +29,53 @@ public class EventTrackingActivity
         extends InterstitialListViewActivity
 {
 
-    private static final ListItem[] events = {
-            new ListItem( "Began Checkout Event", "Track when user begins checkout procedure" ),
-            new ListItem( "Cart Event", "Track when user adds an item to cart" ),
-            new ListItem( "Completed Achievement Event", "Track when user completed an achievement" ),
-            new ListItem( "Completed Checkout Event", "Track when user completed checkout" ),
-            new ListItem( "Completed Level Event", "Track when user completed level" ),
-            new ListItem( "Created Reservation Event", "Track when user created a reservation" ),
-            new ListItem( "In-App Purchase Event", "Track when user makes an in-app purchase" ),
-            new ListItem( "Login Event", "Track when user logs in" ),
-            new ListItem( "Payment Info Event", "Tracks when user inputs their payment information" ),
-            new ListItem( "Registration Event", "Track when user registers" ),
-            new ListItem( "Search Event", "Track when user makes a search" ),
-            new ListItem( "Sent Invitation Event", "Track when user sends invitation" ),
-            new ListItem( "Shared Link Event", "Track when user shares a link" ),
-            new ListItem( "Spent Virtual Currency Event", "Track when users spends virtual currency" ),
-            new ListItem( "Tutorial Event", "Track when users does a tutorial" ),
-            new ListItem( "Viewed Content Event", "Track when user views content" ),
-            new ListItem( "Viewed Product Event", "Track when user views product" ),
-            new ListItem( "Wishlist Event", "Track when user adds an item to their wishlist" )
-    };
+    private EventItem[] events;
+
+    private static final class EventItem
+    {
+        private String              name;
+        private String              description;
+        private String              eventType;
+        private Map<String, String> parameters;
+
+        private EventItem(final String name, final String description, final String appLovinEventType, final Map<String, String> parameters)
+        {
+            this.name = name;
+            this.description = description;
+            this.eventType = appLovinEventType;
+            this.parameters = parameters;
+        }
+
+        String getName()
+        {
+            return name;
+        }
+
+        String getDescription()
+        {
+            return description;
+        }
+
+        void trackEvent(AppLovinEventService eventService)
+        {
+            if ( eventType == AppLovinEventTypes.USER_COMPLETED_IN_APP_PURCHASE )
+            {
+                // eventService.trackInAppPurchase(responseIntentFromOnActivityResult, parameters);
+                // responseIntentFromOnActivityResult is the Intent returned to you by Google Play upon a purchase within the onActivityResult method, as described in the Android Developer Portal.
+            }
+            else if ( eventType == AppLovinEventTypes.USER_PROVIDED_PAYMENT_INFORMATION
+                    || eventType == AppLovinEventTypes.USER_SENT_INVITATION
+                    || eventType == AppLovinEventTypes.USER_SHARED_LINK
+                    || eventType == AppLovinEventTypes.USER_COMPLETED_TUTORIAL )
+            {
+                eventService.trackEvent( eventType );
+            }
+            else
+            {
+                eventService.trackEvent( eventType, parameters );
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,8 +86,149 @@ public class EventTrackingActivity
 
         final AppLovinEventService eventService = AppLovinSdk.getInstance( this ).getEventService();
 
+        events = new EventItem[]{
+                new EventItem( getString( R.string.event_name_began_checkout ),
+                        getString( R.string.event_description_began_checkout ),
+                        AppLovinEventTypes.USER_BEGAN_CHECKOUT,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.PRODUCT_IDENTIFIER, getString( R.string.event_parameter_product_description ) );
+                                put( AppLovinEventParameters.REVENUE_AMOUNT, getString( R.string.event_parameter_price_description ) );
+                                put( AppLovinEventParameters.REVENUE_CURRENCY, getString( R.string.event_parameter_currency_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_cart ),
+                        getString( R.string.event_description_cart ),
+                        AppLovinEventTypes.USER_ADDED_ITEM_TO_CART,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.PRODUCT_IDENTIFIER, getString( R.string.event_parameter_product_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_achievement ),
+                        getString( R.string.event_description_achievement ),
+                        AppLovinEventTypes.USER_COMPLETED_ACHIEVEMENT,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.COMPLETED_ACHIEVEMENT_IDENTIFIER, getString( R.string.event_parameter_achievement_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_completed_checkout ),
+                        getString( R.string.event_description_completed_checkout ),
+                        AppLovinEventTypes.USER_COMPLETED_CHECKOUT,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.CHECKOUT_TRANSACTION_IDENTIFIER, getString( R.string.event_parameter_transaction_description ) );
+                                put( AppLovinEventParameters.PRODUCT_IDENTIFIER, getString( R.string.event_parameter_product_description ) );
+                                put( AppLovinEventParameters.REVENUE_AMOUNT, getString( R.string.event_parameter_amount_description ) );
+                                put( AppLovinEventParameters.REVENUE_CURRENCY, getString( R.string.event_parameter_currency_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_level ),
+                        getString( R.string.event_description_level ),
+                        AppLovinEventTypes.USER_COMPLETED_LEVEL,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.COMPLETED_LEVEL_IDENTIFIER, getString( R.string.event_parameter_level_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_reservation ),
+                        getString( R.string.event_description_reservation ),
+                        AppLovinEventTypes.USER_CREATED_RESERVATION,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.PRODUCT_IDENTIFIER, getString( R.string.event_parameter_product_description ) );
+                                long unixTimeInMilliseconds = System.currentTimeMillis() / 1000L;
+                                put( AppLovinEventParameters.RESERVATION_START_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
+                                put( AppLovinEventParameters.RESERVATION_END_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_in_app_purchase ),
+                        getString( R.string.event_description_in_app_purchase ),
+                        AppLovinEventTypes.USER_COMPLETED_IN_APP_PURCHASE,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.REVENUE_AMOUNT, getString( R.string.event_parameter_amount_description ) );
+                                put( AppLovinEventParameters.REVENUE_CURRENCY, getString( R.string.event_parameter_currency_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_login ),
+                        getString( R.string.event_description_login ),
+                        AppLovinEventTypes.USER_LOGGED_IN,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, getString( R.string.event_parameter_user_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_payment_info ),
+                        getString( R.string.event_description_payment_info ),
+                        AppLovinEventTypes.USER_PROVIDED_PAYMENT_INFORMATION,
+                        new HashMap<String, String>() ),
+                new EventItem( getString( R.string.event_name_registration ),
+                        getString( R.string.event_description_registration ),
+                        AppLovinEventTypes.USER_CREATED_ACCOUNT,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, getString( R.string.event_parameter_user_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_search ),
+                        getString( R.string.event_description_search ),
+                        AppLovinEventTypes.USER_EXECUTED_SEARCH,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.SEARCH_QUERY, getString( R.string.event_parameter_search_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_invitation ),
+                        getString( R.string.event_description_invitation ),
+                        AppLovinEventTypes.USER_SENT_INVITATION,
+                        new HashMap<String, String>() ),
+                new EventItem( getString( R.string.event_name_shared_link ),
+                        getString( R.string.event_description_shared_link ),
+                        AppLovinEventTypes.USER_SHARED_LINK,
+                        new HashMap<String, String>() ),
+                new EventItem( getString( R.string.event_name_virt_currency ),
+                        getString( R.string.event_description_virt_currency ),
+                        AppLovinEventTypes.USER_SPENT_VIRTUAL_CURRENCY,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.VIRTUAL_CURRENCY_AMOUNT, getString( R.string.event_parameter_virt_amount_description ) );
+                                put( AppLovinEventParameters.VIRTUAL_CURRENCY_NAME, getString( R.string.event_paramter_virt_currency_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_tutorial ),
+                        getString( R.string.event_description_tutorial ),
+                        AppLovinEventTypes.USER_COMPLETED_TUTORIAL,
+                        new HashMap<String, String>() ),
+                new EventItem( getString( R.string.event_name_viewed_content ),
+                        getString( R.string.event_description_viewed_content ),
+                        AppLovinEventTypes.USER_VIEWED_CONTENT,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.CONTENT_IDENTIFIER, getString( R.string.event_parameter_content_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_viewed_product ),
+                        getString( R.string.event_description_viewed_product ),
+                        AppLovinEventTypes.USER_VIEWED_PRODUCT,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.PRODUCT_IDENTIFIER, getString( R.string.event_parameter_product_description ) );
+                            }
+                        } ),
+                new EventItem( getString( R.string.event_name_wishlist ),
+                        getString( R.string.event_description_wishlist ),
+                        AppLovinEventTypes.USER_ADDED_ITEM_TO_WISHLIST,
+                        new HashMap<String, String>() {
+                            {
+                                put( AppLovinEventParameters.PRODUCT_IDENTIFIER, getString( R.string.event_parameter_product_description ) );
+                            }
+                        } )
+        };
+
         ListView listView = (ListView) findViewById( R.id.listView );
-        ArrayAdapter<ListItem> listAdapter = new ArrayAdapter<ListItem>( this, android.R.layout.simple_list_item_2, events ) {
+        ArrayAdapter<EventItem> listAdapter = new ArrayAdapter<EventItem>( this, android.R.layout.simple_list_item_2, events ) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
@@ -71,12 +239,12 @@ public class EventTrackingActivity
                     row = inflater.inflate( android.R.layout.simple_list_item_2, parent, false );
                 }
 
-                ListItem item = events[position];
+                EventItem item = events[position];
 
                 TextView title = (TextView) row.findViewById( android.R.id.text1 );
-                title.setText( item.getTitle() );
+                title.setText( item.getName() );
                 TextView subtitle = (TextView) row.findViewById( android.R.id.text2 );
-                subtitle.setText( item.getSubtitle() );
+                subtitle.setText( item.getDescription() );
 
                 return row;
             }
@@ -87,138 +255,16 @@ public class EventTrackingActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                String eventTitle = events[position].getTitle();
-                setTitle( eventTitle );
+                EventItem event = events[position];
+                event.trackEvent( eventService );
 
-                if ( position == 0 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-                    parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "PRICE OF ITEM" );
-                    parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_BEGAN_CHECKOUT, parameters );
-                }
-                else if ( position == 1 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_CART, parameters );
-                }
-                else if ( position == 2 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.COMPLETED_ACHIEVEMENT_IDENTIFIER, "ACHIEVEMENT NAME OR ID" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_ACHIEVEMENT, parameters );
-                }
-                else if ( position == 3 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.CHECKOUT_TRANSACTION_IDENTIFIER, "UNIQUE TRANSACTION ID" );
-                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-                    parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
-                    parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_CHECKOUT, parameters );
-                }
-                else if ( position == 4 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.COMPLETED_LEVEL_IDENTIFIER, "LEVEL NAME OR NUMBER" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_LEVEL, parameters );
-                }
-                else if ( position == 5 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-                    long unixTimeInMilliseconds = System.currentTimeMillis() / 1000L;
-                    parameters.put( AppLovinEventParameters.RESERVATION_START_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
-                    parameters.put( AppLovinEventParameters.RESERVATION_END_TIMESTAMP, Long.toString( unixTimeInMilliseconds ) );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_CREATED_RESERVATION, parameters );
-                }
-                else if ( position == 6 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.REVENUE_AMOUNT, "AMOUNT OF MONEY SPENT" );
-                    parameters.put( AppLovinEventParameters.REVENUE_CURRENCY, "3-LETTER CURRENCY CODE" );
-
-                    // eventService.trackInAppPurchase(responseIntentFromOnActivityResult, parameters);
-                    // responseIntentFromOnActivityResult is the Intent returned to you by Google Play upon a purchase within the onActivityResult method, as described in the Android Developer Portal.
-                }
-                else if ( position == 7 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_LOGGED_IN, parameters );
-                }
-                else if ( position == 8 )
-                {
-                    eventService.trackEvent( AppLovinEventTypes.USER_PROVIDED_PAYMENT_INFORMATION );
-                }
-                else if ( position == 9 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.USER_ACCOUNT_IDENTIFIER, "USERNAME" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_CREATED_ACCOUNT, parameters );
-                }
-                else if ( position == 10 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.SEARCH_QUERY, "USER'S SEARCH STRING" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_EXECUTED_SEARCH, parameters );
-                }
-                else if ( position == 11 )
-                {
-                    eventService.trackEvent( AppLovinEventTypes.USER_SENT_INVITATION );
-                }
-                else if ( position == 12 )
-                {
-                    eventService.trackEvent( AppLovinEventTypes.USER_SHARED_LINK );
-                }
-                else if ( position == 13 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_AMOUNT, "NUMBER OF COINS SPENT" );
-                    parameters.put( AppLovinEventParameters.VIRTUAL_CURRENCY_NAME, "CURRENCY NAME" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_SPENT_VIRTUAL_CURRENCY, parameters );
-                }
-                else if ( position == 14 )
-                {
-                    eventService.trackEvent( AppLovinEventTypes.USER_COMPLETED_TUTORIAL );
-                }
-                else if ( position == 15 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.CONTENT_IDENTIFIER, "SOME ID DESCRIBING CONTENT" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_CONTENT, parameters );
-                }
-                else if ( position == 16 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_VIEWED_PRODUCT, parameters );
-                }
-                else if ( position == 17 )
-                {
-                    Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put( AppLovinEventParameters.PRODUCT_IDENTIFIER, "PRODUCT SKU OR ID" );
-
-                    eventService.trackEvent( AppLovinEventTypes.USER_ADDED_ITEM_TO_WISHLIST, parameters );
-                }
+                String eventName = event.getName();
+                setTitle( eventName );
             }
         };
         listView.setOnItemClickListener( itemClickListener );
 
     }
+
 }
 
