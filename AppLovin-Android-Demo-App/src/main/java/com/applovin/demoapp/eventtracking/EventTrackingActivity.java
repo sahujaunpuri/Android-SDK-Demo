@@ -55,7 +55,7 @@ public class EventTrackingActivity
     {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_event_tracking );
-        setTitle( "Event Tracking" );
+        setTitle( R.string.title_activity_event_tracking );
 
         final AppLovinEventService eventService = AppLovinSdk.getInstance( this ).getEventService();
 

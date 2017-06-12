@@ -76,7 +76,7 @@
             android:label="@string/title_activity_banner"></activity>
         <activity
             android:name="com.applovin.demoapp.eventtracking.EventTrackingActivity"
-            android:label="Event Tracking"></activity>
+            android:label="@string/title_activity_event_tracking"></activity>
         <activity
             android:name="com.applovin.demoapp.banners.ProgrammaticBannerActivity"
             android:label="@string/title_activity_banner_programmatic"></activity>
