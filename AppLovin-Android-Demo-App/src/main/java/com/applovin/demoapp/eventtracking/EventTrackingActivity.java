@@ -63,13 +63,6 @@ public class EventTrackingActivity
                 // eventService.trackInAppPurchase(responseIntentFromOnActivityResult, parameters);
                 // responseIntentFromOnActivityResult is the Intent returned to you by Google Play upon a purchase within the onActivityResult method, as described in the Android Developer Portal.
             }
-            else if ( eventType == AppLovinEventTypes.USER_PROVIDED_PAYMENT_INFORMATION
-                    || eventType == AppLovinEventTypes.USER_SENT_INVITATION
-                    || eventType == AppLovinEventTypes.USER_SHARED_LINK
-                    || eventType == AppLovinEventTypes.USER_COMPLETED_TUTORIAL )
-            {
-                eventService.trackEvent( eventType );
-            }
             else
             {
                 eventService.trackEvent( eventType, parameters );
@@ -86,6 +79,7 @@ public class EventTrackingActivity
 
         final AppLovinEventService eventService = AppLovinSdk.getInstance( this ).getEventService();
 
+        events = new EventItem[] {
                 new EventItem( getString( R.string.event_name_began_checkout ),
                         getString( R.string.event_description_began_checkout ),
                         AppLovinEventTypes.USER_BEGAN_CHECKOUT,
@@ -162,7 +156,7 @@ public class EventTrackingActivity
                 new EventItem( getString( R.string.event_name_payment_info ),
                         getString( R.string.event_description_payment_info ),
                         AppLovinEventTypes.USER_PROVIDED_PAYMENT_INFORMATION,
-                        new HashMap<String, String>() ),
+                        Collections.EMPTY_MAP ),
                 new EventItem( getString( R.string.event_name_registration ),
                         getString( R.string.event_description_registration ),
                         AppLovinEventTypes.USER_CREATED_ACCOUNT,
@@ -182,11 +176,11 @@ public class EventTrackingActivity
                 new EventItem( getString( R.string.event_name_invitation ),
                         getString( R.string.event_description_invitation ),
                         AppLovinEventTypes.USER_SENT_INVITATION,
-                        new HashMap<String, String>() ),
+                        Collections.EMPTY_MAP ),
                 new EventItem( getString( R.string.event_name_shared_link ),
                         getString( R.string.event_description_shared_link ),
                         AppLovinEventTypes.USER_SHARED_LINK,
-                        new HashMap<String, String>() ),
+                        Collections.EMPTY_MAP ),
                 new EventItem( getString( R.string.event_name_virt_currency ),
                         getString( R.string.event_description_virt_currency ),
                         AppLovinEventTypes.USER_SPENT_VIRTUAL_CURRENCY,
@@ -199,6 +193,7 @@ public class EventTrackingActivity
                 new EventItem( getString( R.string.event_name_tutorial ),
                         getString( R.string.event_description_tutorial ),
                         AppLovinEventTypes.USER_COMPLETED_TUTORIAL,
+                        Collections.EMPTY_MAP ),
                 new EventItem( getString( R.string.event_name_viewed_content ),
                         getString( R.string.event_description_viewed_content ),
                         AppLovinEventTypes.USER_VIEWED_CONTENT,
