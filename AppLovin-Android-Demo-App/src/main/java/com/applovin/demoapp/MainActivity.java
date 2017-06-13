@@ -1,6 +1,7 @@
 package com.applovin.demoapp;
 
 import com.applovin.apps.demoapp.R;
+import com.applovin.demoapp.eventtracking.EventTrackingActivity;
 import com.applovin.demoapp.rewarded.RewardedVideosActivity;
 import com.applovin.sdk.AppLovinSdk;
 
@@ -39,8 +40,9 @@ public class MainActivity
     private static final int    POSITION_INCENTIVIZED            = 1;
     private static final int    POSITION_NATIVE                  = 2;
     private static final int    POSITION_BANNER                  = 3;
-    private static final int    POSITION_RESOURCES               = 5;
-    private static final int    POSITION_CONTACT                 = 6;
+    private static final int    POSITION_EVENT                   = 5;
+    private static final int    POSITION_RESOURCES               = 6;
+    private static final int    POSITION_CONTACT                 = 7;
 
     private ListView            listView;
     private ListItem[]          items                            = {
@@ -49,6 +51,7 @@ public class MainActivity
             new ListItem( "Native Ads", "In-content ads that blend in seamlessly" ),
             new ListItem( "Banners", "320x50 Classic banner ads" ),
             new ListItem( "MRecs", "Please reference banners demo" ),
+            new ListItem( "Event Tracking", "Track in-app events for your users" ),
             new ListItem( "Resources", "https://support.applovin.com/support/home" ),
             new ListItem( "Contact", "support@applovin.com" )
     };
@@ -128,6 +131,11 @@ public class MainActivity
                 else if ( position == POSITION_BANNER )
                 {
                     Intent intent = new Intent( MainActivity.this, BannerListViewActivity.class );
+                    startActivity( intent );
+                }
+                else if ( position == POSITION_EVENT )
+                {
+                    Intent intent = new Intent( MainActivity.this, EventTrackingActivity.class );
                     startActivity( intent );
                 }
                 else if ( position == POSITION_RESOURCES )

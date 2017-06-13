@@ -22,4 +22,6 @@
     <string name="title_activity_banner">Banners</string>
     <string name="title_activity_banner_programmatic">Programmatic Banners</string>
     <string name="title_activity_banner_layout_editor">Layout Editor Banners</string>
+
+    <string name="title_activity_event_tracking">Event Tracking</string>
 </resources>
