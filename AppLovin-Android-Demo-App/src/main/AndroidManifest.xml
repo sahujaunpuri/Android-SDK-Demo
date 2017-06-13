@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.applovin.apps.demoapp">
+
     <uses-sdk
         android:minSdkVersion="15"
         android:targetSdkVersion="25" />
@@ -24,8 +25,9 @@
             android:value="YOUR_SDK_KEY" />
 
         <!-- It is VERY IMPORTANT you add the orientation and screenSize config flags if using Version 6.4.0 and above -->
-        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
-                  android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="com.applovin.adview.AppLovinInterstitialActivity"
+            android:configChanges="orientation|screenSize" />
 
         <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
 
@@ -41,52 +43,40 @@
         </activity>
         <activity
             android:name="com.applovin.demoapp.MainActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name="com.applovin.demoapp.interstitials.InterstitialSingleInstanceActivity"
-            android:label="@string/title_activity_interstitial_single_instance">
-        </activity>
+            android:label="@string/title_activity_interstitial_single_instance"></activity>
         <activity
             android:name="com.applovin.demoapp.InterstitialListViewActivity"
-            android:label="@string/title_activity_interstitial_list_view">
-        </activity>
+            android:label="@string/title_activity_interstitial_list_view"></activity>
         <activity
             android:name="com.applovin.demoapp.interstitials.InterstitialSharedInstanceActivity"
-            android:label="@string/title_activity_interstitial_shared_instance">
-        </activity>
+            android:label="@string/title_activity_interstitial_shared_instance"></activity>
         <activity
             android:name="com.applovin.demoapp.interstitials.InterstitialManualLoadingActivity"
-            android:label="@string/title_activity_interstitial_manual_loading">
-        </activity>
+            android:label="@string/title_activity_interstitial_manual_loading"></activity>
         <activity
             android:name="com.applovin.demoapp.rewarded.RewardedVideosActivity"
-            android:label="@string/title_activity_rewarded_videos">
-        </activity>
+            android:label="@string/title_activity_rewarded_videos"></activity>
         <activity
             android:name="com.applovin.demoapp.NativeAdListViewActivity"
-            android:label="@string/title_activity_native_ad_list_view">
-        </activity>
+            android:label="@string/title_activity_native_ad_list_view"></activity>
         <activity
             android:name="com.applovin.demoapp.nativeads.CarouselUINativeAdActivity"
             android:label="@string/title_activity_single_native_ad"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.applovin.demoapp.nativeads.RecyclerViewNativeAdsActivity"
-            android:label="@string/title_activity_multiple_native_ads">
-        </activity>
+            android:label="@string/title_activity_multiple_native_ads"></activity>
         <activity
             android:name="com.applovin.demoapp.BannerListViewActivity"
-            android:label="@string/title_activity_banner">
-        </activity>
+            android:label="@string/title_activity_banner"></activity>
         <activity
             android:name="com.applovin.demoapp.banners.ProgrammaticBannerActivity"
-            android:label="@string/title_activity_banner_programmatic">
-        </activity>
+            android:label="@string/title_activity_banner_programmatic"></activity>
         <activity
             android:name="com.applovin.demoapp.banners.LayoutEditorBannerActivity"
-            android:label="@string/title_activity_banner_layout_editor">
-        </activity>
+            android:label="@string/title_activity_banner_layout_editor"></activity>
     </application>
 </manifest>

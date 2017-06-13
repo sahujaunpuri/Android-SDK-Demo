@@ -1,5 +1,9 @@
 package com.applovin.demoapp;
 
+import com.applovin.apps.demoapp.R;
+import com.applovin.demoapp.rewarded.RewardedVideosActivity;
+import com.applovin.sdk.AppLovinSdk;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,10 +26,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.applovin.apps.demoapp.R;
-import com.applovin.demoapp.rewarded.RewardedVideosActivity;
-import com.applovin.sdk.AppLovinSdk;
-
 /**
  * Created by thomasso on 10/5/15.
  */
@@ -35,15 +35,15 @@ public class MainActivity
     private static final String KEY_SHARED_PREFERENCES_NAMESPACE = "com.applovin.apps.demo.shared_preferences";
     private static final String KEY_PROMPTED_CONFIG_FLAGS        = "com.applovin.apps.demo.shared_preferences.prompted_config_flags";
 
-    private static final int POSITION_INTERSTITIALS = 0;
-    private static final int POSITION_INCENTIVIZED  = 1;
-    private static final int POSITION_NATIVE        = 2;
-    private static final int POSITION_BANNER        = 3;
-    private static final int POSITION_RESOURCES     = 5;
-    private static final int POSITION_CONTACT       = 6;
+    private static final int    POSITION_INTERSTITIALS           = 0;
+    private static final int    POSITION_INCENTIVIZED            = 1;
+    private static final int    POSITION_NATIVE                  = 2;
+    private static final int    POSITION_BANNER                  = 3;
+    private static final int    POSITION_RESOURCES               = 5;
+    private static final int    POSITION_CONTACT                 = 6;
 
-    private ListView listView;
-    private ListItem[] items = {
+    private ListView            listView;
+    private ListItem[]          items                            = {
             new ListItem( "Interstitials", "Full screen ads. Graphic or video" ),
             new ListItem( "Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos" ),
             new ListItem( "Native Ads", "In-content ads that blend in seamlessly" ),
@@ -53,7 +53,7 @@ public class MainActivity
             new ListItem( "Contact", "support@applovin.com" )
     };
 
-    private MenuItem muteToggleMenuItem;
+    private MenuItem            muteToggleMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,8 +81,7 @@ public class MainActivity
         listView = (ListView) findViewById( R.id.listView );
         setupListViewFooter();
 
-        ArrayAdapter<ListItem> listAdapter = new ArrayAdapter<ListItem>( this, android.R.layout.simple_list_item_2, items )
-        {
+        ArrayAdapter<ListItem> listAdapter = new ArrayAdapter<ListItem>( this, android.R.layout.simple_list_item_2, items ) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
@@ -107,8 +106,7 @@ public class MainActivity
 
 
         // If ListActivity -> @Override public void onListItemClick( . . . .
-        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener()
-        {
+        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
@@ -228,8 +226,8 @@ public class MainActivity
         footer.setGravity( Gravity.CENTER );
         footer.setTextSize( 18 );
         footer.setText( "\nApp Version: " + appVersion +
-                                "\nSDK Version: " + AppLovinSdk.VERSION +
-                                "\nOS Version: " + versionName + "(API " + apiLevel + ")" );
+                "\nSDK Version: " + AppLovinSdk.VERSION +
+                "\nOS Version: " + versionName + "(API " + apiLevel + ")" );
 
         listView.addFooterView( footer );
         listView.setFooterDividersEnabled( false );
