@@ -1,11 +1,11 @@
 package com.applovin.demoapp.eventtracking;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.applovin.apps.demoapp.R;
 import com.applovin.demoapp.InterstitialListViewActivity;
-import com.applovin.demoapp.ListItem;
 import com.applovin.sdk.AppLovinEventParameters;
 import com.applovin.sdk.AppLovinEventService;
 import com.applovin.sdk.AppLovinEventTypes;
@@ -86,7 +86,6 @@ public class EventTrackingActivity
 
         final AppLovinEventService eventService = AppLovinSdk.getInstance( this ).getEventService();
 
-        events = new EventItem[]{
                 new EventItem( getString( R.string.event_name_began_checkout ),
                         getString( R.string.event_description_began_checkout ),
                         AppLovinEventTypes.USER_BEGAN_CHECKOUT,
@@ -200,7 +199,6 @@ public class EventTrackingActivity
                 new EventItem( getString( R.string.event_name_tutorial ),
                         getString( R.string.event_description_tutorial ),
                         AppLovinEventTypes.USER_COMPLETED_TUTORIAL,
-                        new HashMap<String, String>() ),
                 new EventItem( getString( R.string.event_name_viewed_content ),
                         getString( R.string.event_description_viewed_content ),
                         AppLovinEventTypes.USER_VIEWED_CONTENT,
