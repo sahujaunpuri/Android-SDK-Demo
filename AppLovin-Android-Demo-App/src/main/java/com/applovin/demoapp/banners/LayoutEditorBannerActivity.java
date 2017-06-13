@@ -9,6 +9,8 @@ import com.applovin.sdk.AppLovinAdDisplayListener;
 import com.applovin.sdk.AppLovinAdLoadListener;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -28,6 +30,16 @@ public final class LayoutEditorBannerActivity
 
         // Retrieve banner from layout editor
         final AppLovinAdView adView = (AppLovinAdView) findViewById( R.id.ad_view );
+
+        final Button loadButton = (Button) findViewById( R.id.load_button );
+
+        loadButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                adView.loadNextAd();
+            }
+        } );
 
         //
         // Optional: Set listeners

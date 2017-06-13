@@ -69,6 +69,8 @@ public class MainActivity
         //
         AppLovinSdk.initializeSdk( getApplicationContext() );
 
+        AppLovinSdk.getInstance( getApplicationContext() ).getSettings().setTestAdsEnabled( true );
+
         // Warn user if SDK key is invalid
         boolean isLegitSdkKey = checkSdkKey();
 

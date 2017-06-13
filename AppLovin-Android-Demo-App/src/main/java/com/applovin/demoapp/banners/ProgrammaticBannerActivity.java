@@ -12,6 +12,8 @@ import com.applovin.sdk.AppLovinAdSize;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +33,16 @@ public final class ProgrammaticBannerActivity
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
         final AppLovinAdView adView = new AppLovinAdView( AppLovinAdSize.BANNER, this );
+
+        Button loadButton = (Button) findViewById( R.id.load_button );
+
+        loadButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                adView.loadNextAd();
+            }
+        } );
 
         //
         // Optional: Set listeners
