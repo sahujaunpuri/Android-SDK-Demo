@@ -58,7 +58,7 @@ public class EventTrackingActivity
 
         void trackEvent(AppLovinEventService eventService)
         {
-            if ( eventType == AppLovinEventTypes.USER_COMPLETED_IN_APP_PURCHASE )
+            if ( eventType.equals( AppLovinEventTypes.USER_COMPLETED_IN_APP_PURCHASE ) )
             {
                 // eventService.trackInAppPurchase(responseIntentFromOnActivityResult, parameters);
                 // responseIntentFromOnActivityResult is the Intent returned to you by Google Play upon a purchase within the onActivityResult method, as described in the Android Developer Portal.
