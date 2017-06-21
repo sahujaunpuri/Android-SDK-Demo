@@ -90,18 +90,18 @@ class NativeAdRecyclerViewActivity : AppCompatActivity() {
         val appIconImageView: ImageView = itemView.findViewById<View>(R.id.appIconImageView) as ImageView
     }
 
-    private inner class NativeAdRecyclerViewAdapter(private val nativeAds: List<AppLovinNativeAd>?) : RecyclerView.Adapter<NativeAdRecyclerViewHolder>() {
+    private inner class NativeAdRecyclerViewAdapter(private val nativeAds: List<AppLovinNativeAd>) : RecyclerView.Adapter<NativeAdRecyclerViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NativeAdRecyclerViewHolder {
             val prototypeView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_cell_nativead, parent, false)
 
-            prototypeView.setOnClickListener({ v -> onRecyclerViewItemClicked(v, nativeAds!!) })
+            prototypeView.setOnClickListener({ v -> onRecyclerViewItemClicked(v, nativeAds) })
 
             return NativeAdRecyclerViewHolder(prototypeView)
         }
 
         override fun onBindViewHolder(holder: NativeAdRecyclerViewHolder, position: Int) {
-            val nativeAd = nativeAds!![position]
+            val nativeAd = nativeAds[position]
 
             holder.appTitleTextView.text = nativeAd.title
             holder.appDescriptionTextView.text = nativeAd.descriptionText
@@ -114,7 +114,7 @@ class NativeAdRecyclerViewActivity : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int {
-            return nativeAds?.size ?: 0
+            return nativeAds.size
         }
     }
 }

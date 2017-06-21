@@ -52,9 +52,7 @@ class AspectRatioTextureView : TextureView {
 
         setMeasuredDimension(scaledWidth, scaledHeight)
 
-        if (onMeasureCompletionListener != null) {
-            onMeasureCompletionListener!!.onMeasureCompleted(scaledWidth, scaledHeight)
-        }
+        onMeasureCompletionListener?.onMeasureCompleted(scaledWidth, scaledHeight)
     }
 
     fun setVideoSize(videoWidth: Int, videoHeight: Int) {

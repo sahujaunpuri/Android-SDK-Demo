@@ -26,7 +26,7 @@ class MainActivity : DemoMenuActivity() {
     private val KEY_SHARED_PREFERENCES_NAMESPACE = "com.applovin.apps.demo.shared_preferences"
     private val KEY_PROMPTED_CONFIG_FLAGS = "com.applovin.apps.demo.shared_preferences.prompted_config_flags"
 
-    private var muteToggleMenuItem: MenuItem? = null
+    private lateinit var muteToggleMenuItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,7 +127,7 @@ class MainActivity : DemoMenuActivity() {
     private fun toggleMute() {
         val sdk = AppLovinSdk.getInstance(applicationContext)
         sdk.settings.isMuted = !sdk.settings.isMuted
-        muteToggleMenuItem!!.icon = getMuteIconForCurrentSdkMuteSetting()
+        muteToggleMenuItem.icon = getMuteIconForCurrentSdkMuteSetting()
     }
 
     private fun getMuteIconForCurrentSdkMuteSetting(): Drawable {
@@ -149,8 +149,9 @@ class MainActivity : DemoMenuActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        muteToggleMenuItem = menu.findItem(R.id.action_toggle_mute)
-        muteToggleMenuItem!!.icon = getMuteIconForCurrentSdkMuteSetting()
+        muteToggleMenuItem = menu.findItem(R.id.action_toggle_mute).apply {
+            icon = getMuteIconForCurrentSdkMuteSetting()
+        }
 
         return true
     }

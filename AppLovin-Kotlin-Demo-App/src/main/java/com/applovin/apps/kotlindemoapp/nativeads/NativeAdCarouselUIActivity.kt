@@ -76,29 +76,31 @@ class NativeAdCarouselUIActivity : AdStatusActivity() {
 
         showButton.setOnClickListener({
             runOnUiThread {
-                log("Native ad rendered")
+                nativeAd?.let { nativeAd ->
+                    log("Native ad rendered")
 
-                appTitleTextView.text = nativeAd!!.title
-                appDescriptionTextView.text = nativeAd!!.descriptionText
+                    appTitleTextView.text = nativeAd.title
+                    appDescriptionTextView.text = nativeAd.descriptionText
 
-                AppLovinSdkUtils.safePopulateImageView(appIcon, Uri.parse(nativeAd!!.iconUrl), AppLovinSdkUtils.dpToPx(applicationContext, AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE))
+                    AppLovinSdkUtils.safePopulateImageView(appIcon, Uri.parse(nativeAd.iconUrl), AppLovinSdkUtils.dpToPx(applicationContext, AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE))
 
-                val starRatingDrawable = getStarRatingDrawable(nativeAd!!.starRating)
-                appRating.setImageDrawable(starRatingDrawable)
+                    val starRatingDrawable = getStarRatingDrawable(nativeAd.starRating)
+                    appRating.setImageDrawable(starRatingDrawable)
 
-                appDownloadButton.text = nativeAd!!.ctaText
+                    appDownloadButton.text = nativeAd.ctaText
 
-                mediaView.ad = nativeAd!!
-                mediaView.cardState = InlineCarouselCardState()
-                mediaView.sdk = AppLovinSdk.getInstance(applicationContext)
-                mediaView.setUiHandler(Handler(Looper.getMainLooper()))
-                mediaView.setUpView()
-                mediaView.autoplayVideo()
+                    mediaView.ad = nativeAd
+                    mediaView.cardState = InlineCarouselCardState()
+                    mediaView.sdk = AppLovinSdk.getInstance(applicationContext)
+                    mediaView.setUiHandler(Handler(Looper.getMainLooper()))
+                    mediaView.setUpView()
+                    mediaView.autoplayVideo()
 
-                //
-                // You are responsible for firing impressions
-                //
-                trackImpression(nativeAd!!)
+                    //
+                    // You are responsible for firing impressions
+                    //
+                    trackImpression(nativeAd)
+                }
             }
         })
 
