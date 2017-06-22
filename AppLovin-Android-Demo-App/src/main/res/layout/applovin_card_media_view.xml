@@ -12,7 +12,7 @@
         android:scaleType="fitCenter" />
 
     <!--TODO: Make sure you use correct package name in your project-->
-    <com.applovin.demoapp.nativeads.carouselui.cards.InlineCarouselCardReplayOverlay
+    <com.applovin.apps.demoapp.nativeads.carouselui.cards.InlineCarouselCardReplayOverlay
         android:id="@+id/applovin_media_replay_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

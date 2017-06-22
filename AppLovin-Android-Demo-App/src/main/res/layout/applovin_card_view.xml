@@ -78,13 +78,13 @@
 
         </LinearLayout>
 
-        <com.applovin.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView
+        <com.applovin.apps.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView
             android:id="@+id/applovin_card_video_ad_view"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_gravity="center">
 
-        </com.applovin.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView>
+        </com.applovin.apps.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView>
 
         <LinearLayout
             android:id="@+id/applovin_card_bottom_bar_layout"
