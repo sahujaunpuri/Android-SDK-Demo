@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26'
+
+    defaultConfig {
+        applicationId "com.applovin.apps.kotlindemoapp"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+buildscript {
+    ext.kotlin_version = '1.1.2-5'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:support-v13:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.google.android.gms:play-services:10.2.0'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    compile 'com.google.android.gms:play-services-identity:10.2.0'
+    compile 'com.android.support:multidex:1.0.1'
+
+    // If AppLovin Demo App is running as a module in the AppLovin development environment
+    if (new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists()) {
+        compile project(':AppLovin-Android-SDK-Mediation-Adapters') // This compiles SDK project
+    }
+    // Otherwise (AppLovin Demo app is running as a standalone project)
+    else {
+        def libsFolder = new File(projectDir, "libs");
+        if (!libsFolder.exists() || libsFolder.list() == null || libsFolder.listFiles().length == 0) {
+            throw new IllegalStateException("AppLovin SDK jar file was not found in the libs/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the libs/ folder of your project")
+        }
+    }
+}
+repositories {
+    mavenCentral()
+}
