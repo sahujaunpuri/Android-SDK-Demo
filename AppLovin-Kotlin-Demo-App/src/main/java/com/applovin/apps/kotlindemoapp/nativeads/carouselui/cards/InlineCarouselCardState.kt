@@ -3,7 +3,8 @@ package com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards
 /**
  * This class tracks the display and playback state of an individual card view within a carousel.
  */
-class InlineCarouselCardState {
+class InlineCarouselCardState
+{
     var isVideoStarted: Boolean = false
     var isVideoCompleted: Boolean = false
     var isImpressionTracked: Boolean = false
@@ -18,7 +19,8 @@ class InlineCarouselCardState {
     /**
      * Created by mszaro on 4/24/15.
      */
-    enum class MuteState {
+    enum class MuteState
+    {
         UNSPECIFIED,
         UNMUTED,
         MUTED

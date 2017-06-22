@@ -20,9 +20,11 @@ import com.applovin.sdk.AppLovinSdk
 import com.applovin.sdk.AppLovinSdkUtils
 import kotlinx.android.synthetic.main.activity_native_ad_recycler_view.*
 
-class NativeAdRecyclerViewActivity : AppCompatActivity() {
+class NativeAdRecyclerViewActivity : AppCompatActivity()
+{
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_native_ad_recycler_view)
 
@@ -32,67 +34,82 @@ class NativeAdRecyclerViewActivity : AppCompatActivity() {
         val activityRef = this
 
         val nativeAdService = sdk.nativeAdService
-        nativeAdService.loadNativeAds(10, object : AppLovinNativeAdLoadListener {
-            override fun onNativeAdsLoaded(list: List<*>) {
+        nativeAdService.loadNativeAds(10, object : AppLovinNativeAdLoadListener
+        {
+            override fun onNativeAdsLoaded(list: List<*>)
+            {
                 runOnUiThread {
                     renderRecyclerView(list as List<AppLovinNativeAd>)
                     retrieveImageResources(nativeAdService, list)
                 }
             }
 
-            override fun onNativeAdsFailedToLoad(errorCode: Int) {
+            override fun onNativeAdsFailedToLoad(errorCode: Int)
+            {
                 runOnUiThread { Toast.makeText(activityRef, "Failed to load native ads: " + errorCode, Toast.LENGTH_LONG).show() }
             }
         })
     }
 
-    private fun retrieveImageResources(nativeAdService: AppLovinNativeAdService, nativeAds: List<AppLovinNativeAd>) {
+    private fun retrieveImageResources(nativeAdService: AppLovinNativeAdService, nativeAds: List<AppLovinNativeAd>)
+    {
         val thisRef = this
 
-        for (nativeAd in nativeAds) {
-            nativeAdService.precacheResources(nativeAd, object : AppLovinNativeAdPrecacheListener {
-                override fun onNativeAdImagesPrecached(appLovinNativeAd: AppLovinNativeAd) {
+        for (nativeAd in nativeAds)
+        {
+            nativeAdService.precacheResources(nativeAd, object : AppLovinNativeAdPrecacheListener
+            {
+                override fun onNativeAdImagesPrecached(appLovinNativeAd: AppLovinNativeAd)
+                {
                     runOnUiThread {
                         val adapter = nativeAdsRecyclerView.adapter as NativeAdRecyclerViewAdapter
                         adapter.notifyItemChanged(nativeAds.indexOf(appLovinNativeAd))
                     }
                 }
 
-                override fun onNativeAdVideoPreceached(appLovinNativeAd: AppLovinNativeAd) {
+                override fun onNativeAdVideoPreceached(appLovinNativeAd: AppLovinNativeAd)
+                {
                     // This example does not implement videos; see CarouselUINativeAdActivity for an example of a widget which does.
                 }
 
-                override fun onNativeAdImagePrecachingFailed(appLovinNativeAd: AppLovinNativeAd, errorCode: Int) {
+                override fun onNativeAdImagePrecachingFailed(appLovinNativeAd: AppLovinNativeAd, errorCode: Int)
+                {
                     runOnUiThread { Toast.makeText(thisRef, "Failed to load images for native ad: " + errorCode, Toast.LENGTH_LONG).show() }
                 }
 
-                override fun onNativeAdVideoPrecachingFailed(appLovinNativeAd: AppLovinNativeAd, i: Int) {
+                override fun onNativeAdVideoPrecachingFailed(appLovinNativeAd: AppLovinNativeAd, i: Int)
+                {
                     // This example does not implement videos; see CarouselUINativeAdActivity for an example of a widget which does.
                 }
             })
         }
     }
 
-    private fun renderRecyclerView(nativeAds: List<AppLovinNativeAd>) {
+    private fun renderRecyclerView(nativeAds: List<AppLovinNativeAd>)
+    {
         nativeAdsRecyclerView.layoutManager = LinearLayoutManager(this)
         nativeAdsRecyclerView.adapter = NativeAdRecyclerViewAdapter(nativeAds)
     }
 
-    private fun onRecyclerViewItemClicked(clickedView: View, nativeAds: List<AppLovinNativeAd>) {
+    private fun onRecyclerViewItemClicked(clickedView: View, nativeAds: List<AppLovinNativeAd>)
+    {
         val itemPosition = nativeAdsRecyclerView.getChildAdapterPosition(clickedView)
         val ad = nativeAds[itemPosition]
         ad.launchClickTarget(this)
     }
 
-    private inner class NativeAdRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private inner class NativeAdRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
         val appTitleTextView: TextView = itemView.findViewById<View>(R.id.appTitleTextView) as TextView
         val appDescriptionTextView: TextView = itemView.findViewById<View>(R.id.appDescriptionTextView) as TextView
         val appIconImageView: ImageView = itemView.findViewById<View>(R.id.appIconImageView) as ImageView
     }
 
-    private inner class NativeAdRecyclerViewAdapter(private val nativeAds: List<AppLovinNativeAd>) : RecyclerView.Adapter<NativeAdRecyclerViewHolder>() {
+    private inner class NativeAdRecyclerViewAdapter(private val nativeAds: List<AppLovinNativeAd>) : RecyclerView.Adapter<NativeAdRecyclerViewHolder>()
+    {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NativeAdRecyclerViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NativeAdRecyclerViewHolder
+        {
             val prototypeView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_cell_nativead, parent, false)
 
             prototypeView.setOnClickListener({ v -> onRecyclerViewItemClicked(v, nativeAds) })
@@ -100,7 +117,8 @@ class NativeAdRecyclerViewActivity : AppCompatActivity() {
             return NativeAdRecyclerViewHolder(prototypeView)
         }
 
-        override fun onBindViewHolder(holder: NativeAdRecyclerViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: NativeAdRecyclerViewHolder, position: Int)
+        {
             val nativeAd = nativeAds[position]
 
             holder.appTitleTextView.text = nativeAd.title
@@ -113,7 +131,8 @@ class NativeAdRecyclerViewActivity : AppCompatActivity() {
             nativeAd.trackImpression()
         }
 
-        override fun getItemCount(): Int {
+        override fun getItemCount(): Int
+        {
             return nativeAds.size
         }
     }

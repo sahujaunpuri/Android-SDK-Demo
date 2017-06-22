@@ -22,13 +22,15 @@ import com.applovin.sdk.AppLovinSdk
 import kotlinx.android.synthetic.main.activity_list.*
 
 
-class MainActivity : DemoMenuActivity() {
+class MainActivity : DemoMenuActivity()
+{
     private val KEY_SHARED_PREFERENCES_NAMESPACE = "com.applovin.apps.demo.shared_preferences"
     private val KEY_PROMPTED_CONFIG_FLAGS = "com.applovin.apps.demo.shared_preferences.prompted_config_flags"
 
     private lateinit var muteToggleMenuItem: MenuItem
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
 
         // Initializing our SDK at launch is very important as it'll start preloading ads in the background.
@@ -39,17 +41,22 @@ class MainActivity : DemoMenuActivity() {
         val isLegitSdkKey = checkSdkKey()
 
         // Prompt to add config flags if SDK key is legit
-        if (isLegitSdkKey) {
+        if (isLegitSdkKey)
+        {
             maybePromptConfigFlags()
         }
     }
 
-    override fun setupListViewFooter() {
+    override fun setupListViewFooter()
+    {
         var appVersion = ""
-        try {
+        try
+        {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
             appVersion = pInfo.versionName
-        } catch (e: PackageManager.NameNotFoundException) {
+        }
+        catch (e: PackageManager.NameNotFoundException)
+        {
             e.printStackTrace()
         }
 
@@ -67,7 +74,8 @@ class MainActivity : DemoMenuActivity() {
         list_view.setFooterDividersEnabled(false)
     }
 
-    private fun makeContactIntent(): Intent {
+    private fun makeContactIntent(): Intent
+    {
         val intent = Intent(Intent.ACTION_SENDTO)
         intent.type = "text/plain"
         intent.data = Uri.parse("mailto:" + "support@applovin.com")
@@ -76,7 +84,8 @@ class MainActivity : DemoMenuActivity() {
         return Intent.createChooser(intent, "Send Email")
     }
 
-    override fun getListViewContents(): Array<DemoMenuItem> {
+    override fun getListViewContents(): Array<DemoMenuItem>
+    {
         return arrayOf(
                 DemoMenuItem("Interstitials", "Full screen ads. Graphic or video", Intent(this, InterstitialDemoMenuActivity::class.java)),
                 DemoMenuItem("Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", Intent(this, RewardedVideosActivity::class.java)),
@@ -89,9 +98,11 @@ class MainActivity : DemoMenuActivity() {
         )
     }
 
-    private fun checkSdkKey(): Boolean {
+    private fun checkSdkKey(): Boolean
+    {
         val sdkKey = AppLovinSdk.getInstance(applicationContext).sdkKey
-        if ("YOUR_SDK_KEY".equals(sdkKey, ignoreCase = true)) {
+        if ("YOUR_SDK_KEY".equals(sdkKey, ignoreCase = true))
+        {
             AlertDialog.Builder(this)
                     .setTitle("ERROR")
                     .setMessage("Please update your sdk key in the manifest file.")
@@ -105,9 +116,11 @@ class MainActivity : DemoMenuActivity() {
         return true
     }
 
-    private fun maybePromptConfigFlags() {
+    private fun maybePromptConfigFlags()
+    {
         val sharedPrefs = getSharedPreferences(KEY_SHARED_PREFERENCES_NAMESPACE, Context.MODE_PRIVATE)
-        if (!sharedPrefs.getBoolean(KEY_PROMPTED_CONFIG_FLAGS, false)) {
+        if (!sharedPrefs.getBoolean(KEY_PROMPTED_CONFIG_FLAGS, false))
+        {
             AlertDialog.Builder(this)
                     .setTitle("IF you are using Android SDK 6.4.0 or above")
                     .setMessage("In your manifest file, please set the \"android:configChanges\" attribute for com.applovin.adview.AppLovinInterstitialActivity to be \"orientation|screenSize\"")
@@ -124,31 +137,38 @@ class MainActivity : DemoMenuActivity() {
     /**
      * Toggling the sdk mute setting will affect whether your video ads begin in a muted state or not.
      */
-    private fun toggleMute() {
+    private fun toggleMute()
+    {
         val sdk = AppLovinSdk.getInstance(applicationContext)
         sdk.settings.isMuted = !sdk.settings.isMuted
         muteToggleMenuItem.icon = getMuteIconForCurrentSdkMuteSetting()
     }
 
-    private fun getMuteIconForCurrentSdkMuteSetting(): Drawable {
+    private fun getMuteIconForCurrentSdkMuteSetting(): Drawable
+    {
         val sdk = AppLovinSdk.getInstance(applicationContext)
         val drawableId = if (sdk.settings.isMuted) R.drawable.mute else R.drawable.unmute
 
-        if (Build.VERSION.SDK_INT >= 22) {
+        if (Build.VERSION.SDK_INT >= 22)
+        {
             return resources.getDrawable(drawableId, theme)
-        } else {
+        }
+        else
+        {
             @Suppress("DEPRECATION")
             return resources.getDrawable(drawableId)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean
+    {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean
+    {
         muteToggleMenuItem = menu.findItem(R.id.action_toggle_mute).apply {
             icon = getMuteIconForCurrentSdkMuteSetting()
         }
@@ -156,8 +176,10 @@ class MainActivity : DemoMenuActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_toggle_mute) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        if (item.itemId == R.id.action_toggle_mute)
+        {
             toggleMute()
         }
 

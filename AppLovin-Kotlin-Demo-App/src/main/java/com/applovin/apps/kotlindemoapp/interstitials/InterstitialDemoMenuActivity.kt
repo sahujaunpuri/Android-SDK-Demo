@@ -4,7 +4,8 @@ import android.content.Intent
 import com.applovin.apps.kotlindemoapp.DemoMenuActivity
 import com.applovin.apps.kotlindemoapp.DemoMenuItem
 
-class InterstitialDemoMenuActivity : DemoMenuActivity() {
+class InterstitialDemoMenuActivity : DemoMenuActivity()
+{
     override fun getListViewContents(): Array<DemoMenuItem> = arrayOf(
             DemoMenuItem("Single instance", "Programmatically creating an instance of it", Intent(this, InterstitialSingleInstanceActivity::class.java)),
             DemoMenuItem("Shared instance", "Use the shared instance", Intent(this, InterstitialSharedInstanceActivity::class.java)),

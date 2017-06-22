@@ -3,7 +3,8 @@ package com.applovin.apps.kotlindemoapp.nativeads.carouselui
 /**
  * Created by mszaro on 5/27/15.
  */
-object AppLovinCarouselViewSettings {
+object AppLovinCarouselViewSettings
+{
     val NUM_ADS_TO_AUTOLOAD = 3
     val VIEW_PAGER_MARGIN = 20
     val VIEW_PAGER_OFF_SCREEN_PAGE_LIMIT = 2

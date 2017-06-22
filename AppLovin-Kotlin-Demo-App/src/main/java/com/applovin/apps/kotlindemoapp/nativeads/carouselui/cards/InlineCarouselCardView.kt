@@ -15,23 +15,22 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-
 import com.applovin.adview.AppLovinTouchToClickListener
 import com.applovin.apps.kotlindemoapp.R
 import com.applovin.apps.kotlindemoapp.nativeads.carouselui.AppLovinCarouselViewSettings
 import com.applovin.apps.kotlindemoapp.nativeads.carouselui.util.LayoutUtils
+import com.applovin.apps.kotlindemoapp.nativeads.carouselui.util.LayoutUtils.WRAP_CONTENT
 import com.applovin.impl.sdk.AppLovinSdkImpl
 import com.applovin.nativeAds.AppLovinNativeAd
 import com.applovin.nativeAds.AppLovinNativeAdPrecacheListener
 import com.applovin.sdk.AppLovinSdk
 import com.applovin.sdk.AppLovinSdkUtils
 
-import com.applovin.apps.kotlindemoapp.nativeads.carouselui.util.LayoutUtils.WRAP_CONTENT
-
 /**
  * This view represents a single 'card' within a carousel view.
  */
-class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovinNativeAdPrecacheListener {
+class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovinNativeAdPrecacheListener
+{
 
     var sdk: AppLovinSdk? = null
     var ad: AppLovinNativeAd? = null
@@ -59,7 +58,8 @@ class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovi
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun setUpView() {
+    fun setUpView()
+    {
         this.uiHandler = Handler(Looper.getMainLooper())
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -69,14 +69,16 @@ class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovi
 
         renderActivityIndicator()
 
-        if (sdk == null) {
+        if (sdk == null)
+        {
             sdk = AppLovinSdk.getInstance(context)
         }
 
         sdk!!.nativeAdService.precacheResources(ad, this)
     }
 
-    private fun bindViews() {
+    private fun bindViews()
+    {
         contentLayout = findViewById<View>(R.id.applovin_card_content_layout) as LinearLayout
         appIconImageView = findViewById<View>(R.id.applovin_card_app_icon) as ImageView
         appTitleTextView = findViewById<View>(R.id.applovin_card_title) as TextView
@@ -87,11 +89,14 @@ class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovi
         downloadButton = findViewById<View>(R.id.applovin_card_action_button) as Button
     }
 
-    fun renderCard() {
-        if (!slotRendered) {
+    fun renderCard()
+    {
+        if (!slotRendered)
+        {
             slotRendered = true
 
-            if (loadingIndicator != null) {
+            if (loadingIndicator != null)
+            {
                 removeView(loadingIndicator)
                 loadingIndicator = null
             }
@@ -118,19 +123,21 @@ class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovi
             contentLayout!!.setOnClickListener { ad!!.launchClickTarget(context) }
 
             AppLovinSdkUtils.safePopulateImageView(appIconImageView, Uri.parse(ad!!.iconUrl),
-                    AppLovinSdkUtils.dpToPx(context, AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE))
+                                                   AppLovinSdkUtils.dpToPx(context, AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE))
 
             val starRatingDrawable = getStarRatingDrawable(ad!!.starRating)
             starRatingImageView!!.setImageDrawable(starRatingDrawable)
 
-            if (videoPlayerNotificationRequested) {
+            if (videoPlayerNotificationRequested)
+            {
                 mediaView!!.onVideoPrecached(ad!!)
                 videoPlayerNotificationRequested = false
             }
         }
     }
 
-    private fun getStarRatingDrawable(starRating: Float): Drawable {
+    private fun getStarRatingDrawable(starRating: Float): Drawable
+    {
         val sanitizedRating = java.lang.Float.toString(starRating).replace(".", "_")
         val resourceName = "applovin_star_sprite_" + sanitizedRating
         sdk!!.logger.d("InlineCarouselCardView", "Looking up resource named: " + resourceName)
@@ -138,7 +145,8 @@ class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovi
         return context.resources.getDrawable(drawableId)
     }
 
-    private fun renderActivityIndicator() {
+    private fun renderActivityIndicator()
+    {
         loadingIndicator = ProgressBar(context)
         loadingIndicator!!.isIndeterminate = true
         loadingIndicator!!.layoutParams = LayoutUtils.createFrameParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER)
@@ -146,59 +154,77 @@ class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovi
         bringChildToFront(loadingIndicator)
     }
 
-    override fun onCardActivated() {
-        if (mediaView != null) {
+    override fun onCardActivated()
+    {
+        if (mediaView != null)
+        {
             mediaView!!.onCardActivated()
         }
 
         cardState!!.isPreviouslyActivated = true
         cardState!!.isCurrentlyActive = true
 
-        if (!cardState!!.isImpressionTracked) {
+        if (!cardState!!.isImpressionTracked)
+        {
             cardState!!.isImpressionTracked = true
             (sdk as AppLovinSdkImpl).postbackService.dispatchPostbackAsync(ad!!.impressionTrackingUrl, null)
         }
     }
 
-    override fun onCardDeactivated() {
-        if (mediaView != null) {
+    override fun onCardDeactivated()
+    {
+        if (mediaView != null)
+        {
             mediaView!!.onCardDeactivated()
         }
 
         cardState!!.isCurrentlyActive = false
     }
 
-    fun handleVideoClicked() {
-        if (AppLovinCarouselViewSettings.TAP_TO_PAUSE_VIDEO) {
+    fun handleVideoClicked()
+    {
+        if (AppLovinCarouselViewSettings.TAP_TO_PAUSE_VIDEO)
+        {
             mediaView!!.togglePlayback()
-        } else {
+        }
+        else
+        {
             ad!!.launchClickTarget(context)
         }
     }
 
-    override fun onNativeAdImagesPrecached(slot: AppLovinNativeAd) {
+    override fun onNativeAdImagesPrecached(slot: AppLovinNativeAd)
+    {
         uiHandler!!.post { renderCard() }
     }
 
     //    @Overrides
-    override fun onNativeAdVideoPreceached(slot: AppLovinNativeAd) {
-        if (mediaView != null) {
+    override fun onNativeAdVideoPreceached(slot: AppLovinNativeAd)
+    {
+        if (mediaView != null)
+        {
             uiHandler!!.post { mediaView!!.onVideoPrecached(slot) }
-        } else {
+        }
+        else
+        {
             videoPlayerNotificationRequested = true
         }
     }
 
-    override fun onNativeAdImagePrecachingFailed(ad: AppLovinNativeAd, errorCode: Int) {
+    override fun onNativeAdImagePrecachingFailed(ad: AppLovinNativeAd, errorCode: Int)
+    {
 
     }
 
-    override fun onNativeAdVideoPrecachingFailed(ad: AppLovinNativeAd, errorCode: Int) {
+    override fun onNativeAdVideoPrecachingFailed(ad: AppLovinNativeAd, errorCode: Int)
+    {
 
     }
 
-    fun destroy() {
-        if (mediaView != null) {
+    fun destroy()
+    {
+        if (mediaView != null)
+        {
             mediaView!!.destroy()
         }
 

@@ -8,9 +8,11 @@ import com.applovin.sdk.AppLovinAdDisplayListener
 import com.applovin.sdk.AppLovinAdLoadListener
 import kotlinx.android.synthetic.main.activity_banner_layout_editor.*
 
-class BannerLayoutEditorActivity : AdStatusActivity() {
+class BannerLayoutEditorActivity : AdStatusActivity()
+{
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banner_layout_editor)
 
@@ -21,24 +23,32 @@ class BannerLayoutEditorActivity : AdStatusActivity() {
         //
         // Optional: Set listeners
         //
-        ad_view.setAdLoadListener(object : AppLovinAdLoadListener {
-            override fun adReceived(ad: AppLovinAd) {
-                log("Banner loaded")
-            }
-            override fun failedToReceiveAd(errorCode: Int) {
-                // Look at AppLovinErrorCodes.java for list of error codes
-                log("Banner failed to load with error code " + errorCode)
-            }
-        })
+        ad_view.setAdLoadListener(object : AppLovinAdLoadListener
+                                  {
+                                      override fun adReceived(ad: AppLovinAd)
+                                      {
+                                          log("Banner loaded")
+                                      }
 
-        ad_view.setAdDisplayListener(object : AppLovinAdDisplayListener {
-            override fun adDisplayed(ad: AppLovinAd) {
-                log("Banner Displayed")
-            }
-            override fun adHidden(ad: AppLovinAd) {
-                log("Banner Hidden")
-            }
-        })
+                                      override fun failedToReceiveAd(errorCode: Int)
+                                      {
+                                          // Look at AppLovinErrorCodes.java for list of error codes
+                                          log("Banner failed to load with error code " + errorCode)
+                                      }
+                                  })
+
+        ad_view.setAdDisplayListener(object : AppLovinAdDisplayListener
+                                     {
+                                         override fun adDisplayed(ad: AppLovinAd)
+                                         {
+                                             log("Banner Displayed")
+                                         }
+
+                                         override fun adHidden(ad: AppLovinAd)
+                                         {
+                                             log("Banner Hidden")
+                                         }
+                                     })
 
         ad_view.setAdClickListener { log("Banner Clicked") }
 

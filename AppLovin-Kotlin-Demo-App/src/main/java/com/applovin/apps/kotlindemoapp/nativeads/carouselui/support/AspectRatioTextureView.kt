@@ -7,31 +7,37 @@ import android.view.TextureView
 /**
  * Provides a TextureView that maintains the aspect ratio of a video contained within.
  */
-class AspectRatioTextureView : TextureView {
+class AspectRatioTextureView : TextureView
+{
     private var mVideoWidth: Int = 0
     private var mVideoHeight: Int = 0
     var onMeasureCompletionListener: OnMeasureCompletionListener? = null
 
-    constructor(context: Context) : super(context) {
+    constructor(context: Context) : super(context)
+    {
 
         mVideoWidth = 0
         mVideoHeight = 0
     }
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    {
 
         mVideoWidth = 0
         mVideoHeight = 0
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    {
 
         mVideoWidth = 0
         mVideoHeight = 0
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        if (mVideoWidth <= 0 || mVideoHeight <= 0) {
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int)
+    {
+        if (mVideoWidth <= 0 || mVideoHeight <= 0)
+        {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
             return
         }
@@ -42,10 +48,13 @@ class AspectRatioTextureView : TextureView {
         val scaledHeight: Int
         val scaledWidth: Int
 
-        if (heightRatio > widthRatio) {
+        if (heightRatio > widthRatio)
+        {
             scaledHeight = Math.ceil((mVideoHeight.toFloat() / heightRatio).toDouble()).toInt()
             scaledWidth = Math.ceil((mVideoWidth.toFloat() / heightRatio).toDouble()).toInt()
-        } else {
+        }
+        else
+        {
             scaledHeight = Math.ceil((mVideoHeight.toFloat() / widthRatio).toDouble()).toInt()
             scaledWidth = Math.ceil((mVideoWidth.toFloat() / widthRatio).toDouble()).toInt()
         }
@@ -55,19 +64,24 @@ class AspectRatioTextureView : TextureView {
         onMeasureCompletionListener?.onMeasureCompleted(scaledWidth, scaledHeight)
     }
 
-    fun setVideoSize(videoWidth: Int, videoHeight: Int) {
+    fun setVideoSize(videoWidth: Int, videoHeight: Int)
+    {
         mVideoWidth = videoWidth
         mVideoHeight = videoHeight
 
-        try {
+        try
+        {
             requestLayout()
             invalidate()
-        } catch (ignore: Exception) {
+        }
+        catch (ignore: Exception)
+        {
         }
 
     }
 
-    interface OnMeasureCompletionListener {
+    interface OnMeasureCompletionListener
+    {
         fun onMeasureCompleted(adjustedWidth: Int, adjustedHeight: Int)
     }
 }

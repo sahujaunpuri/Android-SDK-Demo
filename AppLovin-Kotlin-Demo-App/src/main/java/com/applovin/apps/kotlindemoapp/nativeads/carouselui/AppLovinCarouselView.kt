@@ -29,7 +29,8 @@ import java.util.*
  * A default AppLovin view which can be used to render native Ads.
  * Attaching this view to a layout will automatically load ads into it.
  */
-class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, sdk: AppLovinSdk = AppLovinSdk.getInstance(context), nativeAds: List<AppLovinNativeAd>? = null) : FrameLayout(context, attrs, defStyleAttr), AppLovinActivityCallbacks {
+class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, sdk: AppLovinSdk = AppLovinSdk.getInstance(context), nativeAds: List<AppLovinNativeAd>? = null) : FrameLayout(context, attrs, defStyleAttr), AppLovinActivityCallbacks
+{
 
     // Parents
     private var parentActivity: Activity? = null
@@ -54,14 +55,17 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
     private var loadingIndicator: FrameLayout? = null
     private var cardStates: MutableMap<Int, InlineCarouselCardState>? = null
 
-    init {
+    init
+    {
 
-        if (!isInEditMode) {
+        if (!isInEditMode)
+        {
             this.sdk = sdk
             this.cardStates = HashMap<Int, InlineCarouselCardState>()
             this.nativeAds = nativeAds
 
-            if (context is Activity) {
+            if (context is Activity)
+            {
                 parentActivity = context
             }
 
@@ -75,7 +79,8 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
      *
      * If you do not explicitly provide ads [AppLovinCarouselView.setNativeAds], the view will load one automatically upon being attached ot the window.
      */
-    fun setLoadListener(loadListener: AppLovinNativeAdLoadListener) {
+    fun setLoadListener(loadListener: AppLovinNativeAdLoadListener)
+    {
         this.loadListener = loadListener
     }
 
@@ -84,10 +89,14 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
 
      * @return Copy of current set of native ads.
      */
-    fun getNativeAds(): List<AppLovinNativeAd> {
-        if (nativeAds != null) {
+    fun getNativeAds(): List<AppLovinNativeAd>
+    {
+        if (nativeAds != null)
+        {
             return Collections.unmodifiableList(nativeAds!!)
-        } else {
+        }
+        else
+        {
             return Collections.unmodifiableList(ArrayList<AppLovinNativeAd>(0))
         }
     }
@@ -97,45 +106,59 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
 
      * @param nativeAds Ads to render.
      */
-    fun setNativeAds(nativeAds: List<AppLovinNativeAd>) {
-        if (this.nativeAds == null) {
+    fun setNativeAds(nativeAds: List<AppLovinNativeAd>)
+    {
+        if (this.nativeAds == null)
+        {
             this.nativeAds = nativeAds
             renderCarousel()
-        } else {
+        }
+        else
+        {
             sdk!!.logger.d(TAG, "Cannot render a new native ad group into a carousel view that's already been populated.")
         }
     }
 
-    fun renderCarousel() {
+    fun renderCarousel()
+    {
         runOnUiThread(Runnable {
-            if (Build.VERSION.SDK_INT < 16) {
+            if (Build.VERSION.SDK_INT < 16)
+            {
                 Log.e(TAG, "AppLovin CarouselView cannot be rendered on systems older than Jelly Bean (4.1); drawing blank view...")
                 return@Runnable
             }
 
-            try {
+            try
+            {
                 val numCards = nativeAds!!.size
-                if (numCards == 1) {
+                if (numCards == 1)
+                {
                     // If there is only one ad, don't bother w/ a view pager. JUst attach a card to the parent layout.
                     renderSingleView()
                     removeLoadingIndicator()
-                } else if (numCards >= 2) {
+                }
+                else if (numCards >= 2)
+                {
                     // 2+ cards means we need a view pager.
                     singleCardView = null
                     renderViewPager()
 
-                    if (lastActiveCardIndex > 0) {
+                    if (lastActiveCardIndex > 0)
+                    {
                         carouselViewPager!!.setCurrentItem(lastActiveCardIndex, false)
                     }
 
                 }
-            } catch (ex: Exception) {
+            }
+            catch (ex: Exception)
+            {
                 sdk!!.logger.e(TAG, "Unable to render carousel view: ", ex)
             }
         })
     }
 
-    private fun renderSingleView() {
+    private fun renderSingleView()
+    {
         singleCardView = InlineCarouselCardView(context)
         singleCardView!!.sdk = sdk
         singleCardView!!.ad = nativeAds!![0]
@@ -151,7 +174,8 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
         addView(singleCardView)
     }
 
-    private fun renderViewPager() {
+    private fun renderViewPager()
+    {
         // Use view pager
         carouselViewPager = SdkCenteredViewPager(context)
         carouselViewPager!!.isFocusable = false
@@ -167,45 +191,54 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
 
         carouselViewPager!!.adapter = this.adapter
 
-        carouselViewPager!!.setOnPageChangeListener(object : SdkCenteredViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                // Useless for us.
-            }
+        carouselViewPager!!.setOnPageChangeListener(object : SdkCenteredViewPager.OnPageChangeListener
+                                                    {
+                                                        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int)
+                                                        {
+                                                            // Useless for us.
+                                                        }
 
-            override fun onPageScrollStateChanged(state: Int) {
-                if (state == SdkCenteredViewPager.SCROLL_STATE_IDLE) {
-                    val currentItem = carouselViewPager!!.currentItem
-                    lastActiveCardIndex = currentItem
+                                                        override fun onPageScrollStateChanged(state: Int)
+                                                        {
+                                                            if (state == SdkCenteredViewPager.SCROLL_STATE_IDLE)
+                                                            {
+                                                                val currentItem = carouselViewPager!!.currentItem
+                                                                lastActiveCardIndex = currentItem
 
-                    // Activate the current card if it exists (which it should always)
-                    activateCard(currentItem)
+                                                                // Activate the current card if it exists (which it should always)
+                                                                activateCard(currentItem)
 
-                    // Deactivate the left card if it exists
-                    deactivateCard(currentItem - 1)
+                                                                // Deactivate the left card if it exists
+                                                                deactivateCard(currentItem - 1)
 
-                    // Deactivate the right card if it exists
-                    deactivateCard(currentItem + 1)
-                }
-            }
+                                                                // Deactivate the right card if it exists
+                                                                deactivateCard(currentItem + 1)
+                                                            }
+                                                        }
 
-            override fun onPageSelected(position: Int) {
-                // Useless, invoked when .setPage(int) is called
-            }
-        })
+                                                        override fun onPageSelected(position: Int)
+                                                        {
+                                                            // Useless, invoked when .setPage(int) is called
+                                                        }
+                                                    })
 
         addView(carouselViewPager)
         removeLoadingIndicator()
     }
 
-    fun getCardState(position: Int): InlineCarouselCardState? {
+    fun getCardState(position: Int): InlineCarouselCardState?
+    {
         sdk!!.logger.d(TAG, "Looking up card state for position " + position)
-        if (position < 0) {
+        if (position < 0)
+        {
             return null
         }
 
-        if (cardStates!!.size >= position + 1) {
+        if (cardStates!!.size >= position + 1)
+        {
             val state = cardStates!![position]
-            if (state != null) {
+            if (state != null)
+            {
                 sdk!!.logger.d(TAG, "Returning existing card state for position " + position)
                 return state
             }
@@ -217,12 +250,16 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
         return state
     }
 
-    private fun activateCard(currentItem: Int) {
+    private fun activateCard(currentItem: Int)
+    {
         val cardState = getCardState(currentItem)
-        if (cardState != null) {
-            if (!cardState.isCurrentlyActive) {
+        if (cardState != null)
+        {
+            if (!cardState.isCurrentlyActive)
+            {
                 val currentCardRef = adapter!!.getExistingCard(currentItem)
-                if (currentCardRef != null) {
+                if (currentCardRef != null)
+                {
                     val currentCard = currentCardRef.get()
                     currentCard?.onCardActivated()
                 }
@@ -230,12 +267,16 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
         }
     }
 
-    private fun deactivateCard(currentItem: Int) {
+    private fun deactivateCard(currentItem: Int)
+    {
         val cardState = getCardState(currentItem)
-        if (cardState != null) {
-            if (cardState.isCurrentlyActive) {
+        if (cardState != null)
+        {
+            if (cardState.isCurrentlyActive)
+            {
                 val currentCardRef = adapter!!.getExistingCard(currentItem)
-                if (currentCardRef != null) {
+                if (currentCardRef != null)
+                {
                     val currentCard = currentCardRef.get()
                     currentCard?.onCardDeactivated()
                 }
@@ -248,32 +289,41 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
      * Intercept touch events which are consumed later by the video view and forward them to the view pager. This is a workaround for an Android limitation: OnClickListeners on the video views absorb touch events and prevent events from propagating up. By intercepting here & manually dispatching,
      * the view pager still receives drag events even if the video views consume click events.
      */
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        if (carouselViewPager != null) {
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean
+    {
+        if (carouselViewPager != null)
+        {
             carouselViewPager!!.onTouchEvent(ev)
         }
 
         return false
     }
 
-    override fun onAttachedToWindow() {
+    override fun onAttachedToWindow()
+    {
         super.onAttachedToWindow()
 
-        if (nativeAds == null && AppLovinCarouselViewSettings.NUM_ADS_TO_AUTOLOAD > 0) {
-            sdk!!.nativeAdService.loadNativeAds(AppLovinCarouselViewSettings.NUM_ADS_TO_AUTOLOAD, object : AppLovinNativeAdLoadListener {
-                override fun onNativeAdsLoaded(/* <AppLovinNativeAd> */ nativeAds: List<*>) {
+        if (nativeAds == null && AppLovinCarouselViewSettings.NUM_ADS_TO_AUTOLOAD > 0)
+        {
+            sdk!!.nativeAdService.loadNativeAds(AppLovinCarouselViewSettings.NUM_ADS_TO_AUTOLOAD, object : AppLovinNativeAdLoadListener
+            {
+                override fun onNativeAdsLoaded(/* <AppLovinNativeAd> */ nativeAds: List<*>)
+                {
                     getUiHandler().post {
                         setNativeAds(nativeAds as List<AppLovinNativeAd>)
 
-                        if (loadListener != null) {
+                        if (loadListener != null)
+                        {
                             loadListener!!.onNativeAdsLoaded(nativeAds)
                         }
                     }
                 }
 
-                override fun onNativeAdsFailedToLoad(errorCode: Int) {
+                override fun onNativeAdsFailedToLoad(errorCode: Int)
+                {
                     getUiHandler().post {
-                        if (loadListener != null) {
+                        if (loadListener != null)
+                        {
                             loadListener!!.onNativeAdsFailedToLoad(errorCode)
                         }
                     }
@@ -282,36 +332,44 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
         }
     }
 
-    private fun removeLoadingIndicator() {
+    private fun removeLoadingIndicator()
+    {
         // Fade out the loading indicator - post delayed to allow time for viewpager sizing to complete (due to android layout passes)
         postDelayed({
-            val fadeOut = AlphaAnimation(1f, 0f)
-            fadeOut.duration = 1000
-            fadeOut.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {}
+                        val fadeOut = AlphaAnimation(1f, 0f)
+                        fadeOut.duration = 1000
+                        fadeOut.setAnimationListener(object : Animation.AnimationListener
+                                                     {
+                                                         override fun onAnimationStart(animation: Animation)
+                                                         {
+                                                         }
 
-                override fun onAnimationEnd(animation: Animation) {
-                    removeView(loadingIndicator)
-                    loadingIndicator = null
+                                                         override fun onAnimationEnd(animation: Animation)
+                                                         {
+                                                             removeView(loadingIndicator)
+                                                             loadingIndicator = null
 
-                    getUiHandler().postDelayed({
-                        // Scroll and center-lock the first card.
-                        if (carouselViewPager != null) {
-                            carouselViewPager!!.scrollToItem(lastActiveCardIndex, true, 20, false)
-                        }
-                    }, 500)
-                }
+                                                             getUiHandler().postDelayed({
+                                                                                            // Scroll and center-lock the first card.
+                                                                                            if (carouselViewPager != null)
+                                                                                            {
+                                                                                                carouselViewPager!!.scrollToItem(lastActiveCardIndex, true, 20, false)
+                                                                                            }
+                                                                                        }, 500)
+                                                         }
 
-                override fun onAnimationRepeat(animation: Animation) {
+                                                         override fun onAnimationRepeat(animation: Animation)
+                                                         {
 
-                }
-            })
+                                                         }
+                                                     })
 
-            loadingIndicator!!.startAnimation(fadeOut)
-        }, 1000)
+                        loadingIndicator!!.startAnimation(fadeOut)
+                    }, 1000)
     }
 
-    private fun renderActivityIndicator() {
+    private fun renderActivityIndicator()
+    {
         loadingIndicator = FrameLayout(context)
         loadingIndicator!!.layoutParams = LayoutUtils.createFrameParams(MATCH_PARENT, MATCH_PARENT, Gravity.CENTER)
         loadingIndicator!!.setBackgroundColor(AppLovinCarouselViewSettings.VIEW_PAGER_BACKGROUND_COLOR)
@@ -323,27 +381,33 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
         bringChildToFront(loadingIndicator)
     }
 
-    override fun onResume(activity: Activity) {
-        if (parentActivity == null) {
+    override fun onResume(activity: Activity)
+    {
+        if (parentActivity == null)
+        {
             parentActivity = activity
         }
 
-        if (wasPaused) {
+        if (wasPaused)
+        {
             renderActivityIndicator()
 
             renderCarousel()
 
-            if (carouselViewPager != null) {
+            if (carouselViewPager != null)
+            {
                 carouselViewPager!!.currentItem = lastActiveCardIndex
                 activateCard(carouselViewPager!!.currentItem)
             }
         }
     }
 
-    override fun onStop(activity: Activity) {
+    override fun onStop(activity: Activity)
+    {
         wasPaused = true
 
-        try {
+        try
+        {
             adapter!!.destroyCards()
             adapter = null
 
@@ -351,29 +415,38 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
 
             carouselViewPager = null
             singleCardView = null
-        } catch (ex: Exception) {
+        }
+        catch (ex: Exception)
+        {
             sdk!!.logger.w(TAG, "Error during activity stop", ex)
         }
 
     }
 
-    private fun getUiHandler(): Handler {
-        if (uiHandler == null) {
+    private fun getUiHandler(): Handler
+    {
+        if (uiHandler == null)
+        {
             uiHandler = Handler(Looper.getMainLooper())
         }
 
         return uiHandler!!
     }
 
-    private fun runOnUiThread(r: Runnable) {
-        if (parentActivity != null) {
+    private fun runOnUiThread(r: Runnable)
+    {
+        if (parentActivity != null)
+        {
             parentActivity!!.runOnUiThread(r)
-        } else {
+        }
+        else
+        {
             getUiHandler().post(r)
         }
     }
 
-    companion object {
+    companion object
+    {
         private val TAG = "AppLovinWidgetView"
     }
 }

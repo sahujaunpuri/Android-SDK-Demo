@@ -14,14 +14,17 @@ import java.lang.ref.WeakReference
 /**
  * This adapter manages instances of InlineCarouselCardView which are supplied to the view pager contained in AppLovinCarouselView.
  */
-class InlineCarouselAdapter(private val context: Context, private val sdk: AppLovinSdk, private val parentView: AppLovinCarouselView) : AppLovinSdkViewPagerAdapter() {
+class InlineCarouselAdapter(private val context: Context, private val sdk: AppLovinSdk, private val parentView: AppLovinCarouselView) : AppLovinSdkViewPagerAdapter()
+{
     private val existingCards: SparseArray<WeakReference<InlineCarouselCardView>> = SparseArray()
 
-    override fun getView(newPosition: Int, pager: SdkCenteredViewPager): View {
+    override fun getView(newPosition: Int, pager: SdkCenteredViewPager): View
+    {
         sdk.logger.d(TAG, "Adapter is creating a card for position " + newPosition)
 
         val slots = parentView.getNativeAds()
-        if (slots != null && newPosition < slots.size) {
+        if (slots != null && newPosition < slots.size)
+        {
             val card = InlineCarouselCardView(context)
             card.sdk = sdk
             card.ad = slots[newPosition]
@@ -38,33 +41,42 @@ class InlineCarouselAdapter(private val context: Context, private val sdk: AppLo
             existingCards.append(newPosition, WeakReference(card))
 
             return card
-        } else {
+        }
+        else
+        {
             sdk.logger.e(TAG, "Unable to render widget slot: Requested position does not exist.")
             return View(context)
         }
     }
 
-    override fun getCount(): Int {
+    override fun getCount(): Int
+    {
         val slots = parentView.getNativeAds()
 
         val count = slots.size
-        if (count <= 1) {
+        if (count <= 1)
+        {
             sdk.logger.e(TAG, "Asked to render a view pager but only one slot is available!")
             return 0
-        } else {
+        }
+        else
+        {
             return slots.size
         }
     }
 
-    fun getExistingCard(key: Int): WeakReference<InlineCarouselCardView>? {
+    fun getExistingCard(key: Int): WeakReference<InlineCarouselCardView>?
+    {
         return existingCards.get(key)
     }
 
-    override fun getPageWidth(position: Int): Float {
+    override fun getPageWidth(position: Int): Float
+    {
         return AppLovinCarouselViewSettings.VIEW_PAGER_CARD_WIDTH
     }
 
-    fun destroyCards() {
+    fun destroyCards()
+    {
         sdk.logger.d(TAG, "Destroying all owned cards")
         (0..existingCards.size() - 1)
                 .mapNotNull { existingCards.get(it) }
@@ -72,7 +84,8 @@ class InlineCarouselAdapter(private val context: Context, private val sdk: AppLo
                 .forEach { it?.destroy() }
     }
 
-    companion object {
+    companion object
+    {
         private val TAG = "InlineCarouselAdapter"
     }
 }

@@ -3,7 +3,8 @@ package com.applovin.apps.kotlindemoapp.nativeads.carouselui.support
 import android.view.View
 import android.view.ViewGroup
 
-abstract class AppLovinSdkViewPagerAdapter : SdkPagerAdapter() {
+abstract class AppLovinSdkViewPagerAdapter : SdkPagerAdapter()
+{
     /**
      * Get a View that displays the data at the specified position in the data set.
 
@@ -27,7 +28,8 @@ abstract class AppLovinSdkViewPagerAdapter : SdkPagerAdapter() {
      * *
      * @return true if view is associated with the key object object.
      */
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+    override fun isViewFromObject(view: View, `object`: Any): Boolean
+    {
         return view === `object`
     }
 
@@ -42,7 +44,8 @@ abstract class AppLovinSdkViewPagerAdapter : SdkPagerAdapter() {
      * @return Returns an Object representing the new page. This does not need
      * * to be a View, but can be some other container of the page.
      */
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+    override fun instantiateItem(container: ViewGroup, position: Int): Any
+    {
         val pager = container as SdkCenteredViewPager
         val view = getView(position, pager)
 
@@ -61,7 +64,8 @@ abstract class AppLovinSdkViewPagerAdapter : SdkPagerAdapter() {
      * *
      * @param view      The same object that was returned by instantiateItem(View, int).
      */
-    override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
+    override fun destroyItem(container: ViewGroup, position: Int, view: Any)
+    {
         (container as SdkCenteredViewPager).removeView(view as View)
     }
 }

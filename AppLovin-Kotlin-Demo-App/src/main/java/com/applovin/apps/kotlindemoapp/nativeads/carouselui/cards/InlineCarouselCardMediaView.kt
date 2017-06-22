@@ -29,7 +29,8 @@ import com.applovin.sdk.AppLovinSdkUtils
 /**
  * This class is used to render a native ad's main image and video component into a layout.
  */
-class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListener {
+class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListener
+{
 
     var sdk: AppLovinSdk? = null
     var ad: AppLovinNativeAd? = null
@@ -57,11 +58,13 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun setUiHandler(uiHandler: Handler) {
+    fun setUiHandler(uiHandler: Handler)
+    {
         this.uiHandler = uiHandler
     }
 
-    fun setUpView() {
+    fun setUpView()
+    {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.applovin_card_media_view, this, true)
 
@@ -69,23 +72,27 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
         initializeView()
     }
 
-    private fun bindViews() {
+    private fun bindViews()
+    {
         fallbackImageView = findViewById<View>(R.id.applovin_media_image) as ImageView
         replayOverlay = findViewById<View>(R.id.applovin_media_replay_overlay) as InlineCarouselCardReplayOverlay
     }
 
-    private fun initializeView() {
-        if (!initialized) {
+    private fun initializeView()
+    {
+        if (!initialized)
+        {
             initialized = true
 
             setBackgroundColor(resources.getColor(AppLovinCarouselViewSettings.VIDEO_VIEW_BACKGROUND_COLOR))
 
-            if (ad!!.isVideoPrecached && AppLovinCarouselViewSettings.USE_VIDEO_SCREENSHOTS_AS_IMAGES) {
+            if (ad!!.isVideoPrecached && AppLovinCarouselViewSettings.USE_VIDEO_SCREENSHOTS_AS_IMAGES)
+            {
                 updateScreenshot()
             }
 
             AppLovinSdkUtils.safePopulateImageView(fallbackImageView, Uri.parse(ad!!.imageUrl),
-                    AppLovinSdkUtils.dpToPx(context, AppLovinCarouselViewSettings.MAIN_IMAGE_MAX_SCALE_SIZE))
+                                                   AppLovinSdkUtils.dpToPx(context, AppLovinCarouselViewSettings.MAIN_IMAGE_MAX_SCALE_SIZE))
 
             // Create mute and replay views programmatically as they're added selectively at runtime.
             muteButtonImageView = ImageView(context)
@@ -112,24 +119,31 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
         }
     }
 
-    internal fun updateScreenshot() {
+    internal fun updateScreenshot()
+    {
         val screenshot = getVideoFrame(Math.max(200, cardState!!.lastMediaPlayerPosition))
-        if (screenshot != null) {
+        if (screenshot != null)
+        {
             fallbackImageView!!.setImageBitmap(screenshot)
         }
     }
 
-    fun createVideo() {
-        if (AppLovinSdkUtils.isValidString(ad!!.videoUrl)) {
-            if (!videoCreated) {
+    fun createVideo()
+    {
+        if (AppLovinSdkUtils.isValidString(ad!!.videoUrl))
+        {
+            if (!videoCreated)
+            {
                 videoCreated = true
                 textureView = AspectRatioTextureView(context)
                 textureView!!.layoutParams = LayoutUtils.createFrameParams(LayoutUtils.MATCH_PARENT, LayoutUtils.MATCH_PARENT, Gravity.CENTER)
                 textureView!!.surfaceTextureListener = this
 
                 val layoutRef = this
-                textureView!!.onMeasureCompletionListener = object : AspectRatioTextureView.OnMeasureCompletionListener {
-                    override fun onMeasureCompleted(adjustedWidth: Int, adjustedHeight: Int) {
+                textureView!!.onMeasureCompletionListener = object : AspectRatioTextureView.OnMeasureCompletionListener
+                {
+                    override fun onMeasureCompleted(adjustedWidth: Int, adjustedHeight: Int)
+                    {
                         val xDelta = layoutRef.width - adjustedWidth // Difference between layout and adjusted video width.
                         val yDelta = layoutRef.height - adjustedHeight
 
@@ -151,17 +165,21 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
                 invalidate()
                 requestLayout()
 
-                if (textureView!!.isAvailable) {
+                if (textureView!!.isAvailable)
+                {
                     onSurfaceTextureAvailable(textureView!!.surfaceTexture, textureView!!.width, textureView!!.height)
                 }
             }
         }
     }
 
-    override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
+    override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int)
+    {
         // Once Android has prepared the GL texture, start MediaPlayer setup
-        if (mediaPlayer == null) {
-            try {
+        if (mediaPlayer == null)
+        {
+            try
+            {
                 mediaPlayer = MediaPlayer()
                 mediaPlayer!!.setDataSource(context, Uri.parse(ad!!.videoUrl))
                 this.surface = Surface(surface)
@@ -169,7 +187,8 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
                 mediaPlayer!!.prepareAsync()
 
                 mediaPlayer!!.setOnPreparedListener { mp ->
-                    try {
+                    try
+                    {
                         mediaPlayerPrepared = true
 
                         val videoWidth = mp.videoWidth
@@ -178,13 +197,18 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
                         textureView!!.setVideoSize(videoWidth, videoHeight)
 
                         val lastPosition = cardState!!.lastMediaPlayerPosition
-                        if (lastPosition > 0) {
+                        if (lastPosition > 0)
+                        {
                             mp.seekTo(lastPosition)
                             playVideo(mp)
-                        } else if (autoplayRequested && !cardState!!.isReplayOverlayVisible) {
+                        }
+                        else if (autoplayRequested && !cardState!!.isReplayOverlayVisible)
+                        {
                             playVideo(mp)
                         }
-                    } catch (ex: Exception) {
+                    }
+                    catch (ex: Exception)
+                    {
                         sdk!!.logger.e(TAG, "Unable to perform post-preparation setup", ex)
                     }
                 }
@@ -194,12 +218,14 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
                     sdk!!.logger.d(TAG, "OnCompletion invoked at " + percentViewed)
 
                     // Some Android devices report 0 on completion. So if we've both started and ended organically, this is a success case.
-                    if (percentViewed == 0) {
+                    if (percentViewed == 0)
+                    {
                         percentViewed = 100
                     }
 
                     // If we've reached the end of the video, toggle 'replay' mode.
-                    if (percentViewed >= 98) {
+                    if (percentViewed >= 98)
+                    {
                         setBackgroundColor(resources.getColor(AppLovinCarouselViewSettings.VIDEO_VIEW_BACKGROUND_COLOR))
                         cardState!!.isVideoCompleted = true
                         prepareForReplay()
@@ -210,19 +236,23 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
 
                     val muteFade = AlphaAnimation(1f, 0f)
                     muteFade.duration = 500
-                    muteFade.setAnimationListener(object : Animation.AnimationListener {
-                        override fun onAnimationStart(animation: Animation) {
+                    muteFade.setAnimationListener(object : Animation.AnimationListener
+                                                  {
+                                                      override fun onAnimationStart(animation: Animation)
+                                                      {
 
-                        }
+                                                      }
 
-                        override fun onAnimationEnd(animation: Animation) {
-                            muteButtonImageView!!.visibility = View.INVISIBLE
-                        }
+                                                      override fun onAnimationEnd(animation: Animation)
+                                                      {
+                                                          muteButtonImageView!!.visibility = View.INVISIBLE
+                                                      }
 
-                        override fun onAnimationRepeat(animation: Animation) {
+                                                      override fun onAnimationRepeat(animation: Animation)
+                                                      {
 
-                        }
-                    })
+                                                      }
+                                                  })
                     muteButtonImageView!!.startAnimation(muteFade)
                 }
 
@@ -231,21 +261,26 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
                     true
                 }
 
-            } catch (ex: Exception) {
+            }
+            catch (ex: Exception)
+            {
                 sdk!!.logger.e(TAG, "Unable to build media player.", ex)
             }
 
         }
     }
 
-    private fun notifyVideoEndUrl(percentViewed: Int) {
-        if (cardState!!.isVideoStarted) {
+    private fun notifyVideoEndUrl(percentViewed: Int)
+    {
+        if (cardState!!.isVideoStarted)
+        {
             sdk!!.postbackService.dispatchPostbackAsync(ad!!.getVideoEndTrackingUrl(percentViewed, cardState!!.isFirstPlay), null)
             cardState!!.isFirstPlay = false
         }
     }
 
-    fun playVideo(mp: MediaPlayer?) {
+    fun playVideo(mp: MediaPlayer?)
+    {
         setBackgroundColor(resources.getColor(AppLovinCarouselViewSettings.VIDEO_VIEW_BACKGROUND_COLOR_WHILE_PLAYING))
         replayOverlay!!.visibility = View.GONE
         cardState!!.isReplayOverlayVisible = false
@@ -253,56 +288,70 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
         val mediaPlayer = mp ?: this.mediaPlayer
 
         sdk!!.logger.d(TAG, "Video play requested...")
-        if (AppLovinSdkUtils.isValidString(ad!!.videoUrl)) {
-            if (cardState!!.muteState == InlineCarouselCardState.MuteState.UNSPECIFIED) {
+        if (AppLovinSdkUtils.isValidString(ad!!.videoUrl))
+        {
+            if (cardState!!.muteState == InlineCarouselCardState.MuteState.UNSPECIFIED)
+            {
                 setMuteState(if (AppLovinCarouselViewSettings.VIDEO_MUTED_BY_DEFAULT) InlineCarouselCardState.MuteState.MUTED else InlineCarouselCardState.MuteState.UNMUTED, false)
-            } else {
+            }
+            else
+            {
                 setMuteState(cardState!!.muteState, false)
             }
 
             mediaPlayer!!.start()
 
-            if (!cardState!!.isVideoStarted) {
+            if (!cardState!!.isVideoStarted)
+            {
                 cardState!!.isVideoStarted = true
                 sdk!!.postbackService.dispatchPostbackAsync(ad!!.videoStartTrackingUrl, null)
             }
 
             val muteFade = AlphaAnimation(0f, 1f)
             muteFade.duration = 500
-            muteFade.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {
-                    muteButtonImageView!!.visibility = View.VISIBLE
-                }
+            muteFade.setAnimationListener(object : Animation.AnimationListener
+                                          {
+                                              override fun onAnimationStart(animation: Animation)
+                                              {
+                                                  muteButtonImageView!!.visibility = View.VISIBLE
+                                              }
 
-                override fun onAnimationEnd(animation: Animation) {
+                                              override fun onAnimationEnd(animation: Animation)
+                                              {
 
-                }
+                                              }
 
-                override fun onAnimationRepeat(animation: Animation) {
+                                              override fun onAnimationRepeat(animation: Animation)
+                                              {
 
-                }
-            })
+                                              }
+                                          })
 
 
             muteButtonImageView!!.startAnimation(muteFade)
 
             // If the fallback view is visible, crossfade it with the video.
-            if (fallbackImageView!!.visibility == View.VISIBLE) {
+            if (fallbackImageView!!.visibility == View.VISIBLE)
+            {
                 val imageFade = AlphaAnimation(fallbackImageView!!.alpha, 0f)
                 imageFade.duration = 750
-                imageFade.setAnimationListener(object : Animation.AnimationListener {
-                    override fun onAnimationStart(animation: Animation) {
+                imageFade.setAnimationListener(object : Animation.AnimationListener
+                                               {
+                                                   override fun onAnimationStart(animation: Animation)
+                                                   {
 
-                    }
+                                                   }
 
-                    override fun onAnimationEnd(animation: Animation) {
-                        fallbackImageView!!.visibility = View.INVISIBLE
-                    }
+                                                   override fun onAnimationEnd(animation: Animation)
+                                                   {
+                                                       fallbackImageView!!.visibility = View.INVISIBLE
+                                                   }
 
-                    override fun onAnimationRepeat(animation: Animation) {
+                                                   override fun onAnimationRepeat(animation: Animation)
+                                                   {
 
-                    }
-                })
+                                                   }
+                                               })
 
                 fallbackImageView!!.startAnimation(imageFade)
 
@@ -313,16 +362,23 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
         }
     }
 
-    fun onCardActivated() {
+    fun onCardActivated()
+    {
         autoplayVideo()
     }
 
-    fun autoplayVideo() {
-        if (AppLovinSdkUtils.isValidString(ad!!.videoUrl)) {
-            if (!cardState!!.isReplayOverlayVisible && ad!!.isVideoPrecached) {
-                if (mediaPlayer != null && mediaPlayerPrepared && !mediaPlayer!!.isPlaying) {
+    fun autoplayVideo()
+    {
+        if (AppLovinSdkUtils.isValidString(ad!!.videoUrl))
+        {
+            if (!cardState!!.isReplayOverlayVisible && ad!!.isVideoPrecached)
+            {
+                if (mediaPlayer != null && mediaPlayerPrepared && !mediaPlayer!!.isPlaying)
+                {
                     playVideo(mediaPlayer)
-                } else {
+                }
+                else
+                {
                     autoplayRequested = true
                     createVideo()
                 }
@@ -330,46 +386,56 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
         }
     }
 
-    fun onCardDeactivated() {
-        if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
+    fun onCardDeactivated()
+    {
+        if (mediaPlayer != null && mediaPlayer!!.isPlaying)
+        {
             mediaPlayer!!.pause()
             cardState!!.lastMediaPlayerPosition = mediaPlayer!!.currentPosition
 
             val percentViewed = calculatePercentViewed(mediaPlayer!!)
-            if (percentViewed > 0) {
+            if (percentViewed > 0)
+            {
                 notifyVideoEndUrl(percentViewed)
             }
         }
 
         updateScreenshot()
 
-        if (textureView != null) {
+        if (textureView != null)
+        {
             val imageFade = AlphaAnimation(fallbackImageView!!.alpha, 1f)
             imageFade.duration = 500
             fallbackImageView!!.visibility = View.VISIBLE
             fallbackImageView!!.startAnimation(imageFade)
             val videoFade = AlphaAnimation(textureView!!.alpha, 0f)
             videoFade.duration = 500
-            videoFade.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {
+            videoFade.setAnimationListener(object : Animation.AnimationListener
+                                           {
+                                               override fun onAnimationStart(animation: Animation)
+                                               {
 
-                }
+                                               }
 
-                override fun onAnimationEnd(animation: Animation) {
-                    removeView(textureView)
-                    textureView = null
-                }
+                                               override fun onAnimationEnd(animation: Animation)
+                                               {
+                                                   removeView(textureView)
+                                                   textureView = null
+                                               }
 
-                override fun onAnimationRepeat(animation: Animation) {
+                                               override fun onAnimationRepeat(animation: Animation)
+                                               {
 
-                }
-            })
+                                               }
+                                           })
 
             textureView!!.startAnimation(videoFade)
             removeView(muteButtonImageView)
 
-            if (mediaPlayer != null) {
-                if (mediaPlayer!!.isPlaying) {
+            if (mediaPlayer != null)
+            {
+                if (mediaPlayer!!.isPlaying)
+                {
                     mediaPlayer!!.stop()
                 }
                 mediaPlayer!!.release()
@@ -380,22 +446,29 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
         }
     }
 
-    fun togglePlayback() {
-        if (mediaPlayer != null) {
-            if (mediaPlayer!!.isPlaying) {
+    fun togglePlayback()
+    {
+        if (mediaPlayer != null)
+        {
+            if (mediaPlayer!!.isPlaying)
+            {
                 mediaPlayer!!.pause()
                 return
-            } else if (mediaPlayerPrepared) {
+            }
+            else if (mediaPlayerPrepared)
+            {
                 playVideo(mediaPlayer)
             }
         }
 
-        if (!mediaPlayerPrepared) {
+        if (!mediaPlayerPrepared)
+        {
             autoplayRequested = true
         }
     }
 
-    private fun prepareForReplay() {
+    private fun prepareForReplay()
+    {
         cardState!!.lastMediaPlayerPosition = 0
         cardState!!.isReplayOverlayVisible = true
 
@@ -409,52 +482,67 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
         textureView!!.visibility = View.INVISIBLE
     }
 
-    private fun replay() {
+    private fun replay()
+    {
         replayOverlay!!.visibility = View.INVISIBLE
         cardState!!.isReplayOverlayVisible = false
 
-        if (textureView != null) {
+        if (textureView != null)
+        {
             textureView!!.visibility = View.VISIBLE
             playVideo(null)
-        } else {
+        }
+        else
+        {
             autoplayRequested = true
             createVideo()
         }
     }
 
-    override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
+    override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int)
+    {
 
     }
 
-    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
+    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean
+    {
         return true
     }
 
-    override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
+    override fun onSurfaceTextureUpdated(surface: SurfaceTexture)
+    {
 
     }
 
-    fun onVideoPrecached(ad: AppLovinNativeAd) {
-        if (sdk != null) {
+    fun onVideoPrecached(ad: AppLovinNativeAd)
+    {
+        if (sdk != null)
+        {
             sdk!!.logger.d(TAG, "Video precache complete.")
         }
 
-        if (cardState != null && cardState!!.isCurrentlyActive) {
+        if (cardState != null && cardState!!.isCurrentlyActive)
+        {
             autoplayVideo()
-        } else {
+        }
+        else
+        {
             autoplayRequested = true
         }
     }
 
-    private fun getVideoFrame(position: Int): Bitmap? {
-        if (ad!!.videoUrl == null) {
+    private fun getVideoFrame(position: Int): Bitmap?
+    {
+        if (ad!!.videoUrl == null)
+        {
             return null
         }
 
         val retriever = MediaMetadataRetriever()
         var bitmap: Bitmap?
 
-        try {
+        try
+        {
             retriever.setDataSource(context, Uri.parse(ad!!.videoUrl))
 
             val rawBitmap = retriever.getFrameAtTime(position.toLong())
@@ -462,85 +550,105 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
 
             rawBitmap.recycle()
             bitmap = scaledBitmap
-        } catch (ex: Exception) {
+        }
+        catch (ex: Exception)
+        {
             bitmap = null
             sdk!!.logger.d(TAG, "Unable to grab video frame for: " + Uri.parse(ad!!.videoUrl))
-        } finally {
+        }
+        finally
+        {
             retriever.release()
         }
 
         return bitmap
     }
 
-    private fun calculatePercentViewed(mp: MediaPlayer): Int {
+    private fun calculatePercentViewed(mp: MediaPlayer): Int
+    {
         val videoDuration = mp.duration.toFloat()
         val currentPosition = mp.currentPosition.toFloat()
         val percentViewed = (currentPosition / videoDuration * 100f).toDouble()
         return Math.ceil(percentViewed).toInt()
     }
 
-    private fun toggleMuteState() {
+    private fun toggleMuteState()
+    {
         setMuteState(if (cardState!!.muteState == InlineCarouselCardState.MuteState.UNMUTED) InlineCarouselCardState.MuteState.MUTED else InlineCarouselCardState.MuteState.UNMUTED, true)
     }
 
-    private fun setMuteState(muteState: InlineCarouselCardState.MuteState, fade: Boolean) {
+    private fun setMuteState(muteState: InlineCarouselCardState.MuteState, fade: Boolean)
+    {
         cardState!!.muteState = muteState
         val isBeingMuted = muteState == InlineCarouselCardState.MuteState.MUTED
         setAppropriateMuteImage(isBeingMuted)
 
-        if (fade && AppLovinCarouselViewSettings.MUTE_FADES_AUDIO) {
+        if (fade && AppLovinCarouselViewSettings.MUTE_FADES_AUDIO)
+        {
             val numSteps = 10f
             val stepDistance = 20
 
             // Fade the audio in / out.
             var i = 0
-            while (i < numSteps) {
+            while (i < numSteps)
+            {
                 val volume = if (isBeingMuted) (numSteps - i) / numSteps else i / numSteps
                 val delay = i * stepDistance
 
                 uiHandler!!.postDelayed({
-                    if (mediaPlayer != null) {
-                        mediaPlayer!!.setVolume(volume, volume)
-                    }
-                }, delay.toLong())
+                                            if (mediaPlayer != null)
+                                            {
+                                                mediaPlayer!!.setVolume(volume, volume)
+                                            }
+                                        }, delay.toLong())
                 i++
             }
 
             // Finally, post a final adjustment to ensure it's at the target volume.
             uiHandler!!.postDelayed({
-                if (mediaPlayer != null) {
-                    val volume = (if (isBeingMuted) 0 else 1).toFloat()
-                    mediaPlayer!!.setVolume(volume, volume)
-                }
-            }, (stepDistance * numSteps).toLong())
-        } else {
-            if (mediaPlayer != null) {
+                                        if (mediaPlayer != null)
+                                        {
+                                            val volume = (if (isBeingMuted) 0 else 1).toFloat()
+                                            mediaPlayer!!.setVolume(volume, volume)
+                                        }
+                                    }, (stepDistance * numSteps).toLong())
+        }
+        else
+        {
+            if (mediaPlayer != null)
+            {
                 val volume = (if (isBeingMuted) 0 else 1).toFloat()
                 mediaPlayer!!.setVolume(volume, volume)
             }
         }
     }
 
-    private fun setAppropriateMuteImage(isMuted: Boolean) {
+    private fun setAppropriateMuteImage(isMuted: Boolean)
+    {
         val drawable = if (isMuted) R.drawable.applovin_card_muted else R.drawable.applovin_card_unmuted
         AppLovinSdkUtils.safePopulateImageView(context, muteButtonImageView, drawable, AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE)
     }
 
-    fun destroy() {
-        try {
+    fun destroy()
+    {
+        try
+        {
             mediaPlayer!!.stop()
             mediaPlayer!!.release()
             mediaPlayer = null
 
             removeAllViews()
-        } catch (ex: Exception) {
+        }
+        catch (ex: Exception)
+        {
             // This is not a fatal case as media players may well be destroyed or being destroyed by Android already.
             sdk!!.logger.d(TAG, "Encountered exception when destroying:" + ex)
         }
 
     }
 
-    companion object {
+    companion object
+    {
         private val TAG = "VideoAdView"
     }
 }

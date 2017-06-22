@@ -12,7 +12,8 @@ import com.applovin.apps.kotlindemoapp.R
 /**
  * Created by mszaro on 4/21/15.
  */
-class InlineCarouselCardReplayOverlay : LinearLayout {
+class InlineCarouselCardReplayOverlay : LinearLayout
+{
     var replayClickListener: View.OnClickListener? = null
     var learnMoreClickListener: View.OnClickListener? = null
 
@@ -27,7 +28,8 @@ class InlineCarouselCardReplayOverlay : LinearLayout {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun setUpView() {
+    fun setUpView()
+    {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.applovin_card_replay_overlay, this, true)
 
@@ -35,12 +37,14 @@ class InlineCarouselCardReplayOverlay : LinearLayout {
         initializeView()
     }
 
-    private fun bindViews() {
+    private fun bindViews()
+    {
         replayLayout = findViewById<View>(R.id.applovin_card_overlay_replay_layout) as LinearLayout
         learnMoreLayout = findViewById<View>(R.id.applovin_card_overlay_learn_more_layout) as LinearLayout
     }
 
-    private fun initializeView() {
+    private fun initializeView()
+    {
         replayLayout!!.setOnClickListener(replayClickListener)
         learnMoreLayout!!.setOnClickListener(learnMoreClickListener)
     }

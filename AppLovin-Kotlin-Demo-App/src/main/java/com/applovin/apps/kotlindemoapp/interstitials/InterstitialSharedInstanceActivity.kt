@@ -7,8 +7,10 @@ import com.applovin.apps.kotlindemoapp.R
 import kotlinx.android.synthetic.main.activity_interstitial_simple.*
 import java.lang.ref.WeakReference
 
-class InterstitialSharedInstanceActivity : AdStatusActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class InterstitialSharedInstanceActivity : AdStatusActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interstitial_simple)
 
@@ -17,7 +19,8 @@ class InterstitialSharedInstanceActivity : AdStatusActivity() {
         val weakRef = WeakReference(this)
 
         loadButton.setOnClickListener {
-            if (AppLovinInterstitialAd.isAdReadyToDisplay(weakRef.get())) {
+            if (AppLovinInterstitialAd.isAdReadyToDisplay(weakRef.get()))
+            {
                 // If you want to set the ad load, ad display, ad click, or video playback callback listeners, use one of the other methods to show
 
                 /*
@@ -29,7 +32,9 @@ class InterstitialSharedInstanceActivity : AdStatusActivity() {
                     */
                 AppLovinInterstitialAd.show(weakRef.get())
                 log("Interstitial Displayed")
-            } else {
+            }
+            else
+            {
                 // Ideally, the SDK preloads ads when you initialize it in your launch activity
                 // you can manually load an ad as demonstrated in InterstitialManualLoadingActivity
                 log("Interstitial not ready for display.\nPlease check SDK key or internet connection.")

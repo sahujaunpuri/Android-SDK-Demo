@@ -10,7 +10,8 @@ import com.applovin.sdk.AppLovinSdkUtils
 /**
  * Created by mszaro on 3/10/15.
  */
-object LayoutUtils {
+object LayoutUtils
+{
 
     val MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT
     val WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -21,26 +22,30 @@ object LayoutUtils {
      * Said another way, Layout Gravity positions you yourself while gravity positions your children.
      */
 
-    fun createLinearParams(width: Int, height: Int, layoutGravity: Int): LinearLayout.LayoutParams {
+    fun createLinearParams(width: Int, height: Int, layoutGravity: Int): LinearLayout.LayoutParams
+    {
         val params = LinearLayout.LayoutParams(width, height)
         params.gravity = layoutGravity
         return params
     }
 
-    fun createFrameParams(width: Int, height: Int, layoutGravity: Int): FrameLayout.LayoutParams {
+    fun createFrameParams(width: Int, height: Int, layoutGravity: Int): FrameLayout.LayoutParams
+    {
         val params = FrameLayout.LayoutParams(width, height)
         params.gravity = layoutGravity
         return params
     }
 
-    fun createLinearParams(width: Int, height: Int, layoutGravity: Int, margins: Margins): LinearLayout.LayoutParams {
+    fun createLinearParams(width: Int, height: Int, layoutGravity: Int, margins: Margins): LinearLayout.LayoutParams
+    {
         val params = LinearLayout.LayoutParams(width, height)
         params.gravity = layoutGravity
         params.setMargins(margins.left, margins.top, margins.right, margins.bottom)
         return params
     }
 
-    fun createFrameParams(width: Int, height: Int, layoutGravity: Int, margins: Margins): FrameLayout.LayoutParams {
+    fun createFrameParams(width: Int, height: Int, layoutGravity: Int, margins: Margins): FrameLayout.LayoutParams
+    {
         val params = FrameLayout.LayoutParams(width, height)
         params.gravity = layoutGravity
         params.setMargins(margins.left, margins.top, margins.right, margins.bottom)

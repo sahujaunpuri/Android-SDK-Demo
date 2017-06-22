@@ -13,20 +13,29 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_list.*
 
 data class DemoMenuItem(val title: String, val subtitle: String, val intent: Intent? = null)
-abstract class DemoMenuActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+abstract class DemoMenuActivity : AppCompatActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
         setupListViewFooter()
         setupListViewContents(getListViewContents())
     }
-    protected open fun setupListViewFooter() {}
+
+    protected open fun setupListViewFooter()
+    {
+    }
+
     protected abstract fun getListViewContents(): Array<DemoMenuItem>
 
-    private fun setupListViewContents(items: Array<DemoMenuItem>) {
-        val listAdapter = object : ArrayAdapter<DemoMenuItem>(this, android.R.layout.simple_list_item_2, items) {
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    private fun setupListViewContents(items: Array<DemoMenuItem>)
+    {
+        val listAdapter = object : ArrayAdapter<DemoMenuItem>(this, android.R.layout.simple_list_item_2, items)
+        {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
+            {
                 val inflater = this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 val row = convertView ?: inflater.inflate(android.R.layout.simple_list_item_2, parent, false)
 

@@ -19,21 +19,23 @@ import com.applovin.sdk.AppLovinSdk
 import com.applovin.sdk.AppLovinSdkUtils
 import kotlinx.android.synthetic.main.activity_native_ad_carousel_ui.*
 
-class NativeAdCarouselUIActivity : AdStatusActivity() {
+class NativeAdCarouselUIActivity : AdStatusActivity()
+{
 
     private val NUM_ADS_TO_LOAD = 1
 
     private var nativeAd: AppLovinNativeAd? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_native_ad_carousel_ui)
 
         adStatusTextView = status_label
 
         appIcon.setOnClickListener({
-            nativeAd?.launchClickTarget(findViewById(android.R.id.content).context)
-        })
+                                       nativeAd?.launchClickTarget(findViewById(android.R.id.content).context)
+                                   })
 
         loadButton.setOnClickListener {
             log("Native ad loading...")
@@ -47,72 +49,80 @@ class NativeAdCarouselUIActivity : AdStatusActivity() {
         }
 
         precacheButton.setOnClickListener({
-            log("Native ad precaching...")
+                                              log("Native ad precaching...")
 
-            val sdk = AppLovinSdk.getInstance(applicationContext)
-            sdk.nativeAdService.precacheResources(nativeAd, object : AppLovinNativeAdPrecacheListener {
-                override fun onNativeAdImagesPrecached(appLovinNativeAd: AppLovinNativeAd) {
-                    log("Native ad precached images")
-                }
+                                              val sdk = AppLovinSdk.getInstance(applicationContext)
+                                              sdk.nativeAdService.precacheResources(nativeAd, object : AppLovinNativeAdPrecacheListener
+                                              {
+                                                  override fun onNativeAdImagesPrecached(appLovinNativeAd: AppLovinNativeAd)
+                                                  {
+                                                      log("Native ad precached images")
+                                                  }
 
-                override fun onNativeAdVideoPreceached(appLovinNativeAd: AppLovinNativeAd) {
-                    // This will get called whether an ad actually has a video to precache or not
-                    log("Native ad done precaching")
-                    runOnUiThread {
-                        showButton.isEnabled = true
-                        precacheButton.isEnabled = false
-                    }
-                }
+                                                  override fun onNativeAdVideoPreceached(appLovinNativeAd: AppLovinNativeAd)
+                                                  {
+                                                      // This will get called whether an ad actually has a video to precache or not
+                                                      log("Native ad done precaching")
+                                                      runOnUiThread {
+                                                          showButton.isEnabled = true
+                                                          precacheButton.isEnabled = false
+                                                      }
+                                                  }
 
-                override fun onNativeAdImagePrecachingFailed(appLovinNativeAd: AppLovinNativeAd, i: Int) {
-                    log("Native ad failed to precache images with error code " + i)
-                }
+                                                  override fun onNativeAdImagePrecachingFailed(appLovinNativeAd: AppLovinNativeAd, i: Int)
+                                                  {
+                                                      log("Native ad failed to precache images with error code " + i)
+                                                  }
 
-                override fun onNativeAdVideoPrecachingFailed(appLovinNativeAd: AppLovinNativeAd, i: Int) {
-                    log("Native ad failed to precache videos with error code " + i)
-                }
-            })
-        })
+                                                  override fun onNativeAdVideoPrecachingFailed(appLovinNativeAd: AppLovinNativeAd, i: Int)
+                                                  {
+                                                      log("Native ad failed to precache videos with error code " + i)
+                                                  }
+                                              })
+                                          })
 
         showButton.setOnClickListener({
-            runOnUiThread {
-                nativeAd?.let { nativeAd ->
-                    log("Native ad rendered")
+                                          runOnUiThread {
+                                              nativeAd?.let { nativeAd ->
+                                                  log("Native ad rendered")
 
-                    appTitleTextView.text = nativeAd.title
-                    appDescriptionTextView.text = nativeAd.descriptionText
+                                                  appTitleTextView.text = nativeAd.title
+                                                  appDescriptionTextView.text = nativeAd.descriptionText
 
-                    AppLovinSdkUtils.safePopulateImageView(appIcon, Uri.parse(nativeAd.iconUrl), AppLovinSdkUtils.dpToPx(applicationContext, AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE))
+                                                  AppLovinSdkUtils.safePopulateImageView(appIcon, Uri.parse(nativeAd.iconUrl), AppLovinSdkUtils.dpToPx(applicationContext, AppLovinCarouselViewSettings.ICON_IMAGE_MAX_SCALE_SIZE))
 
-                    val starRatingDrawable = getStarRatingDrawable(nativeAd.starRating)
-                    appRating.setImageDrawable(starRatingDrawable)
+                                                  val starRatingDrawable = getStarRatingDrawable(nativeAd.starRating)
+                                                  appRating.setImageDrawable(starRatingDrawable)
 
-                    appDownloadButton.text = nativeAd.ctaText
+                                                  appDownloadButton.text = nativeAd.ctaText
 
-                    mediaView.ad = nativeAd
-                    mediaView.cardState = InlineCarouselCardState()
-                    mediaView.sdk = AppLovinSdk.getInstance(applicationContext)
-                    mediaView.setUiHandler(Handler(Looper.getMainLooper()))
-                    mediaView.setUpView()
-                    mediaView.autoplayVideo()
+                                                  mediaView.ad = nativeAd
+                                                  mediaView.cardState = InlineCarouselCardState()
+                                                  mediaView.sdk = AppLovinSdk.getInstance(applicationContext)
+                                                  mediaView.setUiHandler(Handler(Looper.getMainLooper()))
+                                                  mediaView.setUpView()
+                                                  mediaView.autoplayVideo()
 
-                    //
-                    // You are responsible for firing impressions
-                    //
-                    trackImpression(nativeAd)
-                }
-            }
-        })
+                                                  //
+                                                  // You are responsible for firing impressions
+                                                  //
+                                                  trackImpression(nativeAd)
+                                              }
+                                          }
+                                      })
 
         appDownloadButton.setOnClickListener({
-            nativeAd?.launchClickTarget(findViewById(android.R.id.content).context)
-        })
+                                                 nativeAd?.launchClickTarget(findViewById(android.R.id.content).context)
+                                             })
     }
 
-    fun loadNativeAds(numAdsToLoad: Int) {
+    fun loadNativeAds(numAdsToLoad: Int)
+    {
         val sdk = AppLovinSdk.getInstance(applicationContext)
-        sdk.nativeAdService.loadNativeAds(numAdsToLoad, object : AppLovinNativeAdLoadListener {
-            override fun onNativeAdsLoaded(list: List<*>) {
+        sdk.nativeAdService.loadNativeAds(numAdsToLoad, object : AppLovinNativeAdLoadListener
+        {
+            override fun onNativeAdsLoaded(list: List<*>)
+            {
                 // Native ads loaded; do something with this, e.g. render into your custom view.
 
                 runOnUiThread {
@@ -124,13 +134,15 @@ class NativeAdCarouselUIActivity : AdStatusActivity() {
                 }
             }
 
-            override fun onNativeAdsFailedToLoad(errorCode: Int) {
+            override fun onNativeAdsFailedToLoad(errorCode: Int)
+            {
                 // Native ads failed to load for some reason, likely a network error.
                 // Compare errorCode to the available constants in AppLovinErrorCodes.
 
                 log("Native ad failed to load with error code " + errorCode)
 
-                if (errorCode == AppLovinErrorCodes.NO_FILL) {
+                if (errorCode == AppLovinErrorCodes.NO_FILL)
+                {
                     // No ad was available for this placement
                 }
                 // else if (errorCode == .... ) { ... }
@@ -139,30 +151,38 @@ class NativeAdCarouselUIActivity : AdStatusActivity() {
     }
 
     // Track an impression, though all other postbacks are handled identically
-    private fun trackImpression(nativeAd: AppLovinNativeAd) {
+    private fun trackImpression(nativeAd: AppLovinNativeAd)
+    {
         impressionStatusTextView.text = "Tracking Impression..."
 
-        nativeAd.trackImpression(object : AppLovinPostbackListener {
-            override fun onPostbackSuccess(url: String) {
-                // Impression tracked!
-                runOnUiThread { impressionStatusTextView.text = "Impression Tracked!" }
-            }
+        nativeAd.trackImpression(object : AppLovinPostbackListener
+                                 {
+                                     override fun onPostbackSuccess(url: String)
+                                     {
+                                         // Impression tracked!
+                                         runOnUiThread { impressionStatusTextView.text = "Impression Tracked!" }
+                                     }
 
-            override fun onPostbackFailure(url: String, errorCode: Int) {
-                // Impression could not be tracked. Retry the postback later.
-                runOnUiThread { impressionStatusTextView.text = "Impression Failed to Track!" }
-            }
-        })
+                                     override fun onPostbackFailure(url: String, errorCode: Int)
+                                     {
+                                         // Impression could not be tracked. Retry the postback later.
+                                         runOnUiThread { impressionStatusTextView.text = "Impression Failed to Track!" }
+                                     }
+                                 })
     }
 
-    private fun getStarRatingDrawable(starRating: Float): Drawable {
+    private fun getStarRatingDrawable(starRating: Float): Drawable
+    {
         val sanitizedRating = java.lang.Float.toString(starRating).replace(".", "_")
         val resourceName = "applovin_star_sprite_" + sanitizedRating
         val drawableId = applicationContext.resources.getIdentifier(resourceName, "drawable", applicationContext.packageName)
 
-        if (Build.VERSION.SDK_INT >= 22) {
+        if (Build.VERSION.SDK_INT >= 22)
+        {
             return applicationContext.resources.getDrawable(drawableId, theme)
-        } else {
+        }
+        else
+        {
             @Suppress("DEPRECATION")
             return applicationContext.resources.getDrawable(drawableId)
         }
