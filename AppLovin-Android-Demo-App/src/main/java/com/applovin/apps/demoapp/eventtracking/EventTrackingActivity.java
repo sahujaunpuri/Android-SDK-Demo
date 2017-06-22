@@ -2,6 +2,7 @@ package com.applovin.apps.demoapp.eventtracking;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.applovin.apps.demoapp.R;
-import com.applovin.apps.demoapp.interstitials.InterstitialDemoMenuActivity;
 import com.applovin.sdk.AppLovinEventParameters;
 import com.applovin.sdk.AppLovinEventService;
 import com.applovin.sdk.AppLovinEventTypes;
@@ -26,7 +26,7 @@ import java.util.Map;
  */
 
 public class EventTrackingActivity
-        extends InterstitialDemoMenuActivity
+        extends AppCompatActivity
 {
 
     private EventItem[] events;

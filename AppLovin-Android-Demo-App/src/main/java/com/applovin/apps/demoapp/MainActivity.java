@@ -12,14 +12,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.applovin.apps.demoapp.banners.BannerDemoMenuActivity;
@@ -33,38 +27,17 @@ import com.applovin.sdk.AppLovinSdk;
  * Created by thomasso on 10/5/15.
  */
 public class MainActivity
-        extends AdStatusActivity
+        extends DemoMenuActivity
 {
     private static final String KEY_SHARED_PREFERENCES_NAMESPACE = "com.applovin.apps.demo.shared_preferences";
     private static final String KEY_PROMPTED_CONFIG_FLAGS        = "com.applovin.apps.demo.shared_preferences.prompted_config_flags";
 
-    private static final int    POSITION_INTERSTITIALS           = 0;
-    private static final int    POSITION_INCENTIVIZED            = 1;
-    private static final int    POSITION_NATIVE                  = 2;
-    private static final int    POSITION_BANNER                  = 3;
-    private static final int    POSITION_EVENT                   = 5;
-    private static final int    POSITION_RESOURCES               = 6;
-    private static final int    POSITION_CONTACT                 = 7;
-
-    private ListView            listView;
-    private ListItem[]          items                            = {
-            new ListItem( "Interstitials", "Full screen ads. Graphic or video" ),
-            new ListItem( "Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos" ),
-            new ListItem( "Native Ads", "In-content ads that blend in seamlessly" ),
-            new ListItem( "Banners", "320x50 Classic banner ads" ),
-            new ListItem( "MRecs", "Please reference banners demo" ),
-            new ListItem( "Event Tracking", "Track in-app events for your users" ),
-            new ListItem( "Resources", "https://support.applovin.com/support/home" ),
-            new ListItem( "Contact", "support@applovin.com" )
-    };
-
-    private MenuItem            muteToggleMenuItem;
+    private MenuItem muteToggleMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_list );
 
         //
         // Initializing our SDK at launch is very important as it'll start preloading ads in the background.
@@ -81,76 +54,32 @@ public class MainActivity
         {
             maybePromptConfigFlags();
         }
+    }
 
-        // Initialize list view
-        listView = (ListView) findViewById( R.id.listView );
-        setupListViewFooter();
+    public Intent makeContactIntent()
+    {
+        Intent intent = new Intent( Intent.ACTION_SENDTO );
+        intent.setType( "text/plain" );
+        intent.setData( Uri.parse( "mailto:" + "support@applovin.com" ) );
+        intent.putExtra( Intent.EXTRA_SUBJECT, "Android SDK support" );
+        intent.putExtra( Intent.EXTRA_TEXT, "\n\n\n---\nSDK Version: " + AppLovinSdk.VERSION );
+        return intent;
+    }
 
-        ArrayAdapter<ListItem> listAdapter = new ArrayAdapter<ListItem>( this, android.R.layout.simple_list_item_2, items ) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                View row = convertView;
-                if ( row == null )
-                {
-                    LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-                    row = inflater.inflate( android.R.layout.simple_list_item_2, parent, false );
-                }
-
-                ListItem item = items[position];
-
-                TextView title = (TextView) row.findViewById( android.R.id.text1 );
-                title.setText( item.getTitle() );
-                TextView subtitle = (TextView) row.findViewById( android.R.id.text2 );
-                subtitle.setText( item.getSubtitle() );
-
-                return row;
-            }
+    @Override
+    protected DemoMenuItem[] getListViewContents()
+    {
+        DemoMenuItem[] result = {
+                new DemoMenuItem( "Interstitials", "Full screen ads. Graphic or video", new Intent( this, InterstitialDemoMenuActivity.class ) ),
+                new DemoMenuItem( "Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", new Intent( this, RewardedVideosActivity.class ) ),
+                new DemoMenuItem( "Native Ads", "In-content ads that blend in seamlessly", new Intent( this, NativeAdDemoMenuActivity.class ) ),
+                new DemoMenuItem( "Banners", "320x50 Classic banner ads", new Intent( this, BannerDemoMenuActivity.class ) ),
+                new DemoMenuItem( "MRecs", "Please reference banners demo", null ),
+                new DemoMenuItem( "Event Tracking", "Track in-app events for your users", new Intent( this, EventTrackingActivity.class ) ),
+                new DemoMenuItem( "Resources", "https://support.applovin.com/support/home", new Intent( Intent.ACTION_VIEW, Uri.parse( "https://support.applovin.com/support/home" ) ) ),
+                new DemoMenuItem( "Contact", "support@applovin.com", makeContactIntent() )
         };
-        listView.setAdapter( listAdapter );
-
-
-        // If ListActivity -> @Override public void onListItemClick( . . . .
-        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                if ( position == POSITION_INTERSTITIALS )
-                {
-                    Intent intent = new Intent( MainActivity.this, InterstitialDemoMenuActivity.class );
-                    startActivity( intent );
-                }
-                else if ( position == POSITION_INCENTIVIZED )
-                {
-                    Intent intent = new Intent( MainActivity.this, RewardedVideosActivity.class );
-                    startActivity( intent );
-                }
-                else if ( position == POSITION_NATIVE )
-                {
-                    Intent intent = new Intent( MainActivity.this, NativeAdDemoMenuActivity.class );
-                    startActivity( intent );
-                }
-                else if ( position == POSITION_BANNER )
-                {
-                    Intent intent = new Intent( MainActivity.this, BannerDemoMenuActivity.class );
-                    startActivity( intent );
-                }
-                else if ( position == POSITION_EVENT )
-                {
-                    Intent intent = new Intent( MainActivity.this, EventTrackingActivity.class );
-                    startActivity( intent );
-                }
-                else if ( position == POSITION_RESOURCES )
-                {
-                    openSupportWebpage();
-                }
-                else if ( position == POSITION_CONTACT )
-                {
-                    openContactSupport();
-                }
-            }
-        };
-        listView.setOnItemClickListener( itemClickListener );
+        return result;
     }
 
     private boolean checkSdkKey()
@@ -214,7 +143,8 @@ public class MainActivity
         }
     }
 
-    public void setupListViewFooter()
+    @Override
+    protected void setupListViewFooter()
     {
         String appVersion = "";
         try
@@ -236,27 +166,11 @@ public class MainActivity
         footer.setGravity( Gravity.CENTER );
         footer.setTextSize( 18 );
         footer.setText( "\nApp Version: " + appVersion +
-                "\nSDK Version: " + AppLovinSdk.VERSION +
-                "\nOS Version: " + versionName + "(API " + apiLevel + ")" );
+                                "\nSDK Version: " + AppLovinSdk.VERSION +
+                                "\nOS Version: " + versionName + "(API " + apiLevel + ")" );
 
         listView.addFooterView( footer );
         listView.setFooterDividersEnabled( false );
-    }
-
-    public void openSupportWebpage()
-    {
-        final String url = "https://support.applovin.com/support/home";
-        startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( url ) ) );
-    }
-
-    public void openContactSupport()
-    {
-        Intent intent = new Intent( Intent.ACTION_SENDTO );
-        intent.setType( "text/plain" );
-        intent.setData( Uri.parse( "mailto:" + "support@applovin.com" ) );
-        intent.putExtra( Intent.EXTRA_SUBJECT, "Android SDK support" );
-        intent.putExtra( Intent.EXTRA_TEXT, "\n\n\n---\nSDK Version: " + AppLovinSdk.VERSION );
-        startActivity( Intent.createChooser( intent, "Send Email" ) );
     }
 
     // Options Menu Functions
@@ -286,27 +200,5 @@ public class MainActivity
         }
 
         return true;
-    }
-
-    private class ListItem
-    {
-        private final String title;
-        private final String subtitle;
-
-        ListItem(final String title, final String subtitle)
-        {
-            this.title = title;
-            this.subtitle = subtitle;
-        }
-
-        public String getTitle()
-        {
-            return title;
-        }
-
-        public String getSubtitle()
-        {
-            return subtitle;
-        }
     }
 }

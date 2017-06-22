@@ -1,17 +1,18 @@
 package com.applovin.apps.demoapp;
 
-/**
- * Created by thomasso on 10/5/15.
- */
+import android.content.Intent;
+
 public class DemoMenuItem
 {
     private final String title;
     private final String subtitle;
+    private final Intent intent;
 
-    public DemoMenuItem(final String title, final String subtitle)
+    public DemoMenuItem(final String title, final String subtitle, final Intent intent)
     {
         this.title = title;
         this.subtitle = subtitle;
+        this.intent = intent;
     }
 
     public String getTitle()
@@ -22,5 +23,10 @@ public class DemoMenuItem
     public String getSubtitle()
     {
         return subtitle;
+    }
+
+    public Intent getIntent()
+    {
+        return intent;
     }
 }
