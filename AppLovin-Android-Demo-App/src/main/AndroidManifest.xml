@@ -52,7 +52,7 @@
             android:label="@string/title_activity_interstitial_single_instance" />
         <activity
             android:name=".interstitials.InterstitialDemoMenuActivity"
-            android:label="@string/title_activity_interstitial_list_view" />
+            android:label="@string/title_activity_interstitial_list" />
         <activity
             android:name=".interstitials.InterstitialSharedInstanceActivity"
             android:label="@string/title_activity_interstitial_shared_instance" />
@@ -63,18 +63,18 @@
             android:name=".rewarded.RewardedVideosActivity"
             android:label="@string/title_activity_rewarded_videos" />
         <activity
-            android:name=".nativeads.NativeAdListViewActivity"
-            android:label="@string/title_activity_native_ad_list_view" />
+            android:name=".nativeads.NativeAdDemoMenuActivity"
+            android:label="@string/title_activity_native_ad_list" />
         <activity
             android:name=".nativeads.NativeAdCarouselUIActivity"
-            android:label="@string/title_activity_single_native_ad"
+            android:label="@string/title_activity_native_ad_carousel_ui"
             android:screenOrientation="portrait" />
         <activity
             android:name=".nativeads.NativeAdRecyclerViewActivity"
-            android:label="@string/title_activity_multiple_native_ads" />
+            android:label="@string/title_activity_native_ad_recycler_view" />
         <activity
             android:name=".banners.BannerDemoMenuActivity"
-            android:label="@string/title_activity_banner" />
+            android:label="@string/title_activity_banner_list" />
         <activity
             android:name=".eventtracking.EventTrackingActivity"
             android:label="@string/title_activity_event_tracking" />

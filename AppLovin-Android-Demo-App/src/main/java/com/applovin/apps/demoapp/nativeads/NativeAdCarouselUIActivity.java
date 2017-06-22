@@ -51,7 +51,7 @@ public class NativeAdCarouselUIActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_single_native_ad );
+        setContentView( R.layout.activity_native_ad_carousel_ui );
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
         impressionStatusTextView = (TextView) findViewById( R.id.impressionStatusTextView );

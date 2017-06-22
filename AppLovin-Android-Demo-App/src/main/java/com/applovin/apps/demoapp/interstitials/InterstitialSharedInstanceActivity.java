@@ -19,7 +19,7 @@ public class InterstitialSharedInstanceActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_interstitial_shared_instance );
+        setContentView( R.layout.activity_interstitial_simple );
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 

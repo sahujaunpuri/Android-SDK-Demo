@@ -1,16 +1,5 @@
 package com.applovin.apps.demoapp.eventtracking;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.applovin.apps.demoapp.R;
-import com.applovin.apps.demoapp.interstitials.InterstitialDemoMenuActivity;
-import com.applovin.sdk.AppLovinEventParameters;
-import com.applovin.sdk.AppLovinEventService;
-import com.applovin.sdk.AppLovinEventTypes;
-import com.applovin.sdk.AppLovinSdk;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +9,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.applovin.apps.demoapp.R;
+import com.applovin.apps.demoapp.interstitials.InterstitialDemoMenuActivity;
+import com.applovin.sdk.AppLovinEventParameters;
+import com.applovin.sdk.AppLovinEventService;
+import com.applovin.sdk.AppLovinEventTypes;
+import com.applovin.sdk.AppLovinSdk;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Monica Ong on 6/8/17.
@@ -74,7 +74,7 @@ public class EventTrackingActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_event_tracking );
+        setContentView( R.layout.activity_list );
         setTitle( R.string.title_activity_event_tracking );
 
         final AppLovinEventService eventService = AppLovinSdk.getInstance( this ).getEventService();

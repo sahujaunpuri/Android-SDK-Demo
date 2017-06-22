@@ -28,7 +28,7 @@ public class InterstitialSingleInstanceActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_interstitial_single_instance );
+        setContentView( R.layout.activity_interstitial_simple );
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 

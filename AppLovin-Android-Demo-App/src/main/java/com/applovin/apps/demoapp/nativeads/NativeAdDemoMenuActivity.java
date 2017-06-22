@@ -18,7 +18,7 @@ import com.applovin.apps.demoapp.R;
 import com.applovin.apps.demoapp.AdStatusActivity;
 import com.applovin.apps.demoapp.DemoMenuItem;
 
-public class NativeAdListViewActivity
+public class NativeAdDemoMenuActivity
         extends AdStatusActivity
 {
 
@@ -36,7 +36,7 @@ public class NativeAdListViewActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_native_ad_list_view );
+        setContentView( R.layout.activity_list );
 
         listView = (ListView) findViewById( R.id.listView );
         setupListViewFooter();
@@ -73,12 +73,12 @@ public class NativeAdListViewActivity
 
                 if ( position == POSITION_SINGLE )
                 {
-                    Intent intent = new Intent( NativeAdListViewActivity.this, NativeAdCarouselUIActivity.class );
+                    Intent intent = new Intent( NativeAdDemoMenuActivity.this, NativeAdCarouselUIActivity.class );
                     startActivity( intent );
                 }
                 else if ( position == POSITION_MULTIPLE )
                 {
-                    Intent intent = new Intent( NativeAdListViewActivity.this, NativeAdRecyclerViewActivity.class );
+                    Intent intent = new Intent( NativeAdDemoMenuActivity.this, NativeAdRecyclerViewActivity.class );
                     startActivity( intent );
                 }
             }

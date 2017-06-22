@@ -30,7 +30,7 @@ public class BannerDemoMenuActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_interstitial_list_view );
+        setContentView( R.layout.activity_list );
 
         ListView listView = (ListView) findViewById( R.id.listView );
         ArrayAdapter<DemoMenuItem> listAdapter = new ArrayAdapter<DemoMenuItem>( this, android.R.layout.simple_list_item_2, items )

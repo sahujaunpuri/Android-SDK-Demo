@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.applovin.apps.demoapp.banners.BannerDemoMenuActivity;
 import com.applovin.apps.demoapp.eventtracking.EventTrackingActivity;
 import com.applovin.apps.demoapp.interstitials.InterstitialDemoMenuActivity;
-import com.applovin.apps.demoapp.nativeads.NativeAdListViewActivity;
+import com.applovin.apps.demoapp.nativeads.NativeAdDemoMenuActivity;
 import com.applovin.apps.demoapp.rewarded.RewardedVideosActivity;
 import com.applovin.sdk.AppLovinSdk;
 
@@ -64,7 +64,7 @@ public class MainActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
+        setContentView( R.layout.activity_list );
 
         //
         // Initializing our SDK at launch is very important as it'll start preloading ads in the background.
@@ -127,7 +127,7 @@ public class MainActivity
                 }
                 else if ( position == POSITION_NATIVE )
                 {
-                    Intent intent = new Intent( MainActivity.this, NativeAdListViewActivity.class );
+                    Intent intent = new Intent( MainActivity.this, NativeAdDemoMenuActivity.class );
                     startActivity( intent );
                 }
                 else if ( position == POSITION_BANNER )

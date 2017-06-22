@@ -36,7 +36,7 @@ public class NativeAdRecyclerViewActivity
     {
         super.onCreate( savedInstanceState );
 
-        setContentView( R.layout.activity_multiple_native_ads );
+        setContentView( R.layout.activity_native_ad_recycler_view );
         recyclerView = (RecyclerView) findViewById( R.id.nativeAdsRecyclerView );
 
         // Load an initial batch of native ads.
