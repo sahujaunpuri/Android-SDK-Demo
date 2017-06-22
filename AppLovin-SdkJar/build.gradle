@@ -1,0 +1,16 @@
+configurations.maybeCreate("default")
+// If AppLovin Demo App is running as a module in the AppLovin development environment
+if (new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists()) {
+    dependencies {
+        compile project(':AppLovin-Android-SDK-Mediation-Adapters') // This compiles SDK project
+    }
+}
+// Otherwise (AppLovin Demo app is running as a standalone project)
+else {
+    def tree = fileTree(dir: '.').include('applovin-sdk-*.jar')
+    if (!tree.any()) {
+        throw new IllegalStateException("AppLovin SDK jar file was not found in the AppLovin-SDKJar/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the AppLovin-SDKJar/ folder of your project")
+    } else {
+        tree.each { artifacts.add("default", it) }
+    }
+}
