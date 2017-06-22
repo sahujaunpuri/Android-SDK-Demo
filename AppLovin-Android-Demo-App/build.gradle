@@ -35,6 +35,9 @@ android {
             debuggable true
         }
     }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
