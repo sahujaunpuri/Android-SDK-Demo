@@ -1,1 +1,1 @@
-include ':AppLovin-Android-Demo-App'
+include ':AppLovin-Android-Demo-App', ':AppLovin-Kotlin-Demo-App'
