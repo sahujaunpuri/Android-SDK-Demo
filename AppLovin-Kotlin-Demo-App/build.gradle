@@ -50,6 +50,7 @@ dependencies {
     compile project(":AppLovin-SdkJar")
     compile project(":AppLovin-Android-NativeAdCarousel")
 }
+
 repositories {
     mavenCentral()
 }

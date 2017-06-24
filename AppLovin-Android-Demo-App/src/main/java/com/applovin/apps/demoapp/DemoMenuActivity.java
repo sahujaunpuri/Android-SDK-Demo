@@ -69,8 +69,7 @@ public abstract class DemoMenuActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Intent intent = items[position].getIntent();
-                if ( intent != null )
-                    startActivity( intent );
+                if ( intent != null ) startActivity( intent );
             }
         };
         listView.setOnItemClickListener( itemClickListener );
