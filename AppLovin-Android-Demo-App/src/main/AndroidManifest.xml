@@ -84,5 +84,8 @@
         <activity
             android:name=".banners.BannerLayoutEditorActivity"
             android:label="@string/title_activity_banner_layout_editor" />
+        <activity
+            android:name="com.applovin.apps.demoapp.mrecs.MRecActivity"
+            android:label="@string/title_activity_mrec" />
     </application>
 </manifest>

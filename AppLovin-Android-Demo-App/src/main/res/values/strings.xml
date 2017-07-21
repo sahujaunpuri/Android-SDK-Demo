@@ -17,4 +17,6 @@
     <string name="title_activity_banner_layout_editor">Layout Editor Banners</string>
 
     <string name="title_activity_event_tracking">Event Tracking</string>
+
+    <string name="title_activity_mrec">MRecs</string>
 </resources>

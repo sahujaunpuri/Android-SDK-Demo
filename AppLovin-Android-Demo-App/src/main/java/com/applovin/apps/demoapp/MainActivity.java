@@ -21,6 +21,7 @@ import com.applovin.apps.demoapp.eventtracking.EventTrackingActivity;
 import com.applovin.apps.demoapp.interstitials.InterstitialDemoMenuActivity;
 import com.applovin.apps.demoapp.nativeads.NativeAdDemoMenuActivity;
 import com.applovin.apps.demoapp.rewarded.RewardedVideosActivity;
+import com.applovin.apps.demoapp.mrecs.MRecActivity;
 import com.applovin.sdk.AppLovinSdk;
 
 /**
@@ -74,7 +75,7 @@ public class MainActivity
                 new DemoMenuItem( "Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", new Intent( this, RewardedVideosActivity.class ) ),
                 new DemoMenuItem( "Native Ads", "In-content ads that blend in seamlessly", new Intent( this, NativeAdDemoMenuActivity.class ) ),
                 new DemoMenuItem( "Banners", "320x50 Classic banner ads", new Intent( this, BannerDemoMenuActivity.class ) ),
-                new DemoMenuItem( "MRecs", "Please reference banners demo", null ),
+                new DemoMenuItem( "MRecs", "300x250 Rectangular ads typically used in-content", new Intent( this, MRecActivity.class ) ),
                 new DemoMenuItem( "Event Tracking", "Track in-app events for your users", new Intent( this, EventTrackingActivity.class ) ),
                 new DemoMenuItem( "Resources", "https://support.applovin.com/support/home", new Intent( Intent.ACTION_VIEW, Uri.parse( "https://support.applovin.com/support/home" ) ) ),
                 new DemoMenuItem( "Contact", "support@applovin.com", makeContactIntent() )
