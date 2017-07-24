@@ -1,3 +1,4 @@
+
 package com.applovin.apps.demoapp.mrecs;
 
 
@@ -9,8 +10,8 @@ import com.applovin.sdk.AppLovinAdClickListener;
 import com.applovin.sdk.AppLovinAdDisplayListener;
 import com.applovin.sdk.AppLovinAdLoadListener;
 import com.applovin.sdk.AppLovinAdSize;
+import com.applovin.sdk.AppLovinSdkUtils;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -23,7 +24,7 @@ import android.widget.TextView;
  * Created by monica ong on 7/20/17.
  */
 
-public final class MRecActivity
+public final class MRecProgrammaticActivity
         extends AdStatusActivity
 {
     @Override
@@ -40,8 +41,8 @@ public final class MRecActivity
         final ViewGroup rootView = (ViewGroup) findViewById( android.R.id.content );
         rootView.addView( adView );
 
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams( com.applovin.sdk.AppLovinSdkUtils.dpToPx( this, AppLovinAdSize.MREC.getWidth() ), com.applovin.sdk.AppLovinSdkUtils.dpToPx( this, AppLovinAdSize.MREC.getHeight() ) );
-        layoutParams.topMargin = (int) (80 * Resources.getSystem().getDisplayMetrics().density);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams( AppLovinSdkUtils.dpToPx( this, AppLovinAdSize.MREC.getWidth() ), AppLovinSdkUtils.dpToPx( this, AppLovinAdSize.MREC.getHeight() ) );
+        layoutParams.topMargin = AppLovinSdkUtils.dpToPx( this, 80 );
         layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
 
         adView.setLayoutParams( layoutParams );
@@ -96,13 +97,5 @@ public final class MRecActivity
                 log( "MRec Clicked" );
             }
         } );
-
-        //
-        // Please note that the AppLovinAdView CAN AUTOMATICALLY invoke loadNextAd() upon inflation from layout
-        // To do so, add the following attributes to the com.applovin.adview.AppLovinAdView element:
-        //
-        // xmlns:demo="http://schemas.applovin.com/android/1.0"
-        // demo:loadAdOnCreate="true"
-        //
     }
 }
