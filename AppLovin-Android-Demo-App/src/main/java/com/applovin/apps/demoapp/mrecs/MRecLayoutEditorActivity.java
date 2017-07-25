@@ -1,53 +1,36 @@
-
 package com.applovin.apps.demoapp.mrecs;
 
-
 import com.applovin.adview.AppLovinAdView;
-import com.applovin.apps.demoapp.AdStatusActivity;
 import com.applovin.apps.demoapp.R;
+import com.applovin.apps.demoapp.AdStatusActivity;
 import com.applovin.sdk.AppLovinAd;
 import com.applovin.sdk.AppLovinAdClickListener;
 import com.applovin.sdk.AppLovinAdDisplayListener;
 import com.applovin.sdk.AppLovinAdLoadListener;
-import com.applovin.sdk.AppLovinAdSize;
-import com.applovin.sdk.AppLovinSdkUtils;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 /**
- * Created by monica ong on 7/20/17.
+ * Created by monica on 7/24/17.
  */
 
-public final class MRecProgrammaticActivity
+public class MRecLayoutEditorActivity
         extends AdStatusActivity
 {
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_mrec_programmatic );
+        setContentView( R.layout.activity_mrec_layout_editor );
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
-        // Create MRec
-        final AppLovinAdView adView = new AppLovinAdView( AppLovinAdSize.MREC, this );
+        // Retrieve banner from layout editor
+        final AppLovinAdView adView = (AppLovinAdView) findViewById( R.id.ad_view );
 
-        final ViewGroup rootView = (ViewGroup) findViewById( android.R.id.content );
-        rootView.addView( adView );
-
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams( AppLovinSdkUtils.dpToPx( this, AppLovinAdSize.MREC.getWidth() ), AppLovinSdkUtils.dpToPx( this, AppLovinAdSize.MREC.getHeight() ) );
-        layoutParams.topMargin = AppLovinSdkUtils.dpToPx( this, 80 );
-        layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-
-        adView.setLayoutParams( layoutParams );
-
-        // Set up load button
         final Button loadButton = (Button) findViewById( R.id.load_button );
 
         loadButton.setOnClickListener( new View.OnClickListener() {
@@ -97,5 +80,16 @@ public final class MRecProgrammaticActivity
                 log( "MRec Clicked" );
             }
         } );
+
+        // Load an ad!
+        adView.loadNextAd();
+
+        //
+        // Please note that the AppLovinAdView CAN AUTOMATICALLY invoke loadNextAd() upon inflation from layout
+        // To do so, add the following attributes to the com.applovin.adview.AppLovinAdView element:
+        //
+        // xmlns:demo="http://schemas.applovin.com/android/1.0"
+        // demo:loadAdOnCreate="true"
+        //
     }
 }
