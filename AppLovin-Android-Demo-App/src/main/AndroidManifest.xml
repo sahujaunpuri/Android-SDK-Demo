@@ -76,13 +76,22 @@
             android:name=".banners.BannerDemoMenuActivity"
             android:label="@string/title_activity_banner_list" />
         <activity
-            android:name=".eventtracking.EventTrackingActivity"
-            android:label="@string/title_activity_event_tracking" />
-        <activity
             android:name=".banners.BannerProgrammaticActivity"
             android:label="@string/title_activity_banner_programmatic" />
         <activity
             android:name=".banners.BannerLayoutEditorActivity"
             android:label="@string/title_activity_banner_layout_editor" />
+        <activity
+            android:name="com.applovin.apps.demoapp.mrecs.MRecDemoMenuActivity"
+            android:label="@string/title_activity_mrec_list" />
+        <activity
+            android:name="com.applovin.apps.demoapp.mrecs.MRecProgrammaticActivity"
+            android:label="@string/title_activity_mrec_programmatic" />
+        <activity
+            android:name="com.applovin.apps.demoapp.mrecs.MRecLayoutEditorActivity"
+            android:label="@string/title_activity_mrec_layout_editor" />
+        <activity
+            android:name=".eventtracking.EventTrackingActivity"
+            android:label="@string/title_activity_event_tracking" />
     </application>
 </manifest>
