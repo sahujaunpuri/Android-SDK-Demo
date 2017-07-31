@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.applovin.apps.demoapp.R;
 import com.applovin.apps.demoapp.AdStatusActivity;
-import com.applovin.apps.demoapp.nativeads.carouselui.AppLovinCarouselViewSettings;
-import com.applovin.apps.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView;
-import com.applovin.apps.demoapp.nativeads.carouselui.cards.InlineCarouselCardState;
+import com.applovin.nativeAds.carouselui.AppLovinCarouselViewSettings;
+import com.applovin.nativeAds.carouselui.cards.InlineCarouselCardMediaView;
+import com.applovin.nativeAds.carouselui.cards.InlineCarouselCardState;
 import com.applovin.nativeAds.AppLovinNativeAd;
 import com.applovin.nativeAds.AppLovinNativeAdLoadListener;
 import com.applovin.nativeAds.AppLovinNativeAdPrecacheListener;

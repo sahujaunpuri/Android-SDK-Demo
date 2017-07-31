@@ -190,9 +190,9 @@ class EventTrackingActivity : AppCompatActivity()
 
                 val item = events[position]
 
-                val title: TextView = row.findViewById(android.R.id.text1)
+                val title = row.findViewById(android.R.id.text1) as TextView
                 title.text = item.name
-                val subtitle: TextView = row.findViewById(android.R.id.text2)
+                val subtitle = row.findViewById(android.R.id.text2) as TextView
                 subtitle.text = item.description
 
                 return row
