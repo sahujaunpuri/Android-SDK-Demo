@@ -6,15 +6,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.applovin.adview.AppLovinInterstitialAd;
-import com.applovin.apps.demoapp.R;
 import com.applovin.apps.demoapp.AdStatusActivity;
+import com.applovin.apps.demoapp.R;
 
-import java.lang.ref.WeakReference;
+/**
+ * Created by thomasso on 10/5/15.
+ */
 
 public class InterstitialSharedInstanceActivity
         extends AdStatusActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,19 +24,14 @@ public class InterstitialSharedInstanceActivity
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
-        final WeakReference<InterstitialSharedInstanceActivity> weakRef = new WeakReference<InterstitialSharedInstanceActivity>( this );
-
         final Button showButton = (Button) findViewById( R.id.loadButton );
         showButton.setOnClickListener( new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-
-                if ( AppLovinInterstitialAd.isAdReadyToDisplay( weakRef.get() ) )
+                if ( AppLovinInterstitialAd.isAdReadyToDisplay( InterstitialSharedInstanceActivity.this ) )
                 {
-                    // If you want to set the ad load, ad display, ad click, or video playback callback listeners, use one of the other methods to show
-
                     /*
                      NOTE: We recommend the use of placements (AFTER creating them in your dashboard):
 
@@ -43,7 +39,7 @@ public class InterstitialSharedInstanceActivity
 
                      To learn more about placements, check out https://applovin.com/integration#androidPlacementsIntegration
                     */
-                    AppLovinInterstitialAd.show( weakRef.get() );
+                    AppLovinInterstitialAd.show( InterstitialSharedInstanceActivity.this );
                     log( "Interstitial Displayed" );
                 }
                 else

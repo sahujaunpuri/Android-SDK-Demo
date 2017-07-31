@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.applovin.adview.AppLovinInterstitialAd;
 import com.applovin.adview.AppLovinInterstitialAdDialog;
-import com.applovin.apps.demoapp.R;
 import com.applovin.apps.demoapp.AdStatusActivity;
+import com.applovin.apps.demoapp.R;
 import com.applovin.sdk.AppLovinAd;
 import com.applovin.sdk.AppLovinAdClickListener;
 import com.applovin.sdk.AppLovinAdDisplayListener;
@@ -17,12 +17,15 @@ import com.applovin.sdk.AppLovinAdSize;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinSdk;
 
+/**
+ * Created by thomasso on 10/5/15.
+ */
+
 public class InterstitialManualLoadingActivity
         extends AdStatusActivity
 {
-
     private AppLovinAd                   currentAd;
-    private AppLovinInterstitialAdDialog interstitialAdDialog;
+    private AppLovinInterstitialAdDialog interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,8 +35,7 @@ public class InterstitialManualLoadingActivity
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
-        final AppLovinSdk sdk = AppLovinSdk.getInstance( getApplicationContext() );
-        interstitialAdDialog = AppLovinInterstitialAd.create( sdk, this );
+        interstitialAd = AppLovinInterstitialAd.create( AppLovinSdk.getInstance( this ), this );
 
         final Button loadButton = (Button) findViewById( R.id.loadButton );
         final Button showButton = (Button) findViewById( R.id.showButton );
@@ -43,7 +45,6 @@ public class InterstitialManualLoadingActivity
             @Override
             public void onClick(View v)
             {
-
                 log( "Interstitial loading..." );
                 showButton.setEnabled( false );
 
@@ -52,7 +53,6 @@ public class InterstitialManualLoadingActivity
                     @Override
                     public void adReceived(AppLovinAd ad)
                     {
-
                         log( "Interstitial Loaded" );
 
                         currentAd = ad;
@@ -84,15 +84,14 @@ public class InterstitialManualLoadingActivity
             {
                 if ( currentAd != null )
                 {
-
                     /*
                      NOTE: We recommend the use of placements (AFTER creating them in your dashboard):
 
-                     interstitialAdDialog.show( "SINGLE_INSTANCE_SCREEN" );
+                     interstitialAd.show( "SINGLE_INSTANCE_SCREEN" );
 
                      To learn more about placements, check out https://applovin.com/integration#androidPlacementsIntegration
                     */
-                    interstitialAdDialog.showAndRender( currentAd );
+                    interstitialAd.showAndRender( currentAd );
                 }
             }
         } );
@@ -100,7 +99,7 @@ public class InterstitialManualLoadingActivity
         //
         // Optional: Set ad display, ad click, and ad video playback callback listeners
         //
-        interstitialAdDialog.setAdDisplayListener( new AppLovinAdDisplayListener()
+        interstitialAd.setAdDisplayListener( new AppLovinAdDisplayListener()
         {
             @Override
             public void adDisplayed(AppLovinAd appLovinAd)
@@ -115,7 +114,7 @@ public class InterstitialManualLoadingActivity
             }
         } );
 
-        interstitialAdDialog.setAdClickListener( new AppLovinAdClickListener()
+        interstitialAd.setAdClickListener( new AppLovinAdClickListener()
         {
             @Override
             public void adClicked(AppLovinAd appLovinAd)
@@ -125,7 +124,7 @@ public class InterstitialManualLoadingActivity
         } );
 
         // This will only ever be used if you have video ads enabled.
-        interstitialAdDialog.setAdVideoPlaybackListener( new AppLovinAdVideoPlaybackListener()
+        interstitialAd.setAdVideoPlaybackListener( new AppLovinAdVideoPlaybackListener()
         {
             @Override
             public void videoPlaybackBegan(AppLovinAd appLovinAd)
