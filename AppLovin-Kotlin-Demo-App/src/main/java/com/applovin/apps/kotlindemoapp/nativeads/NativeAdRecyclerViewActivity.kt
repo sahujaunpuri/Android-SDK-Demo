@@ -100,9 +100,9 @@ class NativeAdRecyclerViewActivity : AppCompatActivity()
 
     private inner class NativeAdRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        val appTitleTextView: TextView = itemView.findViewById(R.id.appTitleTextView) as TextView
-        val appDescriptionTextView: TextView = itemView.findViewById(R.id.appDescriptionTextView) as TextView
-        val appIconImageView: ImageView = itemView.findViewById(R.id.appIconImageView) as ImageView
+        val appTitleTextView: TextView = itemView.findViewById<View>(R.id.appTitleTextView) as TextView
+        val appDescriptionTextView: TextView = itemView.findViewById<View>(R.id.appDescriptionTextView) as TextView
+        val appIconImageView: ImageView = itemView.findViewById<View>(R.id.appIconImageView) as ImageView
     }
 
     private inner class NativeAdRecyclerViewAdapter(private val nativeAds: List<AppLovinNativeAd>) : RecyclerView.Adapter<NativeAdRecyclerViewHolder>()

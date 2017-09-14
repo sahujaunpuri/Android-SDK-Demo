@@ -1,1 +1,1 @@
-include ':AppLovin-Android-Demo-App', ':AppLovin-Kotlin-Demo-App', ':AppLovin-Android-NativeAdCarousel', ':AppLovin-SdkJar'
+include ':AppLovin-Android-Demo-App', ':AppLovin-Kotlin-Demo-App'

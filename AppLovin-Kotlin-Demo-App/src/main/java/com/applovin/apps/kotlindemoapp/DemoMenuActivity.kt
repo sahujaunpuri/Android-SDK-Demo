@@ -41,9 +41,9 @@ abstract class DemoMenuActivity : AppCompatActivity()
 
                 val item = items[position]
 
-                val title = row.findViewById(android.R.id.text1) as TextView
+                val title: TextView = row.findViewById(android.R.id.text1)
                 title.text = item.title
-                val subtitle = row.findViewById(android.R.id.text2) as TextView
+                val subtitle: TextView = row.findViewById(android.R.id.text2)
                 subtitle.text = item.subtitle
 
                 return row

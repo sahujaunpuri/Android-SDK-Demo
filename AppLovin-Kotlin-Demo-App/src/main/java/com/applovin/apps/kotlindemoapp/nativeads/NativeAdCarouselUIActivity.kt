@@ -8,11 +8,11 @@ import android.os.Handler
 import android.os.Looper
 import com.applovin.apps.kotlindemoapp.AdStatusActivity
 import com.applovin.apps.kotlindemoapp.R
+import com.applovin.apps.kotlindemoapp.nativeads.carouselui.AppLovinCarouselViewSettings
+import com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards.InlineCarouselCardState
 import com.applovin.nativeAds.AppLovinNativeAd
 import com.applovin.nativeAds.AppLovinNativeAdLoadListener
 import com.applovin.nativeAds.AppLovinNativeAdPrecacheListener
-import com.applovin.nativeAds.carouselui.AppLovinCarouselViewSettings
-import com.applovin.nativeAds.carouselui.cards.InlineCarouselCardState
 import com.applovin.sdk.AppLovinErrorCodes
 import com.applovin.sdk.AppLovinPostbackListener
 import com.applovin.sdk.AppLovinSdk

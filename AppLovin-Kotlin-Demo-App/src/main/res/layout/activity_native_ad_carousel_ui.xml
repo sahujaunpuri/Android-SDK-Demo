@@ -132,7 +132,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp" />
 
-        <com.applovin.nativeAds.carouselui.cards.InlineCarouselCardMediaView
+        <com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView
             android:id="@+id/mediaView"
             android:layout_width="wrap_content"
             android:layout_height="184dp"
@@ -144,7 +144,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
-        </com.applovin.nativeAds.carouselui.cards.InlineCarouselCardMediaView>
+        </com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView>
 
         <Button
             android:layout_width="wrap_content"
