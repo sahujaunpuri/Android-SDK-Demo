@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,7 +39,8 @@ public class NativeAdCarouselUIActivity
     private TextView  appDescriptionTextView;
     private Button    appDownloadButton;
 
-    private FrameLayout mediaViewPlaceholder;
+    // We will just use the mediaView class provided by our Carousels to display the ad images and videos
+    private InlineCarouselCardMediaView mediaView;
 
     private TextView impressionStatusTextView;
     private Button   loadButton;
@@ -55,10 +55,11 @@ public class NativeAdCarouselUIActivity
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
         impressionStatusTextView = (TextView) findViewById( R.id.impressionStatusTextView );
+        loadButton = (Button) findViewById( R.id.loadButton );
         appRating = (ImageView) findViewById( R.id.appRating );
         appTitleTextView = (TextView) findViewById( R.id.appTitleTextView );
         appDescriptionTextView = (TextView) findViewById( R.id.appDescriptionTextView );
-        mediaViewPlaceholder = (FrameLayout) findViewById( R.id.mediaViewPlaceholder );
+        mediaView = (InlineCarouselCardMediaView) findViewById( R.id.mediaView );
 
         appIcon = (ImageView) findViewById( R.id.appIcon );
         appIcon.setOnClickListener( new View.OnClickListener()
@@ -73,7 +74,7 @@ public class NativeAdCarouselUIActivity
             }
         } );
 
-        loadButton = (Button) findViewById( R.id.loadButton );
+        final Button loadButton = (Button) findViewById( R.id.loadButton );
         loadButton.setOnClickListener( new View.OnClickListener()
         {
             @Override
@@ -81,7 +82,6 @@ public class NativeAdCarouselUIActivity
             {
                 log( "Native ad loading..." );
 
-                loadButton.setEnabled( false );
                 precacheButton.setEnabled( false );
                 showButton.setEnabled( false );
 
@@ -114,15 +114,8 @@ public class NativeAdCarouselUIActivity
                         // This will get called whether an ad actually has a video to precache or not
                         log( "Native ad done precaching" );
 
-                        runOnUiThread( new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                showButton.setEnabled( true );
-                                precacheButton.setEnabled( false );
-                            }
-                        });
+                        showButton.setEnabled( true );
+                        precacheButton.setEnabled( false );
                     }
 
                     @Override
@@ -153,9 +146,6 @@ public class NativeAdCarouselUIActivity
                     {
                         log( "Native ad rendered" );
 
-                        loadButton.setEnabled( true );
-                        showButton.setEnabled( false );
-
                         appTitleTextView.setText( nativeAd.getTitle() );
                         appDescriptionTextView.setText( nativeAd.getDescriptionText() );
 
@@ -166,16 +156,12 @@ public class NativeAdCarouselUIActivity
 
                         appDownloadButton.setText( nativeAd.getCtaText() );
 
-                        InlineCarouselCardMediaView mediaView = new InlineCarouselCardMediaView( NativeAdCarouselUIActivity.this );
                         mediaView.setAd( nativeAd );
                         mediaView.setCardState( new InlineCarouselCardState() );
                         mediaView.setSdk( AppLovinSdk.getInstance( getApplicationContext() ) );
                         mediaView.setUiHandler( new Handler( Looper.getMainLooper() ) );
                         mediaView.setUpView();
                         mediaView.autoplayVideo();
-
-                        mediaViewPlaceholder.removeAllViews();
-                        mediaViewPlaceholder.addView(mediaView);
 
                         //
                         // You are responsible for firing impressions
@@ -218,6 +204,7 @@ public class NativeAdCarouselUIActivity
                         log( "Native ad loaded, assets not retrieved yet." );
 
                         nativeAd = (AppLovinNativeAd) list.get( 0 );
+                        loadButton.setEnabled( false );
                         precacheButton.setEnabled( true );
                     }
                 } );
