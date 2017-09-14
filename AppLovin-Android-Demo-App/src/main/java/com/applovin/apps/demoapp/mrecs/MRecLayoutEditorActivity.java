@@ -1,19 +1,17 @@
 package com.applovin.apps.demoapp.mrecs;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.applovin.adview.AppLovinAdView;
-import com.applovin.adview.AppLovinAdViewDisplayErrorCode;
-import com.applovin.adview.AppLovinAdViewEventListener;
-import com.applovin.apps.demoapp.AdStatusActivity;
 import com.applovin.apps.demoapp.R;
+import com.applovin.apps.demoapp.AdStatusActivity;
 import com.applovin.sdk.AppLovinAd;
 import com.applovin.sdk.AppLovinAdClickListener;
 import com.applovin.sdk.AppLovinAdDisplayListener;
 import com.applovin.sdk.AppLovinAdLoadListener;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by monica on 7/24/17.
@@ -35,8 +33,7 @@ public class MRecLayoutEditorActivity
 
         final Button loadButton = (Button) findViewById( R.id.load_button );
 
-        loadButton.setOnClickListener( new View.OnClickListener()
-        {
+        loadButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -47,8 +44,7 @@ public class MRecLayoutEditorActivity
         //
         // Optional: Set listeners
         //
-        adView.setAdLoadListener( new AppLovinAdLoadListener()
-        {
+        adView.setAdLoadListener( new AppLovinAdLoadListener() {
             @Override
             public void adReceived(final AppLovinAd ad)
             {
@@ -63,8 +59,7 @@ public class MRecLayoutEditorActivity
             }
         } );
 
-        adView.setAdDisplayListener( new AppLovinAdDisplayListener()
-        {
+        adView.setAdDisplayListener( new AppLovinAdDisplayListener() {
             @Override
             public void adDisplayed(final AppLovinAd ad)
             {
@@ -78,8 +73,7 @@ public class MRecLayoutEditorActivity
             }
         } );
 
-        adView.setAdClickListener( new AppLovinAdClickListener()
-        {
+        adView.setAdClickListener( new AppLovinAdClickListener() {
             @Override
             public void adClicked(final AppLovinAd ad)
             {
@@ -87,33 +81,6 @@ public class MRecLayoutEditorActivity
             }
         } );
 
-        adView.setAdViewEventListener( new AppLovinAdViewEventListener()
-        {
-            @Override
-            public void adOpenedFullscreen(final AppLovinAd ad, final AppLovinAdView adView)
-            {
-                log( "MRec opened fullscreen" );
-            }
-
-            @Override
-            public void adClosedFullscreen(final AppLovinAd ad, final AppLovinAdView adView)
-            {
-                log( "MRec closed fullscreen" );
-            }
-
-            @Override
-            public void adLeftApplication(final AppLovinAd ad, final AppLovinAdView adView)
-            {
-                log( "MRec left application" );
-            }
-
-            @Override
-            public void adFailedToDisplay(final AppLovinAd ad, final AppLovinAdView adView, final AppLovinAdViewDisplayErrorCode code)
-            {
-                log( "MRec failed to display with error code " + code );
-            }
-        } );
-        
         // Load an ad!
         adView.loadNextAd();
 
