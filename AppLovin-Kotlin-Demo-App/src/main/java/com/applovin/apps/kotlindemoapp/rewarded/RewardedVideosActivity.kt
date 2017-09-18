@@ -64,7 +64,7 @@ class RewardedVideosActivity : AdStatusActivity()
                 // Reward Listener
                 val adRewardListener = object : AppLovinAdRewardListener
                 {
-                    override fun userRewardVerified(appLovinAd: AppLovinAd, map: Map<*, *>)
+                    override fun userRewardVerified(appLovinAd: AppLovinAd, map: Map<String, String>)
                     {
                         // AppLovin servers validated the reward. Refresh user balance from your server.  We will also pass the number of coins
                         // awarded and the name of the currency.  However, ideally, you should verify this with your server before granting it.
@@ -81,7 +81,7 @@ class RewardedVideosActivity : AdStatusActivity()
                         // If you don't want this, you can turn it off in the Manage Apps UI.
                     }
 
-                    override fun userOverQuota(appLovinAd: AppLovinAd, map: Map<*, *>)
+                    override fun userOverQuota(appLovinAd: AppLovinAd, map: Map<String, String>)
                     {
                         // Your user has already earned the max amount you allowed for the day at this point, so
                         // don't give them any more currency. By default we'll show them a alert explaining this,
@@ -90,7 +90,7 @@ class RewardedVideosActivity : AdStatusActivity()
                         log("Reward validation request exceeded quota with response: " + map)
                     }
 
-                    override fun userRewardRejected(appLovinAd: AppLovinAd, map: Map<*, *>)
+                    override fun userRewardRejected(appLovinAd: AppLovinAd, map: Map<String, String>)
                     {
                         // Your user couldn't be granted a reward for this view. This could happen if you've blacklisted
                         // them, for example. Don't grant them any currency. By default we'll show them an alert explaining this,

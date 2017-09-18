@@ -307,7 +307,7 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
         {
             sdk!!.nativeAdService.loadNativeAds(AppLovinCarouselViewSettings.NUM_ADS_TO_AUTOLOAD, object : AppLovinNativeAdLoadListener
             {
-                override fun onNativeAdsLoaded(/* <AppLovinNativeAd> */ nativeAds: List<*>)
+                override fun onNativeAdsLoaded(nativeAds: List<AppLovinNativeAd>)
                 {
                     getUiHandler().post {
                         setNativeAds(nativeAds as List<AppLovinNativeAd>)

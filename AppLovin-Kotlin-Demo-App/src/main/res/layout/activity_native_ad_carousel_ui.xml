@@ -132,8 +132,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp" />
 
-        <com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView
-            android:id="@+id/mediaView"
+        <FrameLayout
+            android:id="@+id/mediaViewPlaceholder"
             android:layout_width="wrap_content"
             android:layout_height="184dp"
             android:layout_gravity="center"
@@ -144,7 +144,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
-        </com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView>
+        </FrameLayout>
 
         <Button
             android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
             android:text="CTA"
             android:id="@+id/appDownloadButton"
             android:enabled="true"
-            android:layout_below="@+id/mediaView"
+            android:layout_below="@+id/mediaViewPlaceholder"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"

@@ -36,7 +36,7 @@ class NativeAdRecyclerViewActivity : AppCompatActivity()
         val nativeAdService = sdk.nativeAdService
         nativeAdService.loadNativeAds(10, object : AppLovinNativeAdLoadListener
         {
-            override fun onNativeAdsLoaded(list: List<*>)
+            override fun onNativeAdsLoaded(list: List<AppLovinNativeAd>)
             {
                 runOnUiThread {
                     renderRecyclerView(list as List<AppLovinNativeAd>)

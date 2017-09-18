@@ -9,6 +9,7 @@ import android.os.Looper
 import com.applovin.apps.kotlindemoapp.AdStatusActivity
 import com.applovin.apps.kotlindemoapp.R
 import com.applovin.apps.kotlindemoapp.nativeads.carouselui.AppLovinCarouselViewSettings
+import com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView
 import com.applovin.apps.kotlindemoapp.nativeads.carouselui.cards.InlineCarouselCardState
 import com.applovin.nativeAds.AppLovinNativeAd
 import com.applovin.nativeAds.AppLovinNativeAdLoadListener
@@ -40,6 +41,7 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
         loadButton.setOnClickListener {
             log("Native ad loading...")
 
+            loadButton.isEnabled = false
             precacheButton.isEnabled = false
             showButton.isEnabled = false
 
@@ -86,6 +88,9 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
                                               nativeAd?.let { nativeAd ->
                                                   log("Native ad rendered")
 
+                                                  loadButton.isEnabled = true
+                                                  showButton.isEnabled = false
+
                                                   appTitleTextView.text = nativeAd.title
                                                   appDescriptionTextView.text = nativeAd.descriptionText
 
@@ -96,12 +101,16 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
 
                                                   appDownloadButton.text = nativeAd.ctaText
 
+                                                  val mediaView = InlineCarouselCardMediaView(this)
                                                   mediaView.ad = nativeAd
                                                   mediaView.cardState = InlineCarouselCardState()
                                                   mediaView.sdk = AppLovinSdk.getInstance(applicationContext)
                                                   mediaView.setUiHandler(Handler(Looper.getMainLooper()))
                                                   mediaView.setUpView()
                                                   mediaView.autoplayVideo()
+
+                                                  mediaViewPlaceholder.removeAllViews()
+                                                  mediaViewPlaceholder.addView(mediaView)
 
                                                   //
                                                   // You are responsible for firing impressions
@@ -121,7 +130,7 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
         val sdk = AppLovinSdk.getInstance(applicationContext)
         sdk.nativeAdService.loadNativeAds(numAdsToLoad, object : AppLovinNativeAdLoadListener
         {
-            override fun onNativeAdsLoaded(list: List<*>)
+            override fun onNativeAdsLoaded(list: List<AppLovinNativeAd>)
             {
                 // Native ads loaded; do something with this, e.g. render into your custom view.
 
@@ -129,7 +138,6 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
                     log("Native ad loaded, assets not retrieved yet.")
 
                     nativeAd = list[0] as AppLovinNativeAd
-                    loadButton.isEnabled = false
                     precacheButton.isEnabled = true
                 }
             }
