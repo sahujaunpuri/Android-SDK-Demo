@@ -137,7 +137,7 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
                 runOnUiThread {
                     log("Native ad loaded, assets not retrieved yet.")
 
-                    nativeAd = list[0] as AppLovinNativeAd
+                    nativeAd = list[0]
                     precacheButton.isEnabled = true
                 }
             }

@@ -1,6 +1,9 @@
 package com.applovin.apps.kotlindemoapp.banners
 
 import android.os.Bundle
+import com.applovin.adview.AppLovinAdView
+import com.applovin.adview.AppLovinAdViewDisplayErrorCode
+import com.applovin.adview.AppLovinAdViewEventListener
 import com.applovin.apps.kotlindemoapp.AdStatusActivity
 import com.applovin.apps.kotlindemoapp.R
 import com.applovin.sdk.AppLovinAd
@@ -51,6 +54,25 @@ class BannerLayoutEditorActivity : AdStatusActivity()
                                      })
 
         ad_view.setAdClickListener { log("Banner Clicked") }
+
+        ad_view.setAdViewEventListener(object : AppLovinAdViewEventListener
+                                      {
+                                          override fun adOpenedFullscreen(ad: AppLovinAd?, adView: AppLovinAdView?) {
+                                              log("Banner opened fullscreen")
+                                          }
+
+                                          override fun adClosedFullscreen(ad: AppLovinAd?, adView: AppLovinAdView?) {
+                                              log("Banner closed fullscreen")
+                                          }
+
+                                          override fun adLeftApplication(ad: AppLovinAd?, adView: AppLovinAdView?) {
+                                              log("Banner left application")
+                                          }
+
+                                          override fun adFailedToDisplay(ad: AppLovinAd?, adView: AppLovinAdView?, code: AppLovinAdViewDisplayErrorCode?) {
+                                              log("Banner failed to display with error code " + code)
+                                          }
+                                      })
 
         // Load an ad!
         ad_view.loadNextAd()

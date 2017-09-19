@@ -39,7 +39,7 @@ class NativeAdRecyclerViewActivity : AppCompatActivity()
             override fun onNativeAdsLoaded(list: List<AppLovinNativeAd>)
             {
                 runOnUiThread {
-                    renderRecyclerView(list as List<AppLovinNativeAd>)
+                    renderRecyclerView(list)
                     retrieveImageResources(nativeAdService, list)
                 }
             }

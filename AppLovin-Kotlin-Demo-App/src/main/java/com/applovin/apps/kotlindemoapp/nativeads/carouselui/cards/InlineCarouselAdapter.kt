@@ -18,17 +18,17 @@ class InlineCarouselAdapter(private val context: Context, private val sdk: AppLo
 {
     private val existingCards: SparseArray<WeakReference<InlineCarouselCardView>> = SparseArray()
 
-    override fun getView(newPosition: Int, pager: SdkCenteredViewPager): View
+    override fun getView(position: Int, pager: SdkCenteredViewPager): View
     {
-        sdk.logger.d(TAG, "Adapter is creating a card for position " + newPosition)
+        sdk.logger.d(TAG, "Adapter is creating a card for position " + position)
 
         val slots = parentView.getNativeAds()
-        if (slots != null && newPosition < slots.size)
+        if (position < slots.size)
         {
             val card = InlineCarouselCardView(context)
             card.sdk = sdk
-            card.ad = slots[newPosition]
-            card.cardState = parentView.getCardState(newPosition)
+            card.ad = slots[position]
+            card.cardState = parentView.getCardState(position)
             card.setUpView()
 
             val params = SdkCenteredViewPager.LayoutParams()
@@ -38,7 +38,7 @@ class InlineCarouselAdapter(private val context: Context, private val sdk: AppLo
 
             card.layoutParams = params
 
-            existingCards.append(newPosition, WeakReference(card))
+            existingCards.append(position, WeakReference(card))
 
             return card
         }

@@ -310,7 +310,7 @@ class AppLovinCarouselView @JvmOverloads constructor(context: Context, attrs: At
                 override fun onNativeAdsLoaded(nativeAds: List<AppLovinNativeAd>)
                 {
                     getUiHandler().post {
-                        setNativeAds(nativeAds as List<AppLovinNativeAd>)
+                        setNativeAds(nativeAds)
 
                         if (loadListener != null)
                         {

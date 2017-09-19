@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import com.applovin.adview.AppLovinAdView
+import com.applovin.adview.AppLovinAdViewDisplayErrorCode
+import com.applovin.adview.AppLovinAdViewEventListener
 import com.applovin.apps.kotlindemoapp.AdStatusActivity
 import com.applovin.apps.kotlindemoapp.R
 import com.applovin.sdk.AppLovinAd
@@ -57,6 +59,26 @@ class BannerProgrammaticActivity : AdStatusActivity()
                                     })
 
         adView.setAdClickListener { log("Banner Clicked") }
+
+        adView.setAdViewEventListener(object : AppLovinAdViewEventListener
+                                      {
+                                          override fun adOpenedFullscreen(ad: AppLovinAd?, adView: AppLovinAdView?) {
+                                              log("Banner opened fullscreen")
+                                          }
+
+                                          override fun adClosedFullscreen(ad: AppLovinAd?, adView: AppLovinAdView?) {
+
+                                              log("Banner closed fullscreen")
+                                          }
+
+                                          override fun adLeftApplication(ad: AppLovinAd?, adView: AppLovinAdView?) {
+                                              log("Banner left application")
+                                          }
+
+                                          override fun adFailedToDisplay(ad: AppLovinAd?, adView: AppLovinAdView?, code: AppLovinAdViewDisplayErrorCode?) {
+                                              log("Banner failed to display with error code " + code)
+                                          }
+                                      })
 
         // Add programmatically created banner into our container
         banner_container.addView(adView, android.widget.FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER))

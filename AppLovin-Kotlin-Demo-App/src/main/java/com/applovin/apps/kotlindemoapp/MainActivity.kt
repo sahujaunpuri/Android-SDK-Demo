@@ -16,6 +16,7 @@ import android.widget.TextView
 import com.applovin.apps.kotlindemoapp.banners.BannerDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.eventtracking.EventTrackingActivity
 import com.applovin.apps.kotlindemoapp.interstitials.InterstitialDemoMenuActivity
+import com.applovin.apps.kotlindemoapp.mrecs.MRecDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.nativeads.NativeAdDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.rewarded.RewardedVideosActivity
 import com.applovin.sdk.AppLovinSdk
@@ -91,7 +92,7 @@ class MainActivity : DemoMenuActivity()
                 DemoMenuItem("Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", Intent(this, RewardedVideosActivity::class.java)),
                 DemoMenuItem("Native Ads", "In-content ads that blend in seamlessly", Intent(this, NativeAdDemoMenuActivity::class.java)),
                 DemoMenuItem("Banners", "320x50 Classic banner ads", Intent(this, BannerDemoMenuActivity::class.java)),
-                DemoMenuItem("MRecs", "Please reference banners demo"),
+                DemoMenuItem("MRecs", "300x250 Rectangular ads typically used in-content", Intent(this, MRecDemoMenuActivity::class.java)),
                 DemoMenuItem("Event Tracking", "Track in-app events for your users", Intent(this, EventTrackingActivity::class.java)),
                 DemoMenuItem("Resources", "https://support.applovin.com/support/home", Intent(Intent.ACTION_VIEW, Uri.parse("https://support.applovin.com/support/home"))),
                 DemoMenuItem("Contact", "support@applovin.com", makeContactIntent())
