@@ -2,6 +2,23 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+buildscript {
+    ext.kotlin_version = '1.1.2-5'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:2.3.2'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
 android {
     compileSdkVersion 26
     buildToolsVersion '26'
@@ -19,16 +36,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-}
-
-buildscript {
-    ext.kotlin_version = '1.1.2-5'
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -58,8 +65,4 @@ dependencies {
             throw new IllegalStateException("AppLovin SDK jar file was not found in the libs/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the libs/ folder of your project")
         }
     }
-}
-
-repositories {
-    mavenCentral()
 }
