@@ -12,4 +12,4 @@ This is our open source demo application for Android. You may re-use any code in
     android:name="applovin.sdk.key"
     android:value="YOUR_SDK_KEY_HERE" />
 ```
-  2. Our SDK is availalbe via [JCenter](https://bintray.com/applovin/Android/sdk_android), so just do a Gradle sync and run the app!
+  2. Do a Gradle sync and run the app! The project will automatically import the latest version of our SDK via [JCenter](https://bintray.com/applovin/Android/sdk_android). If you prefer to import it manually, our SDK may be downloaded from our [docs](https://www.applovin.com/integration#androidIntegration) as well.
