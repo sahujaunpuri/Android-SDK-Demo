@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">AppLovin-Kotlin</string>
+
+    <string name="title_activity_interstitial_list">Interstitials</string>
+    <string name="title_activity_interstitial_single_instance">Single Instance</string>
+    <string name="title_activity_interstitial_shared_instance">Shared Instance</string>
+    <string name="title_activity_interstitial_manual_loading">Manual Loading</string>
+
+    <string name="title_activity_rewarded_videos">Rewarded Videos</string>
+
+    <string name="title_activity_native_ad_list">Native Ads</string>
+    <string name="title_activity_native_ad_carousel_ui">Single ad</string>
+    <string name="title_activity_native_ad_recycler_view">Multiple ads</string>
+
+    <string name="title_activity_banner_list">Banners</string>
+    <string name="title_activity_banner_programmatic">Programmatic Banners</string>
+    <string name="title_activity_banner_layout_editor">Layout Editor Banners</string>
+
+    <string name="title_activity_mrec_list">MRecs</string>
+    <string name="title_activity_mrec_programmatic">Programmatic MRecs</string>
+    <string name="title_activity_mrec_layout_editor">Layout Editor MRecs</string>
+
+    <string name="title_activity_event_tracking">Event Tracking</string>
+</resources>
