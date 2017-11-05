@@ -41,9 +41,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     compile 'com.android.support:appcompat-v7:25.1.1'
@@ -58,11 +56,8 @@ dependencies {
     if (new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists()) {
         compile project(':AppLovin-Android-SDK-Mediation-Adapters') // This compiles SDK project
     }
-    // Otherwise (AppLovin Demo app is running as a standalone project)
+    // Otherwise (AppLovin Demo app is running as a standalone project) - Import latest AppLovin SDK from JCenter
     else {
-        def libsFolder = new File(projectDir, "libs");
-        if (!libsFolder.exists() || libsFolder.list() == null || libsFolder.listFiles().length == 0) {
-            throw new IllegalStateException("AppLovin SDK jar file was not found in the libs/ folder. Please download the latest AppLovin SDK from http://applovin.com and place it under the libs/ folder of your project")
-        }
+        compile 'com.applovin:applovin-sdk:+'
     }
 }
