@@ -16,13 +16,11 @@ import com.applovin.sdk.AppLovinAdRewardListener;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinErrorCodes;
 
-import java.lang.ref.WeakReference;
 import java.util.Map;
 
 public class RewardedVideosActivity
         extends AdStatusActivity
 {
-
     private AppLovinIncentivizedInterstitial incentivizedInterstitial;
 
     @Override
@@ -70,7 +68,6 @@ public class RewardedVideosActivity
             }
         } );
 
-        final WeakReference<RewardedVideosActivity> weakRef = new WeakReference<RewardedVideosActivity>( this );
         showButton.setOnClickListener( new View.OnClickListener()
         {
             @Override
@@ -208,7 +205,7 @@ public class RewardedVideosActivity
 
                      To learn more about placements, check out https://applovin.com/integration#androidPlacementsIntegration
                      */
-                    incentivizedInterstitial.show( weakRef.get(), adRewardListener, adVideoPlaybackListener, adDisplayListener, adClickListener );
+                    incentivizedInterstitial.show( RewardedVideosActivity.this, adRewardListener, adVideoPlaybackListener, adDisplayListener, adClickListener );
                 }
             }
         } );

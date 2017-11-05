@@ -52,7 +52,6 @@ class RewardedVideosActivity : AdStatusActivity()
             }
         }
 
-        val weakRef = WeakReference(this)
         showButton.setOnClickListener {
             if (incentivizedInterstitial?.isAdReadyToDisplay ?: false)
             {
@@ -172,7 +171,7 @@ class RewardedVideosActivity : AdStatusActivity()
 
                      To learn more about placements, check out https://applovin.com/integration#androidPlacementsIntegration
                      */
-                incentivizedInterstitial!!.show(weakRef.get(), adRewardListener, adVideoPlaybackListener, adDisplayListener, adClickListener)
+                incentivizedInterstitial!!.show(this, adRewardListener, adVideoPlaybackListener, adDisplayListener, adClickListener)
             }
         }
     }
