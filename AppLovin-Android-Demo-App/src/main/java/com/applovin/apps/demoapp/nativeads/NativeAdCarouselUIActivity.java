@@ -11,8 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.applovin.apps.demoapp.R;
 import com.applovin.apps.demoapp.AdStatusActivity;
+import com.applovin.apps.demoapp.R;
 import com.applovin.apps.demoapp.nativeads.carouselui.AppLovinCarouselViewSettings;
 import com.applovin.apps.demoapp.nativeads.carouselui.cards.InlineCarouselCardMediaView;
 import com.applovin.apps.demoapp.nativeads.carouselui.cards.InlineCarouselCardState;
@@ -105,7 +105,26 @@ public class NativeAdCarouselUIActivity
                     @Override
                     public void onNativeAdImagesPrecached(AppLovinNativeAd appLovinNativeAd)
                     {
-                        log( "Native ad precached images" );
+                        // If this native ad contains a video, wait for the `onNativeAdVideoPreceached()` callback
+                        if ( AppLovinSdkUtils.isValidString( nativeAd.getVideoUrl() ) )
+                        {
+                            log( "Native ad precached images" );
+                        }
+                        // Native ad only has image and no video. We are done precaching now.
+                        else
+                        {
+                            log( "Native ad done precaching" );
+
+                            runOnUiThread( new Runnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    showButton.setEnabled( true );
+                                    precacheButton.setEnabled( false );
+                                }
+                            } );
+                        }
                     }
 
                     @Override
@@ -122,7 +141,7 @@ public class NativeAdCarouselUIActivity
                                 showButton.setEnabled( true );
                                 precacheButton.setEnabled( false );
                             }
-                        });
+                        } );
                     }
 
                     @Override
@@ -175,7 +194,7 @@ public class NativeAdCarouselUIActivity
                         mediaView.autoplayVideo();
 
                         mediaViewPlaceholder.removeAllViews();
-                        mediaViewPlaceholder.addView(mediaView);
+                        mediaViewPlaceholder.addView( mediaView );
 
                         //
                         // You are responsible for firing impressions
