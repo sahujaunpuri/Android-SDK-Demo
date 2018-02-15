@@ -12,8 +12,7 @@ public class InterstitialDemoMenuActivity
     protected DemoMenuItem[] getListViewContents()
     {
         DemoMenuItem[] result = {
-                new DemoMenuItem( "Single instance", "Programmatically creating an instance of it", new Intent( this, InterstitialSingleInstanceActivity.class ) ),
-                new DemoMenuItem( "Shared instance", "Use the shared instance", new Intent( this, InterstitialSharedInstanceActivity.class ) ),
+                new DemoMenuItem( "Basic Integration", "Quick interstitial ads integration", new Intent( this, InterstitialBasicIntegrationActivity.class ) ),
                 new DemoMenuItem( "Manually loading ad", "Use this for greater control over the ad load process", new Intent( this, InterstitialManualLoadingActivity.class ) )
         };
         return result;

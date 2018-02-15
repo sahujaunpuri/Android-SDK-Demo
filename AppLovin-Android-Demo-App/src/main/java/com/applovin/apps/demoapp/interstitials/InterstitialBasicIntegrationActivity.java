@@ -21,43 +21,41 @@ import com.applovin.sdk.AppLovinSdk;
  * Created by thomasso on 10/5/15.
  */
 
-public class InterstitialSingleInstanceActivity
+public class InterstitialBasicIntegrationActivity
         extends AdStatusActivity
         implements AppLovinAdLoadListener, AppLovinAdDisplayListener, AppLovinAdClickListener, AppLovinAdVideoPlaybackListener
 {
     private AppLovinInterstitialAdDialog interstitialAd;
+    private Button                       showButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_interstitial_simple );
+        setContentView( R.layout.activity_interstitial_basic_integration );
 
         adStatusTextView = (TextView) findViewById( R.id.status_label );
 
         interstitialAd = AppLovinInterstitialAd.create( AppLovinSdk.getInstance( this ), this );
 
-        final Button showButton = (Button) findViewById( R.id.loadButton );
+        showButton = (Button) findViewById( R.id.showButton );
         showButton.setOnClickListener( new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                showButton.setEnabled( false );
+
+                log( "Showing..." );
+
                 //
                 // Optional: Set ad load, ad display, ad click, and ad video playback callback listeners
                 //
-                interstitialAd.setAdLoadListener( InterstitialSingleInstanceActivity.this );
-                interstitialAd.setAdDisplayListener( InterstitialSingleInstanceActivity.this );
-                interstitialAd.setAdClickListener( InterstitialSingleInstanceActivity.this );
-                interstitialAd.setAdVideoPlaybackListener( InterstitialSingleInstanceActivity.this ); // This will only ever be used if you have video ads enabled.
+                interstitialAd.setAdLoadListener( InterstitialBasicIntegrationActivity.this );
+                interstitialAd.setAdDisplayListener( InterstitialBasicIntegrationActivity.this );
+                interstitialAd.setAdClickListener( InterstitialBasicIntegrationActivity.this );
+                interstitialAd.setAdVideoPlaybackListener( InterstitialBasicIntegrationActivity.this ); // This will only ever be used if you have video ads enabled.
 
-                /**
-                 NOTE: We recommend the use of placements (AFTER creating them in your dashboard):
-
-                 interstitialAd.showAndRender(currentAd, "INTER_LOADING_SCREEN");
-
-                 To learn more about placements, check out https://applovin.com/integration#androidPlacementsIntegration
-                 */
                 interstitialAd.show();
             }
         } );
@@ -70,20 +68,16 @@ public class InterstitialSingleInstanceActivity
     public void adReceived(AppLovinAd appLovinAd)
     {
         log( "Interstitial loaded" );
+        showButton.setEnabled( true );
     }
 
     @Override
     public void failedToReceiveAd(int errorCode)
     {
         // Look at AppLovinErrorCodes.java for list of error codes
-        if ( errorCode == AppLovinErrorCodes.NO_FILL )
-        {
-            log( "No-fill: No ads are currently available for this device/country" );
-        }
-        else
-        {
-            log( "Interstitial failed to load with error code " + errorCode );
-        }
+        log( "Interstitial failed to load with error code " + errorCode );
+
+        showButton.setEnabled( true );
     }
 
     //

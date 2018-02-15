@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="16dp"
-    tools:context=".interstitials.InterstitialSingleInstanceActivity">
+    tools:context=".interstitials.InterstitialBasicIntegrationActivity">
 
     <TextView
         android:id="@+id/status_label"
@@ -17,15 +17,15 @@
         android:gravity="center" />
 
     <Button
-        android:id="@+id/loadButton"
+        android:id="@+id/showButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/transparent"
-        android:text="Show if Ready"
+        android:text="Show"
         android:textAllCaps="false"
-        android:textColor="#0A83AA"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#0A83AA" />
 
 </RelativeLayout>
