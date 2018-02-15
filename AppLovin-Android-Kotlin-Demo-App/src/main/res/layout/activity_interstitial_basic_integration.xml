@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="16dp"
-    tools:context="com.applovin.apps.kotlindemoapp.interstitials.InterstitialSingleInstanceActivity">
+    tools:context="com.applovin.apps.kotlindemoapp.interstitials.InterstitialBasicIntegrationActivity">
     <TextView
         android:id="@+id/status_label"
         android:layout_width="wrap_content"
@@ -17,14 +17,14 @@
         android:gravity="center" />
 
     <Button
-        android:id="@+id/loadButton"
+        android:id="@+id/showButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/transparent"
-        android:text="Show if Ready"
+        android:text="Show"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary" />
 </RelativeLayout>

@@ -40,11 +40,8 @@
             android:name=".interstitials.InterstitialDemoMenuActivity"
             android:label="@string/title_activity_interstitial_list" />
         <activity
-            android:name=".interstitials.InterstitialSingleInstanceActivity"
-            android:label="@string/title_activity_interstitial_single_instance" />
-        <activity
-            android:name=".interstitials.InterstitialSharedInstanceActivity"
-            android:label="@string/title_activity_interstitial_shared_instance" />
+            android:name=".interstitials.InterstitialBasicIntegrationActivity"
+            android:label="@string/title_activity_interstitial_basic_integration" />
         <activity
             android:name=".interstitials.InterstitialManualLoadingActivity"
             android:label="@string/title_activity_interstitial_manual_loading" />

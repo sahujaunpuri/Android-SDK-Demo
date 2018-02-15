@@ -48,13 +48,6 @@ class InterstitialManualLoadingActivity : AdStatusActivity()
 
         showButton.setOnClickListener {
             currentAd?.let {
-                /*
-                     NOTE: We recommend the use of placements (AFTER creating them in your dashboard):
-
-                     interstitialAdDialog.show( "SINGLE_INSTANCE_SCREEN" );
-
-                     To learn more about placements, check out https://applovin.com/integration#androidPlacementsIntegration
-                    */
                 interstitialAdDialog.showAndRender(it)
             }
         }
