@@ -113,7 +113,7 @@ public class MRecLayoutEditorActivity
                 log( "MRec failed to display with error code " + code );
             }
         } );
-        
+
         // Load an ad!
         adView.loadNextAd();
 

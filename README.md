@@ -5,14 +5,11 @@ This is our open source demo application for Android. You may re-use any code in
 
 # Instructions #
 
-  1. Download the latest SDK from [https://applovin.com](https://applovin.com/integration).
-
-  2. Copy the AppLovin SDK JAR into `Android-SDK-Demo/AppLovin-Android-Demo-App/libs` folder.
-
-  3. Add your SDK key into your `AndroidManifest.xml` file, inside the `<application>` tag:
+  1. Add your SDK key into your `AndroidManifest.xml` file, inside the `<application>` tag:
 
 ```
 <meta-data
-            android:name="applovin.sdk.key"
-            android:value="YOUR_SDK_KEY_HERE" />
+    android:name="applovin.sdk.key"
+    android:value="YOUR_SDK_KEY_HERE" />
 ```
+  2. Do a Gradle sync and run the app! The project will automatically import the latest version of our SDK via [JCenter](https://bintray.com/applovin/Android/sdk_android). If you prefer to import it manually, our SDK may be downloaded from our [docs](https://www.applovin.com/integration#androidIntegration) as well.
