@@ -51,8 +51,9 @@
         <activity
             android:name=".nativeads.NativeAdDemoMenuActivity"
             android:label="@string/title_activity_native_ad_list" />
-        <activity android:name=".nativeads.NativeAdCarouselUIActivity"
-            android:label="@string/title_activity_native_ad_carousel_ui"/>
+        <activity
+            android:name=".nativeads.NativeAdCarouselUIActivity"
+            android:label="@string/title_activity_native_ad_carousel_ui" />
         <activity
             android:name=".nativeads.NativeAdRecyclerViewActivity"
             android:label="@string/title_activity_native_ad_recycler_view" />
@@ -74,6 +75,15 @@
         <activity
             android:name=".mrecs.MRecLayoutEditorActivity"
             android:label="@string/title_activity_mrec_layout_editor" />
+        <activity
+            android:name=".leaders.LeaderDemoMenuActivity"
+            android:label="@string/title_activity_leader_list" />
+        <activity
+            android:name=".leaders.LeaderProgrammaticActivity"
+            android:label="@string/title_activity_leader_programmatic" />
+        <activity
+            android:name=".leaders.LeaderLayoutEditorActivity"
+            android:label="@string/title_activity_leader_layout_editor" />
         <activity
             android:name=".eventtracking.EventTrackingActivity"
             android:label="@string/title_activity_event_tracking" />

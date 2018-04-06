@@ -16,11 +16,13 @@ import android.widget.TextView
 import com.applovin.apps.kotlindemoapp.banners.BannerDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.eventtracking.EventTrackingActivity
 import com.applovin.apps.kotlindemoapp.interstitials.InterstitialDemoMenuActivity
+import com.applovin.apps.kotlindemoapp.leaders.LeaderDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.mrecs.MRecDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.nativeads.NativeAdDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.rewarded.RewardedVideosActivity
 import com.applovin.sdk.AppLovinSdk
 import kotlinx.android.synthetic.main.activity_list.*
+import java.util.*
 
 
 class MainActivity : DemoMenuActivity()
@@ -87,7 +89,7 @@ class MainActivity : DemoMenuActivity()
 
     override fun getListViewContents(): Array<DemoMenuItem>
     {
-        return arrayOf(
+        var items = arrayOf(
                 DemoMenuItem("Interstitials", "Full screen ads. Graphic or video", Intent(this, InterstitialDemoMenuActivity::class.java)),
                 DemoMenuItem("Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", Intent(this, RewardedVideosActivity::class.java)),
                 DemoMenuItem("Native Ads", "In-content ads that blend in seamlessly", Intent(this, NativeAdDemoMenuActivity::class.java)),
@@ -97,6 +99,15 @@ class MainActivity : DemoMenuActivity()
                 DemoMenuItem("Resources", "https://support.applovin.com/support/home", Intent(Intent.ACTION_VIEW, Uri.parse("https://support.applovin.com/support/home"))),
                 DemoMenuItem("Contact", "support@applovin.com", makeContactIntent())
         )
+        if (resources.getBoolean(R.bool.is_tablet))
+        {
+            val menuItems = ArrayList<DemoMenuItem>(items.size + 1)
+            menuItems.addAll(Arrays.asList(*items))
+            // Add Leaders menu item below MRecs.
+            menuItems.add(5, DemoMenuItem("Leaders", "728x90 leaderboard advertisement indented for tablets", Intent(this, LeaderDemoMenuActivity::class.java)))
+            items = menuItems.toTypedArray()
+        }
+        return items;
     }
 
     private fun checkSdkKey(): Boolean

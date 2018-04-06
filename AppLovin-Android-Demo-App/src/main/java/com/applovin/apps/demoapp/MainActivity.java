@@ -3,6 +3,7 @@ package com.applovin.apps.demoapp;
 import com.applovin.apps.demoapp.banners.BannerDemoMenuActivity;
 import com.applovin.apps.demoapp.eventtracking.EventTrackingActivity;
 import com.applovin.apps.demoapp.interstitials.InterstitialDemoMenuActivity;
+import com.applovin.apps.demoapp.leaders.LeaderDemoMenuActivity;
 import com.applovin.apps.demoapp.mrecs.MRecDemoMenuActivity;
 import com.applovin.apps.demoapp.nativeads.NativeAdDemoMenuActivity;
 import com.applovin.apps.demoapp.rewarded.RewardedVideosActivity;
@@ -24,6 +25,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by thomasso on 10/5/15.
  */
@@ -33,7 +37,7 @@ public class MainActivity
     private static final String KEY_SHARED_PREFERENCES_NAMESPACE = "com.applovin.apps.demo.shared_preferences";
     private static final String KEY_PROMPTED_CONFIG_FLAGS        = "com.applovin.apps.demo.shared_preferences.prompted_config_flags";
 
-    private MenuItem            muteToggleMenuItem;
+    private MenuItem muteToggleMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -80,6 +84,15 @@ public class MainActivity
                 new DemoMenuItem( "Resources", "https://support.applovin.com/support/home", new Intent( Intent.ACTION_VIEW, Uri.parse( "https://support.applovin.com/support/home" ) ) ),
                 new DemoMenuItem( "Contact", "support@applovin.com", makeContactIntent() )
         };
+        boolean isTablet = getResources().getBoolean( R.bool.is_tablet );
+        if ( isTablet )
+        {
+            ArrayList<DemoMenuItem> menuItems = new ArrayList<>( result.length + 1 );
+            menuItems.addAll( Arrays.asList( result ) );
+            // Add Leaders menu item below MRecs.
+            menuItems.add( 5, new DemoMenuItem( "Leaders", "728x90 leaderboard advertisement indented for tablets", new Intent( this, LeaderDemoMenuActivity.class ) ) );
+            result = menuItems.toArray( result );
+        }
         return result;
     }
 
@@ -167,8 +180,8 @@ public class MainActivity
         footer.setGravity( Gravity.CENTER );
         footer.setTextSize( 18 );
         footer.setText( "\nApp Version: " + appVersion +
-                "\nSDK Version: " + AppLovinSdk.VERSION +
-                "\nOS Version: " + versionName + "(API " + apiLevel + ")" );
+                                "\nSDK Version: " + AppLovinSdk.VERSION +
+                                "\nOS Version: " + versionName + "(API " + apiLevel + ")" );
 
         listView.addFooterView( footer );
         listView.setFooterDividersEnabled( false );

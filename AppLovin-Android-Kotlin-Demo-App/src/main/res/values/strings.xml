@@ -19,5 +19,9 @@
     <string name="title_activity_mrec_programmatic">Programmatic MRecs</string>
     <string name="title_activity_mrec_layout_editor">Layout Editor MRecs</string>
 
+    <string name="title_activity_leader_list">Leaders</string>
+    <string name="title_activity_leader_programmatic">Programmatic Leaders</string>
+    <string name="title_activity_leader_layout_editor">Layout Editor Leaders</string>
+
     <string name="title_activity_event_tracking">Event Tracking</string>
 </resources>

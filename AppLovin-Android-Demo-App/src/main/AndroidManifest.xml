@@ -88,6 +88,15 @@
             android:name=".mrecs.MRecLayoutEditorActivity"
             android:label="@string/title_activity_mrec_layout_editor" />
         <activity
+            android:name=".leaders.LeaderDemoMenuActivity"
+            android:label="@string/title_activity_leader_list" />
+        <activity
+            android:name=".leaders.LeaderProgrammaticActivity"
+            android:label="@string/title_activity_leader_programmatic" />
+        <activity
+            android:name=".leaders.LeaderLayoutEditorActivity"
+            android:label="@string/title_activity_leader_layout_editor" />
+        <activity
             android:name=".eventtracking.EventTrackingActivity"
             android:label="@string/title_activity_event_tracking" />
     </application>
