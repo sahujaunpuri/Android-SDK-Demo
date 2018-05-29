@@ -16,12 +16,12 @@ allprojects {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.0'
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.applovin.apps.demoapp"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -37,17 +37,21 @@ android {
     }
 }
 
+ext {
+    supportLibVersion = "27.+"
+}
+
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(include: ["*.jar"], dir: "libs")
 
-    compile 'com.android.support:multidex:1.0.1'
+    compile "com.android.support:multidex:1.0.3"
 
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:support-v13:25.1.1'
-    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile "com.android.support:appcompat-v7:$supportLibVersion"
+    compile "com.android.support:support-v13:$supportLibVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibVersion"
 
     // For AppLovin SDK
-    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    compile "com.google.android.gms:play-services-ads:15.0.1"
 
     // If AppLovin Demo App is running as a module in the AppLovin development environment
     if (new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists()) {
@@ -55,6 +59,6 @@ dependencies {
     }
     // Otherwise (AppLovin Demo app is running as a standalone project) - Import latest AppLovin SDK from JCenter
     else {
-        compile 'com.applovin:applovin-sdk:+'
+        compile "com.applovin:applovin-sdk:+"
     }
 }
