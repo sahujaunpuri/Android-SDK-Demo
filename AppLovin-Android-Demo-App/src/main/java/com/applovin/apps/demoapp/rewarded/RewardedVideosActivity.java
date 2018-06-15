@@ -161,7 +161,7 @@ public class RewardedVideosActivity
                     }
 
                     @Override
-                    public void videoPlaybackEnded(AppLovinAd appLovinAd, double v, boolean b)
+                    public void videoPlaybackEnded(AppLovinAd appLovinAd, double percentViewed, boolean fullyWatched)
                     {
                         log( "Video Ended" );
                     }

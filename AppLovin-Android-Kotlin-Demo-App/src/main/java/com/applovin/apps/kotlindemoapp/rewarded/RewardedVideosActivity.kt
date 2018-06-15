@@ -122,7 +122,7 @@ class RewardedVideosActivity : AdStatusActivity() {
                     log("Video Started")
                 }
 
-                override fun videoPlaybackEnded(appLovinAd: AppLovinAd, v: Double, b: Boolean) {
+                override fun videoPlaybackEnded(appLovinAd: AppLovinAd, percentViewed: Double, fullyWatched: Boolean) {
                     log("Video Ended")
                 }
             }
