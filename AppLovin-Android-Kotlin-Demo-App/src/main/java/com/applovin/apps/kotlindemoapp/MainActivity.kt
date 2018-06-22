@@ -20,6 +20,7 @@ import com.applovin.apps.kotlindemoapp.leaders.LeaderDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.mrecs.MRecDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.nativeads.NativeAdDemoMenuActivity
 import com.applovin.apps.kotlindemoapp.rewarded.RewardedVideosActivity
+import com.applovin.apps.kotlindemoapp.rewarded.RewardedVideosDemoMenuActivity
 import com.applovin.sdk.AppLovinSdk
 import kotlinx.android.synthetic.main.activity_list.*
 import java.util.*
@@ -91,7 +92,7 @@ class MainActivity : DemoMenuActivity()
     {
         var items = arrayOf(
                 DemoMenuItem("Interstitials", "Full screen ads. Graphic or video", Intent(this, InterstitialDemoMenuActivity::class.java)),
-                DemoMenuItem("Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", Intent(this, RewardedVideosActivity::class.java)),
+                DemoMenuItem("Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", Intent(this, RewardedVideosDemoMenuActivity::class.java)),
                 DemoMenuItem("Native Ads", "In-content ads that blend in seamlessly", Intent(this, NativeAdDemoMenuActivity::class.java)),
                 DemoMenuItem("Banners", "320x50 Classic banner ads", Intent(this, BannerDemoMenuActivity::class.java)),
                 DemoMenuItem("MRecs", "300x250 Rectangular ads typically used in-content", Intent(this, MRecDemoMenuActivity::class.java)),

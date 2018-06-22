@@ -7,6 +7,7 @@ import com.applovin.apps.demoapp.leaders.LeaderDemoMenuActivity;
 import com.applovin.apps.demoapp.mrecs.MRecDemoMenuActivity;
 import com.applovin.apps.demoapp.nativeads.NativeAdDemoMenuActivity;
 import com.applovin.apps.demoapp.rewarded.RewardedVideosActivity;
+import com.applovin.apps.demoapp.rewarded.RewardedVideosDemoMenuActivity;
 import com.applovin.sdk.AppLovinSdk;
 
 import android.app.AlertDialog;
@@ -76,7 +77,7 @@ public class MainActivity
     {
         DemoMenuItem[] result = {
                 new DemoMenuItem( "Interstitials", "Full screen ads. Graphic or video", new Intent( this, InterstitialDemoMenuActivity.class ) ),
-                new DemoMenuItem( "Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", new Intent( this, RewardedVideosActivity.class ) ),
+                new DemoMenuItem( "Rewarded Videos (Incentivized Ads)", "Reward your users for watching these on-demand videos", new Intent( this, RewardedVideosDemoMenuActivity.class ) ),
                 new DemoMenuItem( "Native Ads", "In-content ads that blend in seamlessly", new Intent( this, NativeAdDemoMenuActivity.class ) ),
                 new DemoMenuItem( "Banners", "320x50 Classic banner ads", new Intent( this, BannerDemoMenuActivity.class ) ),
                 new DemoMenuItem( "MRecs", "300x250 Rectangular ads typically used in-content", new Intent( this, MRecDemoMenuActivity.class ) ),
