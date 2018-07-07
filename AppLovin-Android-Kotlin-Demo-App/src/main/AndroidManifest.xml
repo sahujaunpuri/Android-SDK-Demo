@@ -46,8 +46,17 @@
             android:name=".interstitials.InterstitialManualLoadingActivity"
             android:label="@string/title_activity_interstitial_manual_loading" />
         <activity
+            android:name=".interstitials.InterstitialZoneActivity"
+            android:label="@string/title_activity_interstitial_zone_integration" />
+        <activity
+            android:name=".rewarded.RewardedVideosDemoMenuActivity"
+            android:label="@string/title_activity_rewarded_videos_list" />
+        <activity
             android:name=".rewarded.RewardedVideosActivity"
-            android:label="@string/title_activity_rewarded_videos" />
+            android:label="@string/title_activity_rewarded_videos_basic_integration" />
+        <activity
+            android:name=".rewarded.RewardedVideosZoneActivity"
+            android:label="@string/title_activity_rewarded_videos_zone_integration" />
         <activity
             android:name=".nativeads.NativeAdDemoMenuActivity"
             android:label="@string/title_activity_native_ad_list" />
@@ -66,6 +75,9 @@
         <activity
             android:name=".banners.BannerLayoutEditorActivity"
             android:label="@string/title_activity_banner_layout_editor" />
+        <activity
+            android:name=".banners.BannerZoneActivity"
+            android:label="@string/title_activity_banner_zone_integration" />
         <activity
             android:name=".mrecs.MRecDemoMenuActivity"
             android:label="@string/title_activity_mrec_list" />

@@ -35,7 +35,7 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
         adStatusTextView = status_label
 
         appIcon.setOnClickListener({
-                                       nativeAd?.launchClickTarget(findViewById(android.R.id.content).context)
+                                       nativeAd?.launchClickTarget(it.context)
                                    })
 
         loadButton.setOnClickListener {
@@ -121,7 +121,7 @@ class NativeAdCarouselUIActivity : AdStatusActivity()
                                       })
 
         appDownloadButton.setOnClickListener({
-                                                 nativeAd?.launchClickTarget(findViewById(android.R.id.content).context)
+                                                 nativeAd?.launchClickTarget(it.context)
                                              })
     }
 

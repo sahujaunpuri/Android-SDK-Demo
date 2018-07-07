@@ -15,10 +15,11 @@ import com.applovin.sdk.AppLovinAdLoadListener;
 import com.applovin.sdk.AppLovinAdRewardListener;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinErrorCodes;
+import com.applovin.sdk.AppLovinSdk;
 
 import java.util.Map;
 
-public class RewardedVideosActivity
+public class RewardedVideosZoneActivity
         extends AdStatusActivity
 {
     private AppLovinIncentivizedInterstitial incentivizedInterstitial;
@@ -34,7 +35,7 @@ public class RewardedVideosActivity
         final Button loadButton = (Button) findViewById( R.id.loadButton );
         final Button showButton = (Button) findViewById( R.id.showButton );
 
-        incentivizedInterstitial = AppLovinIncentivizedInterstitial.create( getApplicationContext() );
+        incentivizedInterstitial = AppLovinIncentivizedInterstitial.create( "YOUR_ZONE_ID", AppLovinSdk.getInstance( this ) );
         incentivizedInterstitial.setUserIdentifier( "DEMO_USER_IDENTIFIER" ); // Set an optional user identifier used for S2S callbacks
 
         // You need to preload each rewarded video before it can be displayed
@@ -193,7 +194,7 @@ public class RewardedVideosActivity
                     }
                 };
 
-                incentivizedInterstitial.show( RewardedVideosActivity.this, adRewardListener, adVideoPlaybackListener, adDisplayListener, adClickListener );
+                incentivizedInterstitial.show( RewardedVideosZoneActivity.this, adRewardListener, adVideoPlaybackListener, adDisplayListener, adClickListener );
             }
         } );
     }

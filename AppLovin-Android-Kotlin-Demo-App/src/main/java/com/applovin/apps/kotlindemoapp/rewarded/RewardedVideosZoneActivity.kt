@@ -4,17 +4,11 @@ import android.os.Bundle
 import com.applovin.adview.AppLovinIncentivizedInterstitial
 import com.applovin.apps.kotlindemoapp.AdStatusActivity
 import com.applovin.apps.kotlindemoapp.R
-import com.applovin.sdk.AppLovinAd
-import com.applovin.sdk.AppLovinAdClickListener
-import com.applovin.sdk.AppLovinAdDisplayListener
-import com.applovin.sdk.AppLovinAdLoadListener
-import com.applovin.sdk.AppLovinAdRewardListener
-import com.applovin.sdk.AppLovinAdVideoPlaybackListener
-import com.applovin.sdk.AppLovinErrorCodes
+import com.applovin.sdk.*
 import kotlinx.android.synthetic.main.activity_rewarded_videos.*
 import java.lang.ref.WeakReference
 
-class RewardedVideosActivity : AdStatusActivity() {
+class RewardedVideosZoneActivity : AdStatusActivity() {
     private var incentivizedInterstitial: AppLovinIncentivizedInterstitial? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +22,9 @@ class RewardedVideosActivity : AdStatusActivity() {
             log("Rewarded video loading...")
             showButton.isEnabled = false
 
-            incentivizedInterstitial = AppLovinIncentivizedInterstitial.create(applicationContext).apply {
+            incentivizedInterstitial = AppLovinIncentivizedInterstitial.create("YOUR_ZONE_ID", AppLovinSdk.getInstance(applicationContext)).apply {
                 // Set an optional user identifier used for S2S callbacks
+
                 userIdentifier = "DEMO_USER_IDENTIFIER"
 
                 preload(object : AppLovinAdLoadListener {
