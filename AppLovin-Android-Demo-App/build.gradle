@@ -56,8 +56,8 @@ dependencies {
     implementation "com.google.android.gms:play-services-ads:15.0.1"
 
     // If AppLovin Demo App is running as a module in the AppLovin development environment
-    if (new File(projectDir, "../../AppLovin-Android-SDK").exists() && new File(projectDir, "../../AppLovin-Android-SDK-Mediation-Adapters").exists()) {
-        implementation project(':AppLovin-Android-SDK-Mediation-Adapters') // This compiles SDK project
+    if (new File(projectDir, "../../AppLovin-Android-SDK").exists()) {
+        implementation project(':AppLovin-Android-SDK')
     }
     // Otherwise (AppLovin Demo app is running as a standalone project) - Import latest AppLovin SDK from JCenter
     else {
