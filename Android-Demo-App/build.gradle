@@ -1,6 +1,17 @@
 apply plugin: 'com.android.application'
 
 buildscript {
+    if (!project.hasProperty('versions')) {
+        ext.versions = [
+                'compileSdk'    : 27,
+                'targetSdk'     : 27,
+                'minSdk'        : 14,
+                'supportLibrary': "27.1.1",
+                'playServices'  : "15.0.1",
+                'multiDex'      : "1.0.3"
+        ]
+    }
+
     repositories {
         google()
         jcenter()
@@ -18,12 +29,11 @@ allprojects {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion versions.compileSdk
     defaultConfig {
         applicationId "com.applovin.apps.demoapp"
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -39,21 +49,17 @@ android {
     }
 }
 
-ext {
-    supportLibVersion = "27.1.1"
-}
-
 dependencies {
     implementation fileTree(include: ["*.jar"], dir: "libs")
 
-    implementation "com.android.support:multidex:1.0.3"
+    implementation "com.android.support:multidex:${versions.multiDex}"
 
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
-    implementation "com.android.support:support-v13:$supportLibVersion"
-    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
+    implementation "com.android.support:appcompat-v7:${versions.supportLibrary}"
+    implementation "com.android.support:support-v13:${versions.supportLibrary}"
+    implementation "com.android.support:recyclerview-v7:${versions.supportLibrary}"
 
     // For AppLovin SDK
-    implementation "com.google.android.gms:play-services-ads:15.0.1"
+    implementation "com.google.android.gms:play-services-ads:${versions.playServices}"
 
     // If AppLovin Demo App is running as a module in the AppLovin development environment
     if (new File(projectDir, "../../Android-SDK").exists()) {
