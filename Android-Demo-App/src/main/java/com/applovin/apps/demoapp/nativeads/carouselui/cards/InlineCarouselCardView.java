@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.applovin.adview.AppLovinTouchToClickListener;
 import com.applovin.apps.demoapp.R;
 import com.applovin.apps.demoapp.nativeads.carouselui.AppLovinCarouselViewSettings;
+import com.applovin.apps.demoapp.nativeads.carouselui.support.AppLovinTouchToClickListener;
 import com.applovin.apps.demoapp.nativeads.carouselui.util.LayoutUtils;
 import com.applovin.nativeAds.AppLovinNativeAd;
 import com.applovin.nativeAds.AppLovinNativeAdPrecacheListener;
