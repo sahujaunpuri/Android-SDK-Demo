@@ -9,18 +9,12 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import com.applovin.adview.AppLovinTouchToClickListener
 import com.applovin.apps.kotlindemoapp.R
 import com.applovin.apps.kotlindemoapp.nativeads.carouselui.AppLovinCarouselViewSettings
 import com.applovin.apps.kotlindemoapp.nativeads.carouselui.util.LayoutUtils
 import com.applovin.apps.kotlindemoapp.nativeads.carouselui.util.LayoutUtils.WRAP_CONTENT
-import com.applovin.impl.sdk.AppLovinSdkImpl
 import com.applovin.nativeAds.AppLovinNativeAd
 import com.applovin.nativeAds.AppLovinNativeAdPrecacheListener
 import com.applovin.sdk.AppLovinSdk
@@ -167,7 +161,7 @@ class InlineCarouselCardView : FrameLayout, InlineCarouselCardCallbacks, AppLovi
         if (!cardState!!.isImpressionTracked)
         {
             cardState!!.isImpressionTracked = true
-            (sdk as AppLovinSdkImpl).postbackService.dispatchPostbackAsync(ad!!.impressionTrackingUrl, null)
+            sdk!!.postbackService.dispatchPostbackAsync(ad!!.impressionTrackingUrl, null)
         }
     }
 
