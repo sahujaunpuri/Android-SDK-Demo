@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 buildscript {
     if (!project.hasProperty('versions')) {
         ext.versions = [
-                'compileSdk'    : 27,
-                'targetSdk'     : 27,
-                'minSdk'        : 14,
-                'supportLibrary': "27.1.1",
-                'playServices'  : "15.0.1",
-                'multiDex'      : "1.0.3"
+                'compileSdk'       : 27,
+                'targetSdk'        : 27,
+                'minSdk'           : 14,
+                'supportLibrary'   : "27.1.1",
+                'playServicesAds'  : "15.0.1",
+                'multiDex'         : "1.0.3"
         ]
     }
 
@@ -59,7 +59,7 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${versions.supportLibrary}"
 
     // For AppLovin SDK
-    implementation "com.google.android.gms:play-services-ads:${versions.playServices}"
+    implementation "com.google.android.gms:play-services-ads:${versions.playServicesAds}"
 
     // If AppLovin Demo App is running as a module in the AppLovin development environment
     if (new File(projectDir, "../../Android-SDK").exists()) {
