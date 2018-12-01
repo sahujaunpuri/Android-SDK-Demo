@@ -20,15 +20,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center"
             android:layout_gravity="center_horizontal" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You must turn ON &quot;Rewarded Videos&quot; in AppLovin dashboard"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/holo_red_dark"
-            android:paddingTop="10dp" />
     </LinearLayout>
 
     <LinearLayout
