@@ -666,6 +666,13 @@ public class InlineCarouselCardMediaView
     {
         final float videoDuration = mp.getDuration();
         final float currentPosition = mp.getCurrentPosition();
+        // NOTE: Media player bug: calling getCurrentPosition after the video finished playing gives slightly larger value than the total duration of the video.
+        if ( currentPosition >= videoDuration )
+        {
+            // Video fully watched, return 100%.
+            return 100;
+        }
+
         final double percentViewed = ( currentPosition / videoDuration ) * 100f;
         return (int) Math.ceil( percentViewed );
     }

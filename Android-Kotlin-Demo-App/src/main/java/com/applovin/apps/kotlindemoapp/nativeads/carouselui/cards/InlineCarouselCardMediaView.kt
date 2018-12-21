@@ -568,6 +568,13 @@ class InlineCarouselCardMediaView : FrameLayout, TextureView.SurfaceTextureListe
     {
         val videoDuration = mp.duration.toFloat()
         val currentPosition = mp.currentPosition.toFloat()
+        // NOTE: Media player bug: calling getCurrentPosition after the video finished playing gives slightly larger value than the total duration of the video.
+        if ( currentPosition >= videoDuration)
+        {
+            // Video fully watched, return 100%.
+            return 100
+        }
+
         val percentViewed = (currentPosition / videoDuration * 100f).toDouble()
         return Math.ceil(percentViewed).toInt()
     }
